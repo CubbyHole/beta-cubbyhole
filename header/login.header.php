@@ -1,6 +1,5 @@
 <?php 
 require_once '..\model\pdo\UserPdoManager.class.php';
-
 ?>
 <!DOCTYPE html>
 <html>

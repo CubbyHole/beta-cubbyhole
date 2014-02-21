@@ -53,11 +53,8 @@ include_once '../controller/functions.php';
                     {
                         echo '<li><a href="register.php">REGISTER</a></li>';
                         echo '<li><a href="login.php">LOGIN</a></li>';
-                    }   
-/*<td><a href="view-post.php?id=<?php echo $post['_id'];?>">View</a></td>*/
+                    }
                     ?>
-                    <!--<li><a href="register.php">REGISTER</a></li>
-                    <li><a href="login.php">LOGIN</a></li>-->
 
                     <?php if($_SESSION == true): //Mise en place d'un module Gravatar pour la photo de profil ?> 
                         <li><img class="img-circle" style="width: 50%;" src=<?php echo $_SESSION['email']; ?> ></li>                  

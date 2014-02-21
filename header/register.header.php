@@ -1,32 +1,7 @@
-<?php require '../model/pdo/UserPdoManager.class.php';
+<?php
+require '../model/pdo/UserPdoManager.class.php';
 require_once '../controller/functions.php';
-
-if( isset($_POST['add_user'] ) )
-{
-    $name = $_POST['name'];
-    $firstName = $_POST['firstName'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $passwordConfirmation = $_POST['passwordConfirmation'];
-    
-    //Verifie si le champ correspondant a "nom" n'est pas vide, meme chose pour "password"
-    //S'il ne sont pas vide=> debut de la condition
-    if(!empty($name) && $password == $passwordConfirmation)
-    {
-    
-        $user = new UserPdoManager();
-        $user->register($name, $firstName, $email, $password, $passwordConfirmation);
-
-        header('Location:../index.php');
-    }
-    else
-    {
-        echo "Your password is not equal";
-    }
-}
-
-
- ?>
+?>
 <!DOCTYPE html>
 <html>
 <head>
