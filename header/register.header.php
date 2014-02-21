@@ -46,7 +46,6 @@ require_once '../controller/functions.php';
                     <li><a href="contact.php">CONTACT US</a></li>
                     <li class="active"><a href="register.php">REGISTER</a></li>
                     <li><a href="login.php">LOGIN</a></li>
-
                 </ul>
             </div>
         </div>
