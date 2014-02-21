@@ -13,9 +13,9 @@ if( isset($_POST['add_user'] ) )
     $email = $_POST['email'];
     $password = $_POST['password'];
     $passwordConfirmation = $_POST['passwordConfirmation'];
-    
+
     //Verifie si le champ correspondant a "nom" n'est pas vide, meme chose pour "password"
-○
+
     //S'il ne sont pas vide=> debut de la condition
     if(!empty($name) && $password == $passwordConfirmation)
     {
