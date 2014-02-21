@@ -7,7 +7,6 @@ require_once '../model/interfaces/AccountManager.interface.php';
 
 class AccountPdoManager extends AbstractPdoManager implements AccountManager{
 
-
 	protected $accountCollection;
 	protected $refPlanPdoManager;
 	
