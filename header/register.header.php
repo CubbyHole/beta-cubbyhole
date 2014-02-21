@@ -1,4 +1,4 @@
-<?php require '../model/Pdo/UserPdoManager.class.php';
+<?php require '../model/pdo/UserPdoManager.class.php';
 require_once '../controller/functions.php';
 
 if( isset($_POST['add_user'] ) )

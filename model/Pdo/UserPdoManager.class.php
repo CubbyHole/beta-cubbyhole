@@ -1,8 +1,8 @@
 <?php
 require_once 'AbstractPdoManager.class.php';
 require_once 'AccountPdoManager.class.php';
-require_once '.\Classes\User.class.php';
-require_once '.\Interfaces\UserManager.interface.php';
+require_once '../model/classes/User.class.php';
+require_once '../model/interfaces/UserManager.interface.php';
 
 
 class UserPdoManager extends AbstractPdoManager implements UserManager{

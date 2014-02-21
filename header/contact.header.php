@@ -38,7 +38,7 @@ include_once '../controller/functions.php';
 
             <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="index.php">HOME</a></li>
+                    <li><a href="../index.php">HOME</a></li>
                     <li><a href="about-us.php">ABOUT US</a></li>
                     <li><a href="pricing.php">PRICING</a></li>
                     <li class="active"><a href="contact.php">CONTACT US</a></li>
@@ -46,13 +46,13 @@ include_once '../controller/functions.php';
                     //recupère la session du login
                     if($_SESSION == true)
                     { 
-                        echo '<li><a href="view/account.php ">MY ACCOUNT</a></li>';
-                        echo '<li><a href="view/logout.php">LOGOUT</a></li>';
+                        echo '<li><a href="account.php ">MY ACCOUNT</a></li>';
+                        echo '<li><a href="logout.php">LOGOUT</a></li>';
                     }
                     else
                     {
-                        echo '<li><a href="view/register.php">REGISTER</a></li>';
-                        echo '<li><a href="view/login.php">LOGIN</a></li>';
+                        echo '<li><a href="register.php">REGISTER</a></li>';
+                        echo '<li><a href="login.php">LOGIN</a></li>';
                     }   
 /*<td><a href="view-post.php?id=<?php echo $post['_id'];?>">View</a></td>*/
                     ?>

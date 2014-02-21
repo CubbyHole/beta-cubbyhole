@@ -1,7 +1,7 @@
 <?php
 require_once 'AbstractPdoManager.class.php';
-require_once'.\Classes\RefPlan.class.php';
-require_once'.\Interfaces\RefPlanManager.interface.php';
+require_once'../model/classes/RefPlan.class.php';
+require_once'../model/interfaces/RefPlanManager.interface.php';
 
 
 class RefPlanPdoManager extends AbstractPdoManager implements RefPlanManager{

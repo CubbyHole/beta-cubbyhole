@@ -1,7 +1,6 @@
 <?php
 include '../header/login.header.php';
 
-
 ?>
     <!-- Sign In Option 1 -->
     <div id="sign_in1">
