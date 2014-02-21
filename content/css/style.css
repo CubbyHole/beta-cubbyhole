@@ -1,0 +1,114 @@
+#registerForm{
+  margin-left: 330px;
+  /*text-align: center;*/
+}
+.center, input[type="text"]{
+	margin: auto;
+}
+/*Panel gauche*/
+aside{
+display: block;
+overflow: hidden;
+background: #3a3633;
+background: -webkit-gradient(linear,left top,right top,color-stop(93%,#3a3633),color-stop(100%,#2a2725));
+background: -webkit-linear-gradient(left,#3a3633 93%,#2a2725 100%);
+background: -webkit-gradient(linear,top left,top right,from(#3a3633),to(#2a2725));
+background: -webkit-linear-gradient(left,#3a3633 93%,#2a2725 100%);
+background: linear-gradient(to right,#3a3633 93%,#2a2725 100%);
+min-height: 100%;
+}
+#left-panel{
+    min-height: 1710px;
+    width: 220px;
+    
+    position: absolute;
+    float: left;
+    overflow: hidden;
+}
+nav ul li a {
+line-height: normal;
+font-size: 14px;
+padding: 10px 10px 10px 11px;
+color: #a8a8a8;
+display: block;
+font-weight: 400;
+text-decoration: none!important;
+position: relative;
+}
+
+/*MAIN*/
+#main{
+    display: block;
+    margin-left: 220px;
+    padding:0;
+    min-height: 500px;
+    margin-top: 91px;
+}
+
+
+/********TEST COMPLEXITY***********/
+
+    #progressbar {
+        width:5%;
+        height:35px;
+        display: inline-flex;
+        border-radius: 3px;
+        overflow:hidden;
+        background-color: white;
+    }
+
+    #progress {
+        display:block;
+        height:100px;
+        width:0%;
+    }
+
+    .progressbarValid {
+        background-color:green;
+        background-image: -o-linear-gradient(-90deg, #8AD702 0%, #389100 100%);
+      background-image: -moz-linear-gradient(-90deg, #8AD702 0%, #389100 100%);
+      background-image: -webkit-linear-gradient(-90deg, #8AD702 0%, #389100 100%);
+      background-image: -ms-linear-gradient(-90deg, #8AD702 0%, #389100 100%);
+      background-image: linear-gradient(-90deg, #8AD702 0%, #389100 100%);
+    }
+
+    .progressbarInvalid {
+        background-color:red;
+        background-image: -o-linear-gradient(-90deg, #F94046 0%, #92080B 100%);
+      background-image: -moz-linear-gradient(-90deg, #F94046 0%, #92080B 100%);
+      background-image: -webkit-linear-gradient(-90deg, #F94046 0%, #92080B 100%);
+      background-image: -ms-linear-gradient(-90deg, #F94046 0%, #92080B 100%);
+      background-image: linear-gradient(-90deg, #F94046 0%, #92080B 100%);
+    }
+
+    #status {
+        height:150px;
+        width:388px;
+        border:1px solid #ccc;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        background-color: white;
+    }
+
+    #complexityLabel {
+        width:100%;
+        text-align:center;
+        margin-top:10px;
+        font-size:20px;
+        line-height:30px;
+    }
+
+    #complexity {
+        width:100%;
+        text-align:center;
+        font-family:"Helvetica Neue", "Helvetica", Arial, sans-serif;
+        font-weight:bold;
+        
+        line-height:35px;
+        
+    }
+
+    .error{
+        color: #FF0000;
+    }
+
