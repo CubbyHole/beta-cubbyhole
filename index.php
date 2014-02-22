@@ -60,7 +60,9 @@ include 'header/index.header.php';
     
 </br>
     
-<?php var_dump($_SESSION['user']); ?>
+<?php 
+$grav = unserialize($_SESSION['user']);
+var_dump( $grav ); ?>
     <div id="showcase">
 
         <div class="container">

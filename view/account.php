@@ -1,9 +1,6 @@
 <?php 
 include '../header/account.header.php'; 
-include '../config/db.class.php';
 
-//instancie la bdd
-$mongo = DB::instantiate();
 
 //On veut pouvoir afficher les infos de l'user en cours
 $users_collection = $mongo->get_collection('USER');

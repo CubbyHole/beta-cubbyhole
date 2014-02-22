@@ -1,7 +1,7 @@
 <?php 
 session_start();
-include '../../config/db.class.php';
-include '../../controller/functions.php';
+require '../model/pdo/AbstractPdoManager.class.php';
+require '../controller/functions.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -88,7 +88,7 @@ include '../../controller/functions.php';
         <div>
         	<?php 
             //Instantiation de la bdd (connexion)
-            $mongo =  DB::instantiate();
+            $mongo =  AbstractPdoManager::instantiate();
 
             //récupère la collection "users"
             $users_collection = $mongo->get_collection('user');

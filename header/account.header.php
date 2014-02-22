@@ -1,5 +1,7 @@
-<?php session_start();
-include 'controller/functions.php'; ?>
+<?php 
+session_start();
+require_once '../controller/required.php';
+include '../controller/functions.php'; ?>
 
 <!DOCTYPE html>
 <html>
@@ -9,14 +11,14 @@ include 'controller/functions.php'; ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
     <!-- Styles -->
-    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/compiled/bootstrap-overrides.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="css/compiled/theme.css" />
+    <link href="../content/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../content/css/compiled/bootstrap-overrides.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../content/css/compiled/theme.css" />
 
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
 
-    <link rel="stylesheet" href="css/compiled/index.css" type="text/css" media="screen" />    
-    <link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection" />    
+    <link rel="stylesheet" href="../content/css/compiled/index.css" type="text/css" media="screen" />    
+    <link rel="stylesheet" type="text/css" href="../content/css/lib/animate.css" media="screen, projection" />    
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -59,7 +61,7 @@ include 'controller/functions.php'; ?>
                     <!--<li><a href="register.php">REGISTER</a></li>
                     <li><a href="login.php">LOGIN</a></li>-->
                     <?php if($_SESSION == true): //Mise en place d'un module Gravatar pour la photo de profil ?> 
-                        <li><img class="img-circle" style="width: 50%;" src=<?php echo get_gravatar($_SESSION['mail']); ?> ></li>                  
+                        <li><img class="img-circle" style="width: 50%;" src=<?php echo $_SESSION['email']; ?> ></li>                  
                     <?php endif ?>
                 </ul>
             </div>

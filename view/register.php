@@ -20,7 +20,7 @@ require_once '../controller/functions.php';
                 <div class="footer">
                     <form method="post" action="../controller/register.php" class="form">
                         <div class="form-group">
-                            <input id="name" name="name" type="text" placeholder="Nom" class="form-control center" autofocus>
+                            <input id="name" name="name" type="text" placeholder="Nom" class="form-control center" autofocus required>
                         </div>
 
                         <div class="form-group">
@@ -168,6 +168,10 @@ require_once '../controller/functions.php';
                 var emailVal = $("#email").val();
                 var passwordVal = $("#password").val();
                 var passwordCheckVal = $("#passwordConfirmation").val();
+
+                //notre expression regulière pour la verification de la validité du mail
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+
                 var hasError = false;
 
                 //cache le span
@@ -176,6 +180,7 @@ require_once '../controller/functions.php';
                 //Si champ name est vide
                 if (nameVal == '') 
                 {   
+
                     //insere notre message d'erreur apres la div du password
                     $("#name").after('<span class="error">Veuillez rentrer un nom.</span>');
                     //erreur = 1
@@ -184,6 +189,7 @@ require_once '../controller/functions.php';
                 //Sinon si firstname est vide
                 else if (firstnameVal == '') 
                 {
+
                     //insere notre message d'erreur apres la div du passwordConfirmation
                     $("#firstname").after('<span class="error">Veuillez rentrer un prenom.</span>');
                     //erreur = 1
@@ -195,6 +201,12 @@ require_once '../controller/functions.php';
                     //insere notre message d'erreur apres la div du passwordConfirmation
                     $("#email").after('<span class="error">Veuillez rentrer un email.</span>');
                     //erreur = 1
+                    hasError = true;
+                }
+                //Test de la validité du mail
+                else if(!emailReg.test(emailVal)) 
+                {
+                    $("#email").after("<span class='error'>Votre email n'est pas valide.</span>");
                     hasError = true;
                 }
                //Sinon si password est vide
@@ -222,11 +234,18 @@ require_once '../controller/functions.php';
                     //erreur = 1
                     hasError = true;
                 }
+                //verifie que le mot de passe ne soit pas égal à l'email
+                else if (passwordVal == emailVal )
+                { 
+                    //insere notre message d'erreur apres la div du passwordConfirmation pour la non correspondance
+                    $("#password").after('<span class="error">Votre mot de passe doit être different de votre email.</span>');
+                    //erreur = 1
+                    hasError = true;
+                }
                  //Verification de la correspondance des mdp
                 else if (passwordVal != passwordCheckVal )
                 {
-                    //entoure la div d'une bordure rouge
-                    $("#passwordConfirmation").css("border-color", "#FF0000");  
+
                     //insere notre message d'erreur apres la div du passwordConfirmation pour la non correspondance
                     $("#passwordConfirmation").after('<span class="error">Votre mot de passe ne correspond pas.</span>');
                     //erreur = 1

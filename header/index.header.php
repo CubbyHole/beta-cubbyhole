@@ -24,8 +24,7 @@ include_once 'controller/functions.php';
     <![endif]-->
 
 </head>
-<body class="pull_top">
-    
+<body class="pull_top">  
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
