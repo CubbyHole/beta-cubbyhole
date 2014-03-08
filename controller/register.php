@@ -65,7 +65,7 @@ if( isset($_POST['add_user'] ) )
 		{
 			$loginOK = true;
             
-			//redirection vers le dashboard
+			//redirection vers le dashboar
 			header('Location:../index.php');
 		}
     }
