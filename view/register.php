@@ -20,7 +20,7 @@ require_once '../controller/functions.php';
                 <div class="footer">
                     <form method="post" action="../controller/register.php" class="form">
                         <div class="form-group">
-                            <input id="name" name="name" type="text" placeholder="Nom" class="form-control center" autofocus required>
+                            <input id="name" name="name" type="text" placeholder="Nom" class="form-control center" autofocus >
                         </div>
 
                         <div class="form-group">
@@ -41,7 +41,7 @@ require_once '../controller/functions.php';
                         <!--Complexité du mot de passe -->
                         <div id="progressbar">
                             <div id="progress" class="progressbarInvalid" style="width: 0%;">
-                                <div id="complexity">0%</div>
+                                <div id="complexity">0</div>
                             </div>
                         </div>
 
@@ -141,12 +141,12 @@ require_once '../controller/functions.php';
             $("#password").complexify({}, function (valid, complexity) {
                 
                 if (!valid) {
-                    $('#progress').css({'width':complexity + '%'}).removeClass('progressbarValid').addClass('progressbarInvalid');
+                    $('#progress').css({'width':complexity }).removeClass('progressbarValid').addClass('progressbarInvalid');
                 } else {
-                    $('#progress').css({'width':complexity + '%'}).removeClass('progressbarInvalid').addClass('progressbarValid');
+                    $('#progress').css({'width':complexity }).removeClass('progressbarInvalid').addClass('progressbarValid');
                 }
 
-                $('#complexity').html(Math.round(complexity) + '%');
+                $('#complexity').html(Math.round(complexity) );
 
             });
             
@@ -161,7 +161,10 @@ require_once '../controller/functions.php';
             });
 
             //Message erreur au submit
-            $( "#submit" ).click(function() {           
+            $( "#submit" ).click(function() {
+
+                //http://www.w3schools.com/jsref/jsref_regexp_test.asp
+
                 //stocke la valeur des champs input en variable
                 var nameVal = $("#name").val();
                 var firstnameVal = $("#firstname").val();
@@ -177,7 +180,7 @@ require_once '../controller/functions.php';
 
                 var hasError = false;
 
-                //cache le span
+                //cache le span pour eviter la repetition lors du submit
                 $(".error").hide();
 
                 //Si champ name est vide
@@ -185,17 +188,21 @@ require_once '../controller/functions.php';
                 {   
 
                     //insere notre message d'erreur apres la div du name
-                    $("#name").after('<span class="error">Veuillez rentrer un nom.</span>');
+                    $("#name").after('<span class="error">Please enter a name.</span>');
+                    /*$('#name').popover({ title: 'Error', content:'Please enter a name' , html:true });
+                    $('#name').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
 
-                //Sinon si name est <= 2
-                else if ( nameVal.length <= 2 )
-                {
+                //Sinon si name est < 2
+                else if ( nameVal.length < 2 )
+                    {
 
                     //insere notre message d'erreur apres la div du name
-                    $("#name").after('<span class="error">Votre nom est trop court.</span>');
+                    $("#name").after('<span class="error">Must be more than 2 characters.</span>');
+                        /*$('#name').popover({ title: 'Error', content:'Must be more than 2 characters' , html:true });
+                        $('#name').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
@@ -205,27 +212,34 @@ require_once '../controller/functions.php';
                 {
 
                     //insere notre message d'erreur apres la div du name
-                    $("#name").after('<span class="error">Votre nom est trop long.</span>');
+                    $("#name").after('<span class="error">Your name is too long.</span>');
+
+                    /*$('#name').popover({ title: 'Error', content:'Your name is too long' , html:true });
+                    $('#name').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
 
                 //Sinon si firstname est vide
-                else if (firstnameVal == '') 
+                if (firstnameVal == '')
                 {
 
                     //insere notre message d'erreur apres la div du firstname
-                    $("#firstname").after('<span class="error">Veuillez rentrer un prenom.</span>');
+                    $("#firstname").after('<span class="error">Please enter a first name.</span>');
+                    /*$('#firstname').popover({ title: 'Error', content:'Please enter a first name' , html:true });
+                    $('#firstname').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
 
-                //Sinon si firstname est <= 2
-                else if (firstnameVal.length <= 2)
+                //Sinon si firstname est < 2
+                else if (firstnameVal.length < 2)
                 {
 
                     //insere notre message d'erreur apres la div du firstname
-                    $("#firstname").after('<span class="error">Votre prénom est trop court.</span>');
+                    $("#firstname").after('<span class="error">Must be more than 2 characters.</span>');
+                    /*$('#firstname').popover({ title: 'Error', placement:'left', content:'Must be more than 2 characters' , html:true });
+                    $('#firstname').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
@@ -234,16 +248,20 @@ require_once '../controller/functions.php';
                 {
 
                     //insere notre message d'erreur apres la div du firstname
-                    $("#firstname").after('<span class="error">Votre prénom est trop long.</span>');
+                    $("#firstname").after('<span class="error">Your first name is too long.</span>');
+                    /*$('#firstname').popover({ title: 'Error', placement:'left', content:'Your first name is too long' , html:true });
+                    $('#firstname').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
 
                 //Sinon si email est vide
-                else if (emailVal == '') 
+                if (emailVal == '')
                 {
                     //insere notre message d'erreur apres la div du email
-                    $("#email").after('<span class="error">Veuillez rentrer un email.</span>');
+                    $("#email").after('<span class="error">Please enter an email.</span>');
+                    /*$('#email').popover({ title: 'Error', content:'Please enter an email' , html:true });
+                    $('#email').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
@@ -251,23 +269,29 @@ require_once '../controller/functions.php';
                 else if (emailVal.length > 26)
                 {
                     //insere notre message d'erreur apres la div du email
-                    $("#email").after('<span class="error">Votre email est trop long.</span>');
+                    $("#email").after('<span class="error">Your email is too long.</span>');
+                    /*$('#email').popover({ title: 'Error', content:'Your email is too long' , html:true });
+                    $('#email').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
                 //Test de la validité du mail
-                else if(!emailReg.test(emailVal)) 
+                else if(!emailReg.test(emailVal))
                 {
                     //insere notre message d'erreur apres la div du email
-                    $("#email").after("<span class='error'>Votre email n'est pas valide.</span>");
+                    $("#email").after("<span class='error'>Your email is not valid.</span>");
+                    /*$('#email').popover({ title: 'Error', content:'Your email is not valid' , html:true });
+                    $('#email').popover('show');*/
                     hasError = true;
                 }
 
                //Sinon si password est vide
-                else if (passwordVal == '' )
+                if (passwordVal == '' )
                 {  
                     //insere notre message d'erreur apres la div du password pour la non correspondance
-                    $("#password").after('<span class="error">Veuillez rentrer un mot de passe.</span>');
+                    $("#password").after('<span class="error">Please enter a password.</span>');
+                    /*$('#password').popover({ title: 'Error', content:'Please enter a password' , html:true });
+                    $('#password').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
@@ -275,7 +299,9 @@ require_once '../controller/functions.php';
                 else if (passwordVal == nameVal )
                 { 
                     //insere notre message d'erreur apres la div du password pour la non correspondance
-                    $("#password").after('<span class="error">Votre mot de passe doit être different de votre nom.</span>');
+                    $("#password").after('<span class="error">You can\'t have your name as your password.</span>');
+                    /*$('#password').popover({ title: 'Error', content:'You can\'t have your name as your password' , html:true, placement:'left' });
+                    $('#password').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
@@ -283,7 +309,9 @@ require_once '../controller/functions.php';
                 else if (passwordVal == firstnameVal )
                 { 
                     //insere notre message d'erreur apres la div du password pour la non correspondance
-                    $("#password").after('<span class="error">Votre mot de passe doit être different de votre prenom.</span>');
+                    $("#password").after('<span class="error">You can\'t have your first name as your password.</span>');
+                    /*$('#password').popover({ title: 'Error', content:'You can\'t have your first name as your password' , html:true, placement:'left' });
+                    $('#password').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
@@ -291,24 +319,30 @@ require_once '../controller/functions.php';
                 else if (passwordVal == emailVal )
                 { 
                     //insere notre message d'erreur apres la div du password pour la non correspondance
-                    $("#password").after('<span class="error">Votre mot de passe doit être different de votre email.</span>');
+                    $("#password").after('<span class="error">You can\'t have your email as your password.</span>');
+                    /*$('#password').popover({ title: 'Error', content:'You can\'t have your email as your password' , html:true, placement:'left' });
+                    $('#password').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
                 //verifie que le mot de passe respecte nos conditions (MAJ,min,special char, compris entre 8 et 26 char)
+                //is a standard javascript function for checking strings against regular expressions
                 else if (!passwordReg.test(passwordVal))
                 {
                     //insere notre message d'erreur apres la div du password pour la non correspondance
-                    $("#password").after('<span class="error">Votre mot de passe doit contenir 1Majuscule, 1min, 1carac spé, compris entre 8 et 26char.</span>');
+                    $("#password").after('<span class="error">Must contain at least: one upper case, one lower case, <br />One special character(@*#)<br /> And be between 8-26 characters.</span>');
+                    /*$('#password').popover({ title: 'Error', content:'Must contain at least: one upper case, one lower case, one special character(@*#), and be between 8-26 characters' , html:true, placement:'left' });
+                    $('#password').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
                 //Enfin nous verifierons la correspondance des mdp
                 else if (passwordVal != passwordCheckVal )
                 {
-
                     //insere notre message d'erreur apres la div du passwordConfirmation pour la non correspondance
-                    $("#passwordConfirmation").after('<span class="error">Votre mot de passe ne correspond pas.</span>');
+                    $("#passwordConfirmation").after('<span class="error">Passwords do not match.</span>');
+                    /*$('#passwordConfirmation').popover({ title: 'Error', content:'Passwords do not match' , html:true });
+                    $('#passwordConfirmation').popover('show');*/
                     //erreur = 1
                     hasError = true;
                 }
@@ -321,6 +355,8 @@ require_once '../controller/functions.php';
                     }*/
 
             });
+
+
 
          });
     </script>

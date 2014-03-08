@@ -109,9 +109,9 @@
 			var defaults = {
 				minimumChars: 8,
 				strengthScaleFactor: 1,
-        bannedPasswords: window.COMPLEXIFY_BANLIST || [],
+                bannedPasswords: window.COMPLEXIFY_BANLIST || [],
 				banmode: 'strict', // (strict|loose)
-        evaluateOnInit: true
+                evaluateOnInit: true
 			};
 
 			if($.isFunction(options) && !callback) {
