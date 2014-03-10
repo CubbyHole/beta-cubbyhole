@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Activate your Cubbyhole account now</title>
-        
+
 <!--[if gte mso 6]>
 <style>
     table.mcnFollowContent {width:100% !important;}
@@ -231,101 +231,77 @@ h4{
         -webkit-text-size-adjust:none !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     body
     {
         width:100% !important;
         min-width:100% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[id=bodyCell]
     {
         padding:10px !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     table[class=mcnTextContentContainer]
     {
         width:100% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     table[class=mcnBoxedTextContentContainer]
     {
         width:100% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     table[class=mcpreview-image-uploader]
     {
         width:100% !important;
         display:none !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     img[class=mcnImage]
     {
         width:100% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     table[class=mcnImageGroupContentContainer]
     {
         width:100% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=mcnImageGroupContent]
     {
         padding:9px !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=mcnImageGroupBlockInner]
     {
         padding-bottom:0 !important;
         padding-top:0 !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     tbody[class=mcnImageGroupBlockOuter]
     {
         padding-bottom:9px !important;
         padding-top:9px !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     table[class=mcnCaptionTopContent],table[class=mcnCaptionBottomContent]
     {
         width:100% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     table[class=mcnCaptionLeftTextContentContainer],
     table[class=mcnCaptionRightTextContentContainer],
     table[class=mcnCaptionLeftImageContentContainer],
@@ -336,9 +312,7 @@ h4{
         width:100% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=mcnImageCardLeftImageContent],td[class=mcnImageCardRightImageContent]
     {
         padding-right:18px !important;
@@ -346,24 +320,19 @@ h4{
         padding-bottom:0 !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=mcnImageCardBottomImageContent]
     {
         padding-bottom:9px !important;
     }
 
-}	@media only screen and (max-width: 480px)
-{
+
     td[class=mcnImageCardTopImageContent]
     {
         padding-top:18px !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=mcnImageCardLeftImageContent],td[class=mcnImageCardRightImageContent]
     {
         padding-right:18px !important;
@@ -371,60 +340,46 @@ h4{
         padding-bottom:0 !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=mcnImageCardBottomImageContent]
     {
         padding-bottom:9px !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=mcnImageCardTopImageContent]
     {
         padding-top:18px !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     table[class=mcnCaptionLeftContentOuter] td[class=mcnTextContent],
     table[class=mcnCaptionRightContentOuter] td[class=mcnTextContent]
     {
         padding-top:9px !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=mcnCaptionBlockInner] table[class=mcnCaptionTopContent]:last-child td[class=mcnTextContent]
     {
         padding-top:18px !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=mcnBoxedTextContentColumn]
     {
         padding-left:18px !important;
         padding-right:18px !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=mcnTextContent]
     {
         padding-right:18px !important;
         padding-left:18px !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     table[id=templateContainer],
     table[id=templatePreheader],
     table[id=templateHeader],
@@ -435,41 +390,31 @@ h4{
         width:100% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     h1{
         font-size:24px !important;
         line-height:125% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     h2{
         font-size:20px !important;
         line-height:125% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     h3{
         font-size:18px !important;
         line-height:125% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     h4{
         font-size:16px !important;
         line-height:125% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     table[class=mcnBoxedTextContentContainer] td[class=mcnTextContent],
     td[class=mcnBoxedTextContentContainer] td[class=mcnTextContent] p
     {
@@ -477,17 +422,14 @@ h4{
         line-height:125% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
+
     table[id=templatePreheader]
     {
         display:block !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=preheaderContainer] td[class=mcnTextContent],
     td[class=preheaderContainer] td[class=mcnTextContent] p
     {
@@ -495,9 +437,7 @@ h4{
         line-height:115% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=headerContainer] td[class=mcnTextContent],
     td[class=headerContainer] td[class=mcnTextContent] p
     {
@@ -505,9 +445,7 @@ h4{
         line-height:125% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=bodyContainer] td[class=mcnTextContent],
     td[class=bodyContainer] td[class=mcnTextContent] p
     {
@@ -515,9 +453,7 @@ h4{
         line-height:125% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
     td[class=footerContainer] td[class=mcnTextContent],
     td[class=footerContainer] td[class=mcnTextContent] p
     {
@@ -525,15 +461,17 @@ h4{
         line-height:115% !important;
     }
 
-}
-@media only screen and (max-width: 480px)
-{
+
+
     td[class=footerContainer] a[class=utilityLink]
     {
         display:block !important;
     }
 
-}</style></head>
+}
+
+</style>
+</head>
 <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="margin: 0;padding: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #f2f2f2;height: 100% !important;width: 100% !important;">
 <center>
     <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;background-color: #f2f2f2;height: 100% !important;width: 100% !important;">
