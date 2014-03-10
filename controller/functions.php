@@ -1,16 +1,22 @@
 <?php
 /**
- * Récupère le gravatar !
+ * Récupère le gravatar correspondant
  * @author Kentucky Sato
  * @param $email
- * @since 03/2014
- * @return $url
+ * @param int $size
+ * @param string $default
+ * @param string $rating
+ * @param bool $img
+ * @param array $atts
+ * @return string
  */
 
-function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array()) {
+function get_gravatar($email, $size = 50, $default = 'mm', $rating = 'g', $img = false, $atts = array()) {
+    //Pour la doc
+    //https://fr.gravatar.com/site/implement/images/
     $url = 'http://www.gravatar.com/avatar/';
-    $url .= md5( strtolower( trim( $email ) ) );
-    $url .= "?s=$s&d=$d&r=$r";
+    $url .= md5( strtolower( trim( $email ) ) ); //http://www.php.net/manual/fr/function.strtolower.php
+    $url .= "?s=$size&d=$default&r=$rating";
     if ( $img ) {
         $url = '<img src="' . $url . '"';
         foreach ( $atts as $key => $val )

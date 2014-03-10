@@ -61,7 +61,7 @@ include_once 'controller/functions.php';
                     <li><a href="login.php">LOGIN</a></li>-->
 
                     <?php if($_SESSION == true): //Mise en place d'un module Gravatar pour la photo de profil ?> 
-                        <li><img class="img-circle" style="width: 50%;" src=<?php echo $_SESSION['email']; ?> ></li>                  
+                        <li><img class="img-circle" style="" src=<?php echo $_SESSION['email']; ?> ></li>
                     <?php endif ?>
                 </ul>
             </div>
