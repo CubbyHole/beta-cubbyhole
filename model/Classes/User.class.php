@@ -1,5 +1,6 @@
 <?php
-class User {
+class User
+{
 	
 	private $id;
 	private $state;
@@ -12,7 +13,8 @@ class User {
 	private $geolocation;
 	private $apiKey;
 	
-	public function __construct() {
+	public function __construct()
+    {
 		
 		$num = func_num_args();
 		

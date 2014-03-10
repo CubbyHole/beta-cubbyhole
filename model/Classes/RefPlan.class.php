@@ -1,6 +1,7 @@
 <?php
 
-class RefPlan {
+class RefPlan
+{
 	
 	private $id;
 	private $state;
@@ -10,7 +11,8 @@ class RefPlan {
 	private $bandwidth;
 	private $maxRatio;
 	
-	public function __construct() {
+    public function __construct()
+    {
 		
 		$num = func_num_args();
 		

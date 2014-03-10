@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by Notepad++.
+ * User: Alban Truc
+ * Date: 30/01/14
+ * Time: 14:51
+ */
 
 abstract class AbstractPdoManager 
 {
@@ -13,6 +19,12 @@ abstract class AbstractPdoManager
     protected $connection;
     protected $database;
 
+    /**
+     * Constructeur: génère la connexion à la base de données Mongo.
+     * @author Alban Truc
+     * @since 30/01/14
+     */
+
     public function __construct() 
     {
         $connection_string = sprintf('mongodb://%s:%d/%s', AbstractPdoManager::DBHOST, AbstractPdoManager::DBPORT, AbstractPdoManager::DBNAME);       
@@ -26,7 +38,13 @@ abstract class AbstractPdoManager
             throw $e;
         }
     }
-    
+
+    /**
+     * @author Alban Truc
+     * @since 30/01/14
+     * @return mixed
+     */
+
     static public function instantiate()
     {
         if(!isset(self::$instance))
@@ -36,7 +54,13 @@ abstract class AbstractPdoManager
         }
         return self::$instance;
     }
-    
+
+    /**
+     * @author Alban Truc
+     * @param $name
+     * @since 30/01/14
+     * @return mixed Renvoie la collection voulue
+     */
     public function getCollection($name)
     {
         return $this->database->selectCollection($name);

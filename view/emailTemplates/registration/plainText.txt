@@ -1,0 +1,13 @@
+View this email in your browser: *|ARCHIVE|*
+
+** Please confirm your registration to Cubbyhole
+------------------------------------------------------------
+
+You received this e-mail because you created an account on Cubbyhole.
+If you did not, please excuse us.
+
+For questions about our service or anything, use the mailing address at the bottom of this message.
+Activate your account: http://localhost:8081/Cubbyhole/
+==============================================
+Our mailing address is:
+*|LIST:EMAIL|*

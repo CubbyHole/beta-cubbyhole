@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../controller/functions.php';
+require 'functions.php';
 require 'required.php';
 $loginOK = false;
 
@@ -61,13 +61,16 @@ if( isset($_POST['add_user'] ) )
         $account_id = $account_collection->insert($account);
 		*/
 
-		if(!(empty($result)))
+		if(!(array_key_exists('error', $result)))
 		{
 			$loginOK = true;
             
 			//redirection vers le dashboar
 			header('Location:../index.php');
 		}
+        else {
+            echo $result['error'];
+        }
     }
     else
     {
