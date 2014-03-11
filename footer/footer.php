@@ -60,10 +60,10 @@
     </footer>
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="\CubbyHole\content\js\bootstrap.min.js"></script>
-    <script src="\CubbyHole\content\js\theme.js"></script>
-    <script type="text/javascript" src="\CubbyHole\content\js\index-slider.js"></script> 
-    <script type="text/javascript" src="\CubbyHole\content\js\flexslider.js"></script> 
+    <script src="../content/js/bootstrap.min.js"></script>
+    <script src="../content/js/theme.js"></script>
+    <script type="text/javascript" src="../content/js/index-slider.js"></script>
+    <script type="text/javascript" src="../content/js/flexslider.js"></script>
    
 </body>
 </html>
