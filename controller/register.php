@@ -13,6 +13,9 @@ if( isset($_POST['add_user'] ) )
     $email = $_POST['email'];
     $password = $_POST['password'];
     $passwordConfirmation = $_POST['passwordConfirmation'];
+    if(!(empty($_POST['geolocation'])))
+        $geolocation = $_POST['geolocation'];
+    else $geolocation = 'Not specified';
 
     //Verifie si le champ correspondant a "nom" n'est pas vide, meme chose pour "password"
 
@@ -20,7 +23,7 @@ if( isset($_POST['add_user'] ) )
     if(!empty($name) && $password == $passwordConfirmation)
     {
 		$userPdoManager = new UserPdoManager();
-		$result = $userPdoManager->register($name, $firstName, $email, $password, $passwordConfirmation);
+		$result = $userPdoManager->register($name, $firstName, $email, $password, $passwordConfirmation, $geolocation);
 		
 		/*
         //Instantiation de la bdd (connexion)

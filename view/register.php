@@ -38,12 +38,15 @@ require_once '../controller/functions.php';
                         <div class="form-group">
                             <input id="passwordConfirmation" name="passwordConfirmation" type="password" placeholder="Confirm Password" class="form-control center password">
                         </div>
+
                         <!--Complexité du mot de passe -->
                         <div id="progressbar">
                             <div id="progress" class="progressbarInvalid" style="width: 0%;">
                                 <div id="complexity">0</div>
                             </div>
                         </div>
+
+                        <input id="geolocation" name="geolocation" type="hidden">
 
                         <input id="submit" name="add_user" value="Sign up" type="submit">
                     </form>
@@ -63,74 +66,57 @@ require_once '../controller/functions.php';
             </div>
         </div>
     </div>
-
-    <!-- starts footer -->
-    <footer id="footer">
-        <div class="container">
-            <div class="row info">
-                <div class="col-sm-6 residence">
-                    <ul>
-                        <li>2301 East Lamar Blvd. Suite 140. City, Arlington.</li>
-                        <li>United States, Zip Code TX 76006.</li>
-                    </ul>
-                </div>
-                <div class="col-sm-5 touch">
-                    <ul>
-                        <li><strong>P.</strong> 1 817 274 2933</li>
-                        <li><strong>E.</strong><a href="#"> bootstrap@twitter.com</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row credits">
-                <div class="col-md-12">
-                    <div class="row social">
-                        <div class="col-md-12">
-                            <a href="#" class="facebook">
-                                <span class="socialicons ico1"></span>
-                                <span class="socialicons_h ico1h"></span>
-                            </a>
-                            <a href="#" class="twitter">
-                                <span class="socialicons ico2"></span>
-                                <span class="socialicons_h ico2h"></span>
-                            </a>
-                            <a href="#" class="gplus">
-                                <span class="socialicons ico3"></span>
-                                <span class="socialicons_h ico3h"></span>
-                            </a>
-                            <a href="#" class="flickr">
-                                <span class="socialicons ico4"></span>
-                                <span class="socialicons_h ico4h"></span>
-                            </a>
-                            <a href="#" class="pinterest">
-                                <span class="socialicons ico5"></span>
-                                <span class="socialicons_h ico5h"></span>
-                            </a>
-                            <a href="#" class="dribble">
-                                <span class="socialicons ico6"></span>
-                                <span class="socialicons_h ico6h"></span>
-                            </a>
-                            <a href="#" class="behance">
-                                <span class="socialicons ico7"></span>
-                                <span class="socialicons_h ico7h"></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row copyright">
-                        <div class="col-md-12">
-                            © 2013 Clean Canvas. All rights reserved. Theme by Detail Canvas.
-                        </div>
-                    </div>
-                </div>            
-            </div>
-        </div>
-    </footer>
-
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="../content/js/bootstrap.min.js"></script>
-    <script src="../content/js/theme.js"></script>
-    <script src="../content/js/jquery.complexify.js"></script>
-
+<?php
+include '../footer/register.footer.php';
+?>
     <script type="text/javascript">
+
+        /**
+         * Fonction de callback dans laquelle on traite les coordonnées de l'utilisateur
+         * @author Alban Truc
+         * @param position Position de l'utilisateur
+         * @since 20/01/2014
+         * Dernière update: 11/03/2014
+         */
+        function currentHumanReadablePosition(position)
+        {
+            //Coordonnées actuelles de l'utilisateur
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            //Création des objets nécessaires pour utiliser l'API
+            var geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(latitude, longitude);
+
+            /*
+             Processus de Reverse Geocoding: transformer des coordonnées (longitude et latitude)
+             en adresse lisible par l'humain.
+             */
+            geocoder.geocode({'latLng': latlng}, function(results, status)
+            {
+                if(status == google.maps.GeocoderStatus.OK)
+                {
+                    /*
+                     Plusieurs résultats sont fournis, le second (results[1]) fournit une adresse formatée
+                     en général suffisamment précise sans pour autant l'être trop.
+                     */
+                    if(results[1])
+                        $('#geolocation').val(results[1].formatted_address);
+                }
+                else
+                //Probablement à retirer, l'utilisateur n'a de toutes façon pas à avoir ces données
+                    $('#geolocation').val('Geocoder failed due to: ' + status);
+            });
+        }
+
+        /**
+         * Récupère la localisation de l'utilisateur par son navigateur.
+         * Nécessite son approbation.
+         * @author Alban Truc
+         * @since 20/01/2014
+         */
+        if(navigator.geolocation)
+            navigator.geolocation.getCurrentPosition(currentHumanReadablePosition);
 
         $(function () {
 
@@ -355,10 +341,8 @@ require_once '../controller/functions.php';
                     }*/
 
             });
-
-
-
          });
+
     </script>
 </body>
 </html>
