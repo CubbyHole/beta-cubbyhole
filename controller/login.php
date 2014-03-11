@@ -25,7 +25,7 @@ if(isset($_POST['loginForm'] ))
 		if(!(array_key_exists('error', $user)))
 		{
 			$loginOK = true;
-			$grav = get_gravatar($user->getEmail());
+			$grav = getGravatar($user->getEmail());
 			//var_dump($test);
 			//redirection vers index
 			header('Location:../index.php');
