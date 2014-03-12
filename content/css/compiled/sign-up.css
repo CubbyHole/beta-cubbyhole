@@ -311,7 +311,8 @@
   #sign_up2 .left_box .perk_box .perk .icos {
     height: 66px; }
   #sign_up2 .signin_box .box .social a.circle {
-    margin-right: 10px; } }
+    margin-right: 10px; }
+}
 @media (max-width: 767px) {
   #sign_up1 {
     background: none;
@@ -360,4 +361,10 @@
     #sign_up2 .signin_box .box {
       float: none;
       margin: 0 auto;
-      width: 100%; } }
+      width: 100%; }
+}
+@media (min-width: 768px){
+    #sign_up1 .header{
+        margin-top: 20px;
+    }
+}
