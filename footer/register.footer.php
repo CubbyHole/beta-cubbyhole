@@ -75,5 +75,6 @@
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
     <script src="../content/js/jquery.complexify.js"></script>
     <script src="../content/js/complexity/complexity.js"></script>
+<script src="../content/js/complexity/geo.js"></script>
 </body>
 </html>
