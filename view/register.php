@@ -1,140 +1,127 @@
-<?php 
-include '../header/register.header.php'; 
+<?php
+include '../header/register.header.php';
 require_once '../controller/functions.php';
 ?>
 
-    <!-- Sign In Option 1 -->
-    <div id="sign_up1">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 header">
-                    <h4>Create your account</h4>
-                </div>
+<!-- Sign In Option 1 -->
+<div id="sign_up1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 header">
+                <h4>Create your account</h4>
+            </div>
 
-                <div class="col-sm-3 division">
-                    <div class="line l"></div>
-                    <span>here</span>
-                    <div class="line r"></div>
-                </div>
+            <div class="col-sm-3 division">
+                <div class="line l"></div>
+                <span>here</span>
+                <div class="line r"></div>
+            </div>
 
-                <div class="footer">
-                    <form method="post" action="../controller/register.php" class="form">
-                        <div class="form-group">
-                            <input id="name" name="name" type="text" placeholder="Nom" class="form-control center" autofocus >
-                        </div>
+            <div class="footer">
+                <form method="post" action="../controller/register.php" class="form">
+                    <div class="form-group">
+                        <input id="name" name="name" type="text" placeholder="Nom" class="form-control center" autofocus >
+                    </div>
 
-                        <div class="form-group">
-                            <input id="firstname" name="firstName" type="text" placeholder="Prenom" class="form-control center">
-                        </div>
+                    <div class="form-group">
+                        <input id="firstname" name="firstName" type="text" placeholder="Prenom" class="form-control center">
+                    </div>
 
-                        <div class="form-group">
-                            <input id="email" name="email" type="text" placeholder="Email" class="form-control center">
-                        </div>
+                    <div class="form-group">
+                        <input id="email" name="email" type="text" placeholder="Email" class="form-control center">
+                    </div>
 
-                        <div class="form-group">
-                            <input id="password" name="password" type="password" placeholder="Password" class="form-control center password" >
-                        </div>
+                    <div class="form-group">
+                        <input id="password" name="password" type="password" placeholder="Password" class="form-control center password" >
+                    </div>
 
-                        <div class="form-group">
-                            <input id="passwordConfirmation" name="passwordConfirmation" type="password" placeholder="Confirm Password" class="form-control center password">
-                        </div>
+                    <div class="form-group">
+                        <input id="passwordConfirmation" name="passwordConfirmation" type="password" placeholder="Confirm Password" class="form-control center password">
+                    </div>
 
-                        <!--Complexité du mot de passe -->
-                        <div class="form-group">
-                            <div id="progressbar" >
-                                <div id="progress" class="progressbarInvalid" style="width: 0%;">
-                                    <div id="complexity" class="noticeInvalid"></div>
-                                </div>
+                    <!--Complexité du mot de passe -->
+                    <div class="form-group">
+                        <div id="progressbar" >
+                            <div id="progress" class="progressbarInvalid" style="width: 0%;">
+                                <div id="complexity" class="noticeInvalid"></div>
                             </div>
-                            <p id="notice" class="noticeInvalid">Strenght password</p>
                         </div>
+                        <p id="notice" class="noticeInvalid">Strenght password</p>
+                    </div>
 
-                        <input id="submit" name="add_user" value="Sign up" type="submit">
-                    </form>
-                </div>
+                    <input id="geolocation" name="geolocation" type="hidden">
 
-                <!--<div class="col-md-5 remember">
-                    <label class="checkbox">
-                        <input type="checkbox"> Remember me
-                    </label>
-                    <a href="#">Forgot password?</a>
-                </div>-->
+                    <input id="submit" name="add_user" value="Sign up" type="submit">
+                </form>
+            </div>
 
-                <div class="col-md-12 dosnt">
-                    <span>Already have an account?</span>
-                    <a href="login.php">Sign in</a>
-                </div>
+            <!--<div class="col-md-5 remember">
+                <label class="checkbox">
+                    <input type="checkbox"> Remember me
+                </label>
+                <a href="#">Forgot password?</a>
+            </div>-->
+
+            <div class="col-md-12 dosnt">
+                <span>Already have an account?</span>
+                <a href="login.php">Sign in</a>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- starts footer -->
-    <footer id="footer">
-        <div class="container">
-            <div class="row info">
-                <div class="col-sm-6 residence">
-                    <ul>
-                        <li>2301 East Lamar Blvd. Suite 140. City, Arlington.</li>
-                        <li>United States, Zip Code TX 76006.</li>
-                    </ul>
-                </div>
-                <div class="col-sm-5 touch">
-                    <ul>
-                        <li><strong>P.</strong> 1 817 274 2933</li>
-                        <li><strong>E.</strong><a href="#"> bootstrap@twitter.com</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row credits">
-                <div class="col-md-12">
-                    <div class="row social">
-                        <div class="col-md-12">
-                            <a href="#" class="facebook">
-                                <span class="socialicons ico1"></span>
-                                <span class="socialicons_h ico1h"></span>
-                            </a>
-                            <a href="#" class="twitter">
-                                <span class="socialicons ico2"></span>
-                                <span class="socialicons_h ico2h"></span>
-                            </a>
-                            <a href="#" class="gplus">
-                                <span class="socialicons ico3"></span>
-                                <span class="socialicons_h ico3h"></span>
-                            </a>
-                            <a href="#" class="flickr">
-                                <span class="socialicons ico4"></span>
-                                <span class="socialicons_h ico4h"></span>
-                            </a>
-                            <a href="#" class="pinterest">
-                                <span class="socialicons ico5"></span>
-                                <span class="socialicons_h ico5h"></span>
-                            </a>
-                            <a href="#" class="dribble">
-                                <span class="socialicons ico6"></span>
-                                <span class="socialicons_h ico6h"></span>
-                            </a>
-                            <a href="#" class="behance">
-                                <span class="socialicons ico7"></span>
-                                <span class="socialicons_h ico7h"></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row copyright">
-                        <div class="col-md-12">
-                            © 2013 Clean Canvas. All rights reserved. Theme by Detail Canvas.
-                        </div>
-                    </div>
-                </div>            
-            </div>
-        </div>
-    </footer>
-
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="../content/js/bootstrap.min.js"></script>
-    <script src="../content/js/theme.js"></script>
-    <script src="../content/js/jquery.complexify.js"></script>
+<?php
+include '../footer/register.footer.php';
+?>
 
     <script type="text/javascript">
+
+    /**
+     * Fonction de callback dans laquelle on traite les coordonnées de l'utilisateur
+     * @author Alban Truc
+     * @param position Position de l'utilisateur
+     * @since 20/01/2014
+     * Dernière update: 11/03/2014
+     */
+    function currentHumanReadablePosition(position)
+    {
+        //Coordonnées actuelles de l'utilisateur
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+
+        //Création des objets nécessaires pour utiliser l'API
+        var geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(latitude, longitude);
+
+        /*
+         Processus de Reverse Geocoding: transformer des coordonnées (longitude et latitude)
+         en adresse lisible par l'humain.
+         */
+        geocoder.geocode({'latLng': latlng}, function(results, status)
+        {
+            if(status == google.maps.GeocoderStatus.OK)
+            {
+                /*
+                 Plusieurs résultats sont fournis, le second (results[1]) fournit une adresse formatée
+                 en général suffisamment précise sans pour autant l'être trop.
+                 */
+                if(results[1])
+                    $('#geolocation').val(results[1].formatted_address);
+            }
+            else
+            //Probablement à retirer, l'utilisateur n'a de toutes façon pas à avoir ces données
+                $('#geolocation').val('Geocoder failed due to: ' + status);
+        });
+    }
+
+    /**
+     * Récupère la localisation de l'utilisateur par son navigateur.
+     * Nécessite son approbation.
+     * @author Alban Truc
+     * @since 20/01/2014
+     */
+    if(navigator.geolocation)
+        navigator.geolocation.getCurrentPosition(currentHumanReadablePosition);
 
         $(function () {
 
