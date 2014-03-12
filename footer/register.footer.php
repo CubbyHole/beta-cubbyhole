@@ -73,5 +73,6 @@
     <script type="text/javascript" src="../content/js/index-slider.js"></script>
     <script type="text/javascript" src="../content/js/flexslider.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+    <script src="../content/js/jquery.complexify.js"></script>
 </body>
 </html>
