@@ -91,7 +91,7 @@ $(function () {
         {
 
             //insere notre message d'erreur apres la div du name
-            $("#name").after('<span class="error">Your name is too long.</span>');
+            $("#name").after('<span class="error">Too long, 15 characters maximum.</span>');
 
             /*$('#name').popover({ title: 'Error', content:'Your name is too long' , html:true });
              $('#name').popover('show');*/
@@ -127,7 +127,7 @@ $(function () {
         {
 
             //insere notre message d'erreur apres la div du firstname
-            $("#firstname").after('<span class="error">Your first name is too long.</span>');
+            $("#firstname").after('<span class="error">Too long, 15 characters maximum.</span>');
             /*$('#firstname').popover({ title: 'Error', placement:'left', content:'Your first name is too long' , html:true });
              $('#firstname').popover('show');*/
             //erreur = 1
@@ -148,7 +148,7 @@ $(function () {
         else if (emailVal.length > 26)
         {
             //insere notre message d'erreur apres la div du email
-            $("#email").after('<span class="error">Your email is too long.</span>');
+            $("#email").after('<span class="error">Too long, 26 characters maximum.</span>');
             /*$('#email').popover({ title: 'Error', content:'Your email is too long' , html:true });
              $('#email').popover('show');*/
             //erreur = 1
