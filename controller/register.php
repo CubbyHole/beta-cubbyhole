@@ -24,45 +24,6 @@ if( isset($_POST['add_user'] ) )
     {
 		$userPdoManager = new UserPdoManager();
 		$result = $userPdoManager->register($name, $firstName, $email, $password, $passwordConfirmation, $geolocation);
-		
-		/*
-        //Instantiation de la bdd (connexion)
-        $mongo =  DB::instantiate();
-
-        //récupère la collection "users" et "account"
-        //s'il n'existe pas alors mongo va la crée
-        $users_collection = $mongo->get_collection('USER');
-        $account_collection = $mongo->get_collection('ACCOUNT');
-
-        //tableau des différents champ à entrer en bdd pour "USER"
-        $users = array(
-                    '_id' => hash('sha1', time() . $nom),
-                    'nom' => $nom,
-                    'prenom' => $prenom,
-                    'mail' => $mail,
-                    'password' => md5($password),
-                    'password2' => md5($password2),
-                    'created_on' => new MongoDate()
-                );
-
-        //tableau des differents élément a rentren en bdd pour "ACCOUNT"
-        $account = array(
-                    '_id' => hash('sha1', time() . $nom),
-                    'etat' => '',
-                    'idRefPlan' => '',
-                    'idUser' => hash('sha1', time() . $nom),
-                    'storage' => '',
-                    'ratio' => '',
-                    'dateDebut' => new MongoDate(),
-                    'dateFin' => new MongoDate()
-                );
-
-        //insère le tableau users en bdd
-        $user_id = $users_collection->insert($users);
-
-        //insère le tableau account en bdd
-        $account_id = $account_collection->insert($account);
-		*/
 
 		if(!(array_key_exists('error', $result)))
 		{
@@ -71,13 +32,14 @@ if( isset($_POST['add_user'] ) )
 			//redirection vers le dashboar
 			header('Location:../index.php');
 		}
-        else {
+        else
+        {
             echo $result['error'];
         }
     }
     else
     {
-        echo "Your password is not equal";
+        echo "Passwords do not match.";
     }
 }
 
