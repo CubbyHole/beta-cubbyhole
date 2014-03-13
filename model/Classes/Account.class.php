@@ -13,17 +13,16 @@ class Account
 	
     public function __construct()
     {
-		
         $num = func_num_args();
 		
         switch($num)
         {
             case 1:
                 $this->id = func_get_arg(0)['_id'];
-                $this->state = func_get_arg(0)['state'];
+                $this->state = (int)func_get_arg(0)['state'];
                 $this->refPlan = func_get_arg(0)['idRefPlan'];
-                $this->storage = func_get_arg(0)['storage'];
-                $this->ratio = func_get_arg(0)['ratio'];
+                $this->storage = (int)func_get_arg(0)['storage'];
+                $this->ratio = (int)func_get_arg(0)['ratio'];
                 $this->startDate = func_get_arg(0)['startDate'];
                 $this->endDate = func_get_arg(0)['endDate'];
                 break;
@@ -31,8 +30,8 @@ class Account
                 $this->id = func_get_arg(0);
                 $this->state = func_get_arg(1);
                 $this->refPlan = func_get_arg(2);
-                $this->storage = func_get_arg(3);
-                $this->ratio = func_get_arg(4);
+                $this->storage = (int)func_get_arg(3);
+                $this->ratio = (int)func_get_arg(4);
                 $this->startDate = func_get_arg(5);
                 $this->endDate = func_get_arg(6);
                 break;

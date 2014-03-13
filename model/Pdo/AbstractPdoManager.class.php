@@ -65,5 +65,27 @@ abstract class AbstractPdoManager
     {
         return $this->database->selectCollection($name);
     }
-   
+
+    /**
+     * Convertir un objet avec des propriétés protected ou private en tableau associatif
+     * @author Alban Truc
+     * @param Object $object
+     * @since 12/03/2014
+     * @return array
+     * Discussions sur le sujet: http://stackoverflow.com/questions/4345554/convert-php-object-to-associative-array
+     */
+    public function dismount($object)
+    {
+        $reflectionClass = new ReflectionClass(get_class($object));
+
+        $array = array();
+        foreach ($reflectionClass->getProperties() as $property)
+        {
+            $property->setAccessible(true);
+            $array[$property->getName()] = $property->getValue($object);
+            $property->setAccessible(false);
+        }
+
+        return $array;
+    }
 }

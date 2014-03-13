@@ -22,8 +22,8 @@ class User
 		{
 			case 1:
 					$this->id = func_get_arg(0)['_id'];
-					$this->state = func_get_arg(0)['state'];
-					$this->isAdmin = func_get_arg(0)['isAdmin'];
+					$this->state = (int)func_get_arg(0)['state'];
+					$this->isAdmin = (bool)func_get_arg(0)['isAdmin'];
 					$this->account = func_get_arg(0)['idAccount'];
 					$this->name = func_get_arg(0)['name'];
 					$this->firstName = func_get_arg(0)['firstName'];
@@ -33,7 +33,7 @@ class User
 					$this->apiKey = func_get_arg(0)['apiKey'];
 					break;
 			case 9:
-					$this->state = func_get_arg(0);
+					$this->state = (int)func_get_arg(0);
 					$this->isAdmin = func_get_arg(1);
 					$this->idAccount = func_get_arg(2);
 					$this->name = func_get_arg(3);

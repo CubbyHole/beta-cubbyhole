@@ -25,12 +25,12 @@ interface AccountManagerInterface
      * - Gestion des erreurs
      * - On n'insert pas de nouveau refPlan, ceux-ci sont déjà définis en base.
      * @author Alban Truc
-     * @param array $account
+     * @param array|Account $account
      * @since 02/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
 
-    function createAccount($account);
+    function create($account);
 
     /**
      * - Supprime un compte à partir de son ID
@@ -42,6 +42,6 @@ interface AccountManagerInterface
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
 
-    function removeAccount($id);
+    function removeById($id);
 }
 ?>
