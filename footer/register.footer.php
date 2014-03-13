@@ -74,7 +74,7 @@
     <script type="text/javascript" src="../content/js/flexslider.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
     <script src="../content/js/jquery.complexify.js"></script>
-    <script src="../content/js/complexity/complexity.js"></script>
-<script src="../content/js/complexity/geo.js"></script>
+    <script src="../content/js/passwordComplexity/complexity.js"></script>
+<script src="../content/js/geo/geo.js"></script>
 </body>
 </html>
