@@ -3,42 +3,44 @@ include '../header/contact.header.php';
 ?>
 
     <div id="contact">
-        <div class="container">
-            <div class="section_header">
-                <h3>Contact us</h3>
-            </div>
-            <div class="row contact">
+        <div id="formContact">
+            <div class="container">
+                <div class="section_header">
+                    <h3>Contact us</h3>
+                </div>
+                <div class="row contact">
 
-                <form method="POST" action="controller/mail.php">
-                    <div class="row form">
-                        <div class="col-sm-6 row-col">
-                            <div class="box">
-                                <input name="nom" class="name form-control" type="text" placeholder="Name">
-                                <input name="email"class="mail form-control" type="text" placeholder="Email">
-                                <input name="phone" class="phone form-control" type="text" placeholder="Phone">
+                    <form method="POST" action="controller/mail.php">
+                        <div class="row form">
+                            <div class="col-sm-6 row-col">
+                                <div class="box">
+                                    <input name="nom" class="name form-control" type="text" placeholder="Name">
+                                    <input name="email"class="mail form-control" type="text" placeholder="Email">
+                                    <input name="phone" class="phone form-control" type="text" placeholder="Phone">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 msg">
+                                <div class="box">
+                                    <textarea name="mymsg" placeholder="Type a message here..." class="form-control"></textarea>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="box">
-                                <textarea name="mymsg" placeholder="Type a message here..." class="form-control"></textarea>
+
+                        <div class="row submit">
+                           <!-- <div class="col-md-5 box">
+                                <label class="checkbox">
+                                    <input type="checkbox"> Sign up for newsletter
+                                </label>
+                            </div>-->
+                            <div class="col-md-3 right">
+                                <input name="mail" type="submit" value="Send your message">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row submit">
-                       <!-- <div class="col-md-5 box">
-                            <label class="checkbox">
-                                <input type="checkbox"> Sign up for newsletter
-                            </label>
-                        </div>-->
-                        <div class="col-md-3 right">
-                            <input name="mail" type="submit" value="Send your message">
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-
+    </div>
         <div class="map">
             <!--<div class="container">
                 <div class="box_wrapp">
@@ -75,6 +77,6 @@ include '../header/contact.header.php';
             M%C3%A2con,+France&amp;ll=46.308632,4.832744&amp;spn=0.006295,0.006295&amp;t=m&amp;output=embed"></iframe>
             <!--<iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.mx/?ie=UTF8&amp;ll=64.089157,-21.816616&amp;spn=0.045157,0.15398&amp;t=m&amp;z=13&amp;output=embed"></iframe>-->
         </div>
-    </div>
+
 
      <?php include '../footer/footer.php'; ?>
