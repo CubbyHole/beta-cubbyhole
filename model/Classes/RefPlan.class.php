@@ -21,21 +21,21 @@ class RefPlan
 		{
 			case 1:
 					$this->id = func_get_arg(0)['_id'];
-					$this->state = func_get_arg(0)['state'];
+					$this->state = (int)func_get_arg(0)['state'];
 					$this->name = func_get_arg(0)['name'];
-					$this->price = func_get_arg(0)['price'];
-					$this->maxStorage = func_get_arg(0)['maxStorage'];
-					$this->bandwidth = func_get_arg(0)['bandwidth'];
-					$this->maxRatio = func_get_arg(0)['maxRatio'];
+					$this->price = (int)func_get_arg(0)['price'];
+					$this->maxStorage = (int)func_get_arg(0)['maxStorage'];
+					$this->bandwidth = (int)func_get_arg(0)['bandwidth'];
+					$this->maxRatio = (int)func_get_arg(0)['maxRatio'];
 					break;
 			case 7:
 					$this->id = func_get_arg(0);
-					$this->state = func_get_arg(1);
+					$this->state = (int)func_get_arg(1);
 					$this->name = func_get_arg(2);
-					$this->price = func_get_arg(3);
-					$this->maxStorage = func_get_arg(4);
-					$this->bandwidth = func_get_arg(5);
-					$this->maxRatio = func_get_arg(6);
+					$this->price = (int)func_get_arg(3);
+					$this->maxStorage = (int)func_get_arg(4);
+					$this->bandwidth = (int)func_get_arg(5);
+					$this->maxRatio = (int)func_get_arg(6);
 					break;
 		}
 	}
