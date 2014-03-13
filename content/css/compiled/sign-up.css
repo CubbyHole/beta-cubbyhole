@@ -315,7 +315,8 @@
 }
 @media (max-width: 767px) {
   #sign_up1 {
-    background: none;
+    /*background: none;*/
+      background-size: auto 100%;
     height: auto;
       margin-bottom: 20px;
   }
