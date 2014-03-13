@@ -1,13 +1,30 @@
-#contact {
-  margin-top: 70px; }
-  #contact .contact {
-    margin: 40px 0 100px 0; }
-    #contact .contact p {
+#contact
+{
+  padding-top: 70px;
+    margin-top: -20px;
+    background: url("../../img/backgrounds/aqua.jpg") no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#formContact .container .section_header h3
+{
+    color: white;
+    border-bottom: 1px solid white;
+}
+  #contact .contact
+  {
+    margin: 40px 0 100px 0;
+  }
+    #contact .contact p
+    {
       color: #939394;
       font-size: 19px;
       margin-bottom: 47px;
       font-style: italic;
-      line-height: 24px; }
+      line-height: 24px;
+    }
     #contact .contact form {
       margin: 0; }
     #contact .contact .submit {
@@ -52,11 +69,14 @@
         background: url("../../img/formmail.png") white no-repeat 5px; }
       #contact .form .box input.phone {
         background: url("../../img/formphone.png") white no-repeat 5px; }
-      #contact .form .box textarea {
+      #contact .form .box textarea
+      {
         padding: 11px;
         margin: 0;
         border-radius: 3px;
-        height: 139px; }
+        height: 139px;
+          margin-bottom: 10px;
+      }
   #contact .map {
     margin: 0;
     position: relative; }
@@ -148,7 +168,8 @@
 
 /* Responsive
 -------------------------------------------------- */
-@media (max-width: 767px) {
+@media (max-width: 767px)
+{
   #contact .contact .submit .box {
     margin: 10px 0 24px; }
   #contact .contact .submit .right {
@@ -166,7 +187,15 @@
     #contact .map .box_wrapp a.btn {
       width: 65%; }
   #contact .map iframe {
-    display: none; } }
+    display: none; }
+    #contact .form .box textarea {
+        width: 100%;
+    }
+    #contact .form .msg{
+        padding-left: 0;
+    }
+}
+
 @media (max-width: 480px) {
   #contact .contact .submit .right input[type="submit"] {
     width: 60%; }

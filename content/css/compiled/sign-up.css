@@ -313,6 +313,7 @@
   #sign_up2 .signin_box .box .social a.circle {
     margin-right: 10px; }
 }
+
 @media (max-width: 767px) {
   #sign_up1 {
     /*background: none;*/
