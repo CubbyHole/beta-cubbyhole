@@ -5,11 +5,9 @@ include '../header/contact.header.php';
     <div id="contact">
         <div class="container">
             <div class="section_header">
-                <h3>Get in touch</h3>
+                <h3>Contact us</h3>
             </div>
             <div class="row contact">
-                <p>
-                    We’d love to hear from you. Interested in working together? Fill out the form below with some info about your project and I will get back to you as soon as I can. Please allow a couple days for me to respond.</p>
 
                 <form method="POST" action="controller/mail.php">
                     <div class="row form">
@@ -28,11 +26,11 @@ include '../header/contact.header.php';
                     </div>
 
                     <div class="row submit">
-                        <div class="col-md-5 box">
+                       <!-- <div class="col-md-5 box">
                             <label class="checkbox">
                                 <input type="checkbox"> Sign up for newsletter
                             </label>
-                        </div>
+                        </div>-->
                         <div class="col-md-3 right">
                             <input name="mail" type="submit" value="Send your message">
                         </div>
