@@ -319,17 +319,17 @@
     /*background: none;*/
       background-size: auto 100%;
     height: auto;
-      margin-bottom: 20px;
+      padding-bottom: 20px;
   }
     #sign_up1 .header h4 {
-      color: #333;
+        color: white;
       line-height: 35px;
       text-shadow: none; }
     #sign_up1 .header p {
       line-height: 24px;
-      color: #333; }
+      color: white; }
     #sign_up1 .division span {
-      color: #333; }
+      color: white; }
     #sign_up1 .division .line {
       display: none; }
     #sign_up1 .footer input[type="text"], #sign_up1 .footer input[type="password"] {
@@ -343,12 +343,12 @@
       float: left; }
       #sign_up1 .dosnt span {
         margin-left: 0;
-        color: #333;
-        border-color: #333;
+        color: white;
+        border-color: white;
         float: left; }
       #sign_up1 .dosnt a {
-        color: #333;
-        border-color: #333;
+        color: white;
+        border-color: white;
         float: left; }
         #sign_up1 .dosnt a:hover {
           color: #187CCC;
