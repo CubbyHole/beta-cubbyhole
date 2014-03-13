@@ -147,10 +147,10 @@
         var password = $(this).val();
         var complexity = 0, valid = false;
         
-        // Reset complexity to 0 when banned password is found
+        // Reset passwordComplexity to 0 when banned password is found
         if (!inBanlist(password)) {
         
-          // Add character complexity
+          // Add character passwordComplexity
           for (var i = CHARSETS.length - 1; i >= 0; i--) {
             complexity += additionalComplexityForCharset(password, CHARSETS[i]);
           }
