@@ -33,7 +33,7 @@ include_once '../controller/functions.php';
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="../index.php" class="navbar-brand"><strong>CLEAN CANVAS</strong></a>
+                <a href="../index.php" class="navbar-brand"><strong>CUBBYHOLE</strong></a>
             </div>
 
             <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
