@@ -5,11 +5,11 @@
  * Date: 31/01/14
  * Time: 12:53
  */
-
+$projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
 require_once 'AbstractPdoManager.class.php';
 require_once 'RefPlanPdoManager.class.php';
-require_once '../model/Classes/Account.class.php';
-require_once '../model/Interfaces/AccountManager.interface.php';
+require_once $projectRoot.'/model/Classes/Account.class.php';
+require_once $projectRoot.'/model/Interfaces/AccountManager.interface.php';
 
 class AccountPdoManager extends AbstractPdoManager implements AccountManagerInterface
 {
@@ -106,13 +106,17 @@ class AccountPdoManager extends AbstractPdoManager implements AccountManagerInte
      * - Gestion des erreurs
      * - On n'insert pas de nouveau refPlan, ceux-ci sont déjà définis en base.
      * @author Alban Truc
-     * @param array $account
+     * @param array|Account $account
      * @since 02/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
 
-    public function createAccount($account)
+    public function create($account)
     {
+        //Transforme $account en array s'il contient un objet
+        if(!(is_array($account)))
+            $account = $this->dismount($account);
+
         try
         {
             /**
@@ -148,7 +152,7 @@ class AccountPdoManager extends AbstractPdoManager implements AccountManagerInte
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
 
-    public function removeAccount($id)
+    public function removeById($id)
     {
         //On cherche le compte à supprimer à partir de son MongoId.
         $criteria = array('_id' => new MongoId($id));

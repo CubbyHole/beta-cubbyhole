@@ -5,11 +5,11 @@
  * Date: 30/01/14
  * Time: 14:51
  */
-
+$projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
 require_once 'AbstractPdoManager.class.php';
 require_once 'AccountPdoManager.class.php';
-require_once '../model/Classes/User.class.php';
-require_once '../model/Interfaces/UserManager.interface.php';
+require_once $projectRoot.'/model/Classes/User.class.php';
+require_once $projectRoot.'/model/Interfaces/UserManager.interface.php';
 
 class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
 
@@ -83,7 +83,7 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
             'endDate' => '11/03/2014' //à changer, penser à utiliser MongoDate
         );
 
-        $isAccountAdded = $this->accountPdoManager->createAccount($account);
+        $isAccountAdded = $this->accountPdoManager->create($account);
 			
 		if($isAccountAdded == TRUE) //inutile d'ajouter un utilisateur si l'ajout d'account a échoué
 		{
@@ -128,7 +128,7 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
                 $error = array('error' => $info['err']);
 
                 //annuler l'insertion de l'account
-                $removeInfo = $this->accountPdoManager->removeAccount($account['_id']);
+                $removeInfo = $this->accountPdoManager->removeById($account['_id']);
 
                 if($removeInfo)
                 {
