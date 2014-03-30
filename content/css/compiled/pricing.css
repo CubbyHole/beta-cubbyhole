@@ -126,8 +126,11 @@
     float: right; }
 
 /* Pricing Option 2 */
-#in_pricing2 {
-  margin-bottom: 40px; }
+#in_pricing2
+{
+  margin-bottom: 40px;
+    margin-top: 151px;
+}
   #in_pricing2 .section_header h3 span {
     font-size: 18px;
     line-height: 20px; }

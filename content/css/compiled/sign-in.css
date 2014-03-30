@@ -4,7 +4,8 @@
   display: block;
   height: 600px;
   /*margin-bottom: 90px;*/
-  margin-top: -20px;
+    padding-top: 100px;
+    padding-bottom: 20px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
