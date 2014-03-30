@@ -27,15 +27,17 @@ abstract class AbstractPdoManager
 
     public function __construct() 
     {
-        $connection_string = sprintf('mongodb://%s:%d/%s', AbstractPdoManager::DBHOST, AbstractPdoManager::DBPORT, AbstractPdoManager::DBNAME);       
+        $connection_string = sprintf('mongodb://%s:%d/%s', AbstractPdoManager::DBHOST, AbstractPdoManager::DBPORT, AbstractPdoManager::DBNAME);
+        if($this->connection === NULL){
         try 
         {
             $this->connection = new Mongo($connection_string);
             $this->database = $this->connection->selectDB(AbstractPdoManager::DBNAME);
-        } 
+        }
         catch (MongoConnectionException $e) 
         {
             throw $e;
+        }
         }
     }
 

@@ -1,7 +1,8 @@
 <?php
 session_start();
-require 'functions.php';
-require 'required.php';
+$projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
+require_once $projectRoot.'/controller/functions.php';
+require_once $projectRoot.'/required.php';
 $loginOK = false;
 
 //On verifie si add_user est définie et que les deux champs password sont identique
@@ -25,16 +26,21 @@ if( isset($_POST['add_user'] ) )
 		$userPdoManager = new UserPdoManager();
 		$result = $userPdoManager->register($name, $firstName, $email, $password, $passwordConfirmation, $geolocation);
 
-		if(!(array_key_exists('error', $result)))
+        //http://www.php.net/manual/en/function.array-key-exists.php
+		if( !( array_key_exists('error', $result) ) )
 		{
 			$loginOK = true;
             
-			//redirection vers le dashboar
+			//redirection vers le dashboard
 			header('Location:../index.php');
+            die();
 		}
         else
         {
-            echo $result['error'];
+
+            $_SESSION['errorMessage'] = $result['error'];
+            header('Location:../view/register.php');
+            die();
         }
     }
     else
@@ -43,15 +49,4 @@ if( isset($_POST['add_user'] ) )
     }
 }
 
-/*if ($loginOK == true) 
-{
-	//Pour les sessions
-	$_SESSION['user'] = serialize($result);
-    
-}
-else 
-{
-  echo 'Une erreur est survenue, veuillez reessayer !'; 
-}
-*/
 ?>

@@ -8,4 +8,6 @@ require_once $projectRoot.'/model/classes/Account.class.php';
 require_once $projectRoot.'/model/pdo/UserPdoManager.class.php';
 require_once $projectRoot.'/model/pdo/RefPlanPdoManager.class.php';
 require_once $projectRoot.'/model/pdo/AccountPdoManager.class.php';
+
+require_once $projectRoot.'/controller/functions.php';
 ?>

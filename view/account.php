@@ -1,5 +1,5 @@
 <?php 
-include '../header/account.header.php'; 
+//include '../header/account.header.php';
 
 
 //On veut pouvoir afficher les infos de l'user en cours

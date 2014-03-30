@@ -36,8 +36,11 @@ class RefPlanPdoManager extends AbstractPdoManager implements RefPlanManagerInte
      * @since 02/2014
      * @return RefPlan|array contenant le message d'erreur
      */
-
-	public function findById($id)
+    /**
+     * @param MongoId|String $id
+     * @return array|RefPlan
+     */
+    public function findById($id)
 	{
         /**
          * Doc du findOne: http://www.php.net/manual/en/mongo.tutorial.findone.php

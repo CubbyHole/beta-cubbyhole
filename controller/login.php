@@ -5,8 +5,9 @@ session_start();
 //variable de session a false
 $loginOK = false;
 
-include 'functions.php';
-require 'required.php';
+$projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
+require $projectRoot.'/controller/functions.php';
+require $projectRoot.'/required.php';
 
 //On check si loginForm est bien defini
 //S'il est defini alors on entre dans la condition
@@ -21,26 +22,25 @@ if(isset($_POST['loginForm'] ))
     {
 		$userPdoManager = new UserPdoManager();
 		$user = $userPdoManager->authenticate($email, $password);
-		
+
+        //http://www.php.net/manual/en/function.array-key-exists.php
 		if(!(array_key_exists('error', $user)))
 		{
 			$loginOK = true;
-			$grav = getGravatar($user->getEmail());
-			//var_dump($test);
 			//redirection vers index
 			header('Location:../index.php');
+
 		}
 
 	}
 	
 }
 
-if ($loginOK) 
+if($loginOK)
 {
 	//Pour les sessions
 	$_SESSION['user'] = serialize($user);
-	$_SESSION['email'] = $grav;
- }
+}
 else 
 {
   echo $user['error'];
