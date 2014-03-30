@@ -1,9 +1,30 @@
 <?php
+$projectRoot = $_SERVER['HTTP_HOST']. '/Cubbyhole';
+?>
+<!-- Styles -->
+<link href="content/css/bootstrap/bootstrap.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="content/css/compiled/bootstrap-overrides.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="content/css/compiled/theme.css" />
 
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
+
+<link rel="stylesheet" href="content/css/compiled/index.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="content/css/lib/animate.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="content/css/style.css" media="screen, projection" />
+
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</head>
+
+<?php
+    include_once 'header/menu.php';
 
 ?>
+
 <section id="feature_slider" class="lol">
-<!-- 
+<!--
 Each slide is composed by <img> and .info
 - .info's position is customized with css in index.css
 - each <img> parallax effect is declared by the following params inside its class:
@@ -17,10 +38,12 @@ Note: Maintain this order of params
 
 For the backgrounds, you can combine from the bgs folder :D
 -->
+
 <article class="slide" id="showcasing" style="background: url('content/img/backgrounds/deep-green.jpg') repeat-x top center;">
     <img class="asset left250 sp600 t120 z1" src="content/img/slides/scene4/my.png" />
     <div class="info">
         <h2>MongoDB</h2>
+
         <p style="color:white;">Performance, speed</p>
     </div>
 </article>
@@ -51,9 +74,9 @@ For the backgrounds, you can combine from the bgs folder :D
         <h2>
             Responsive <strong>HTML5 & CSS3</strong>
             Theme
-        </h2>                
+        </h2>
     </div>
-</article> 
+</article>
 
 </section>
 
@@ -62,7 +85,10 @@ For the backgrounds, you can combine from the bgs folder :D
 
 <?php
 if(isset($_SESSION['user']))
+{
     $grav = unserialize($_SESSION['user']);
+    var_dump($grav);
+}
 ?>
 <div id="showcase">
 
@@ -72,7 +98,7 @@ if(isset($_SESSION['user']))
 
         <div class="section_header">
             <h3>Our Services</h3>
-        </div>            
+        </div>
         <div class="row feature_wrapper">
             <!-- Features Row -->
             <div class="features_op1_row">
@@ -81,7 +107,7 @@ if(isset($_SESSION['user']))
                     <div class="img_box">
                         <a href="services.php">
                             <img src="content/img/mongo_logo.png">
-                            <span class="circle"> 
+                            <span class="circle">
                                 <span class="plus">&#43;</span>
                             </span>
                         </a>
@@ -98,7 +124,7 @@ if(isset($_SESSION['user']))
                     <div class="img_box">
                         <a href="services.php">
                             <img src="content/img/service2.png">
-                            <span class="circle"> 
+                            <span class="circle">
                                 <span class="plus">&#43;</span>
                             </span>
                         </a>
@@ -115,7 +141,7 @@ if(isset($_SESSION['user']))
                     <div class="img_box">
                         <a href="services.php">
                             <img src="content/img/DD.png">
-                            <span class="circle"> 
+                            <span class="circle">
                                 <span class="plus">&#43;</span>
                             </span>
                         </a>
@@ -136,7 +162,7 @@ if(isset($_SESSION['user']))
     <div class="container">
         <div class="section_header">
             <h3>Features</h3>
-        </div> 
+        </div>
         <div class="row feature">
             <div class="col-sm-6">
                 <img src="content/img/showcase1.png" class="img-responsive" />
@@ -163,7 +189,7 @@ if(isset($_SESSION['user']))
                 <p>
                     There are many variations of passages of Lorem Ipsum available, but the randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
                 </p>
-            </div>                
+            </div>
         </div>
         <div class="row feature">
             <div class="col-sm-6">
@@ -197,8 +223,8 @@ if(isset($_SESSION['user']))
                     <div class="wrapper">
                         <h3>Free</h3>
                         <div class="price">
-                            <span class="dollar">$</span> 
-                            <span class="qty">0</span> 
+                            <span class="dollar">$</span>
+                            <span class="qty">0</span>
                             <span class="month">/month</span>
                         </div>
                         <div class="features">
@@ -226,8 +252,8 @@ if(isset($_SESSION['user']))
                         <img class="ribbon" src="content/img/badge.png">
                         <h3>Ultimate</h3>
                         <div class="price">
-                            <span class="dollar">$</span> 
-                            <span class="qty">99</span> 
+                            <span class="dollar">$</span>
+                            <span class="qty">99</span>
                             <span class="month">/month</span>
                         </div>
                         <div class="features">
@@ -255,8 +281,8 @@ if(isset($_SESSION['user']))
                     <div class="wrapper">
                         <h3>Premium</h3>
                         <div class="price">
-                            <span class="dollar">$</span> 
-                            <span class="qty">65</span> 
+                            <span class="dollar">$</span>
+                            <span class="qty">65</span>
                             <span class="month">/month</span>
                         </div>
                         <div class="features">

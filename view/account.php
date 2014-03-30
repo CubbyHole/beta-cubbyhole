@@ -8,21 +8,21 @@ $account_collection = $mongo->get_collection('ACCOUNT');
 //Recherche par id  
 $users = $user_collection->findOne(array('_id' => $id));
 ?>
-    <div id="showcase">
+<div id="showcase">
 
-        <div class="container">
-            <?php 
-                $passage_ligne = '\r\n';
+    <div class="container">
+        <?php
+        $passage_ligne = '\r\n';
 
-                if($_SESSION == true)
-                {
-                    echo 'Bienvenue :' . $_SESSION['mail'];
-                    $passage_ligne;
-                    echo 'Nom :' . $users['nom'];
-                }
-            ?>
+        if($_SESSION == true)
+        {
+            echo 'Bienvenue :' . $_SESSION['mail'];
+            $passage_ligne;
+            echo 'Nom :' . $users['nom'];
+        }
+        ?>
 
-        </div>
+    </div>
             
 
-    <?php include '../footer/footer.php'; ?>
+<?php include '../footer/footer.php'; ?>

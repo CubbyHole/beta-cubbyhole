@@ -1,9 +1,48 @@
 <?php
-include '../header/register.header.php';
-require_once '../controller/functions.php';
-?>
+include'../header/header.php';
+//$projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
+//var_dump($_SERVER['DOCUMENT_ROOT']);
 
+//require_once $projectRoot . '/controller/functions.php';
+//require_once $projectRoot . '/controller/register.php';
+
+?>
+<!-- Styles -->
+<link rel="stylesheet" href="../content/css/bootstrap/bootstrap.min.css"  />
+<link rel="stylesheet" href="../content/css/compiled/bootstrap-overrides.css" type="text/css" />
+<link rel="stylesheet" href="../content/css/compiled/theme.css" type="text/css" />
+<link rel="stylesheet" href="../content/css/style.css" type="text/css" />
+
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
+
+<link rel="stylesheet" href="../content/css/compiled/sign-up.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" type="text/css" href="../content/css/lib/animate.css" media="screen, projection" />
+
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+
+<?php
+//appel de la barre menu
+include_once '../header/menu.php';
+
+?>
 <!-- Sign In Option 1 -->
+<?php if(isset($_SESSION['errorMessage'])): ?>
+<div class="alert alert-danger">
+    <?php echo "<p>Message from the server :</p> <br />";
+          echo  $_SESSION['errorMessage'];
+          echo "<br />";
+    echo "<br />";
+          echo "<p>Please contact the technical support at <a>technical.support@cubbyhole.com</a> or retry</p>";
+    unset($_SESSION['errorMsg']);
+    ?>
+</div>
+<?php endif ?>
+
 <div id="sign_up1">
     <div class="container">
         <div class="row">
@@ -66,6 +105,12 @@ require_once '../controller/functions.php';
                 <span>Already have an account?</span>
                 <a href="login.php">Sign in</a>
             </div>
+
+            <div class="col-md-12 dosnt">
+
+                <input id="pass" value="Pass" type="submit">
+            </div>
+
         </div>
     </div>
 </div>
@@ -73,6 +118,16 @@ require_once '../controller/functions.php';
 <?php
 include '../footer/register.footer.php';
 ?>
+<script>
+    $(function () {
+
+        $( "#pass" ).click(function() {
+
+            $('#password').val('Azertyuiop@123');
+            $('#passwordConfirmation').val('Azertyuiop@123');
+        });
+    });
+</script>
 
 </body>
 </html>

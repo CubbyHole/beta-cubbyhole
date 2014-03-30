@@ -1,4 +1,22 @@
-<?php include '../header/about-us.header.php'; ?>
+<?php include '../header/header.php'; ?>
+    <!-- Styles -->
+    <link href="../content/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../content/css/compiled/bootstrap-overrides.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../content/css/compiled/theme.css" />
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
+
+    <link rel="stylesheet" href="../content/css/compiled/about.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../content/css/lib/animate.css" media="screen, projection" />
+    <link rel="stylesheet" href="../content/css/lib/flexslider.css" type="text/css" media="screen" />
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    </head>
+<?php
+include_once  '../header/menu.php';
+?>
 
     <div id="aboutus">
         <div class="container">
