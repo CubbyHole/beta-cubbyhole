@@ -9,6 +9,11 @@
 <body class="pull_top">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
+        
+        <div>
+
+        </div>
+        
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -18,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/Cubbyhole"><strong>CUBBYHOLE</strong></a>
+            <a class="navbar-brand" href="/Cubbyhole"><img id="cubbyLogo" src="/Cubbyhole/content/img/icons/cubbyhole_logoFull.png"><strong>UBBYHOLE</strong></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -50,7 +55,7 @@
 
                     </li>
                     <li>
-                        <a id="cross" href="/Cubbyhole/view/logout.php"><span style="color:red;" class="glyphicon glyphicon-remove"></span></a></span>
+                        <a id="cross" title="Se déconnecter" href="/Cubbyhole/view/logout.php"><span style="color:red;" class="glyphicon glyphicon-remove"></span></a></span>
                     </li>
                     <li>
                         <a id="menuTwo-Name">
