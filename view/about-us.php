@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="../content/css/lib/animate.css" media="screen, projection" />
     <link rel="stylesheet" href="../content/css/lib/flexslider.css" type="text/css" media="screen" />
 
+    <link rel="stylesheet" href="../content/css/style.css" type="text/css" media="screen" />
+
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
