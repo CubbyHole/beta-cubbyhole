@@ -498,17 +498,6 @@ h4{
                                                             </td>
                                                         </tr>
                                                         </tbody></table>
-                
-                                                    <table align="right" border="0" cellpadding="0" cellspacing="0" width="197" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-                                                        <tbody><tr>
-                        
-                                                            <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: left;">
-                        
-                                                                <a href="*|ARCHIVE|*" target="_blank" style="word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-weight: normal;text-decoration: underline;">View this email in your browser</a>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody></table>
-                
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -566,7 +555,7 @@ h4{
 
                                                                 <h3 style="margin: 0;padding: 0;display: block;font-family: Helvetica;font-size: 18px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;">&nbsp;</h3>
 
-                                                                <div style="text-align: center;">You received this e-mail because you created an account on Cubbyhole.<br>
+                                                                <div style="text-align: center;">You have received this e-mail because you created an account on Cubbyhole.<br>
                                                                     If you did not, please excuse us.<br>
                                                                     <br>
                                                                     For questions about our service or anything, use the mailing address at the bottom of this message.</div>
@@ -586,7 +575,7 @@ h4{
                                                         <tbody>
                                                         <tr>
                                                             <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial;font-size: 16px;padding: 15px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-                                                                <a class="mcnButton " title="Activate Account" href="http://localhost:8081/Cubbyhole/" target="_blank" style="font-weight: bold;letter-spacing: -0.5px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">Activate Account</a>
+                                                                <a class="mcnButton " title="Activate Account" href="activationLink" target="_blank" style="font-weight: bold;letter-spacing: -0.5px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;word-wrap: break-word;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">Activate Account</a>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -615,10 +604,10 @@ h4{
                         
                                                             <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: left;">
                         
-                                                                <em>Copyright &#169; *|CURRENT_YEAR|* *|LIST:COMPANY|*, All rights reserved.</em><br>
+                                                                <em>Copyright &#169; <?php echo date('Y');?> Cubbyhole&#153;, All rights reserved.</em><br>
                                                                 <br>
                                                                 <strong>Our mailing address is:</strong><br>
-                                                                *|LIST:EMAIL|*
+                                                                commercial-support@cubbyhole.com
                                                             </td>
                                                         </tr>
                                                         </tbody></table>

@@ -1,11 +1,13 @@
 ** Please confirm your registration to Cubbyhole
 ------------------------------------------------------------
 
-You have received this e-mail because you created an account on Cubbyhole.
+You have received this e-mail because you used the "lost password" feature on Cubbyhole.
 If you did not, please excuse us.
+However, if you did lose your password, we can set another one for you. All you have to do is to click on the button below.
+It will display a form in your browser where you will be able to choose a new password.
 
 For questions about our service or anything, use the mailing address at the bottom of this message.
-Activate your account: activationLink
+Reset your password: resetPasswordLink
 ==============================================
 Our mailing address is:
 commercial-support@cubbyhole.com
