@@ -1,22 +1,21 @@
 <?php
 /**
- * Created by Notepad++.
- * User: Alban Truc
- * Date: 31/01/14
- * Time: 12:52
+ * Created by PhpStorm.
+ * User: Crocell
+ * Date: 15/04/14
+ * Time: 13:13
  */
-
 /**
- * Interface AccountManagerInterface
+ * Interface RefActionManagerInterface
  * @interface
  * @author Alban Truc
  */
-interface AccountManagerInterface
+interface RefActionManagerInterface
 {
     /**
-     * Retrouver un Account selon des critères donnés
+     * Retrouver un refAction selon des critères donnés
      * @author Alban Truc
-     * @param array|Account $criteria critères de recherche
+     * @param array|RefAction $criteria critères de recherche
      * @param array $fieldsToReturn champs à récupérer
      * @since 29/03/2014
      * @return array
@@ -25,86 +24,85 @@ interface AccountManagerInterface
     function find($criteria, $fieldsToReturn = array());
 
     /**
-     * Retourne le premier Account correspondant au(x) critère(s) donné(s)
+     * Retourne le premier refAction correspondant au(x) critère(s) donné(s)
      * @author Alban Truc
-     * @param array|Account $criteria critère(s) de recherche
+     * @param array|RefAction $criteria critère(s) de recherche
      * @param array $fieldsToReturn champs à retourner
      * @since 29/03/2014
-     * @return array|Account
+     * @return array|RefAction
      */
 
     function findOne($criteria, $fieldsToReturn = array());
 
     /**
-     * - Retrouver l'ensemble des Account
+     * - Retrouver un refAction par son ID.
      * - Gestion des exceptions et des erreurs
      * @author Alban Truc
-     * @param array $fieldsToReturn champs à retourner
-     * @since 11/03/2014
-     * @return array|Account[] tableau d'objets Account
-     */
-
-    function findAll($fieldsToReturn = array());
-
-    /**
-     * - Retrouver un account par son ID. Inclut le refPlan de l'account dans le retour.
-     * - Gestion des exceptions et des erreurs
-     * @author Alban Truc
-     * @param string|MongoId $id Identifiant unique de l'account à trouver
+     * @param string|MongoId $id Identifiant unique du refAction à trouver
      * @param array $fieldsToReturn champs à retourner
      * @since 02/2014
-     * @return Account|array contenant le message d'erreur
+     * @return RefAction|array contenant le message d'erreur
      */
 
     function findById($id, $fieldsToReturn = array());
 
     /**
-     * - Retrouver un Account selon certains critères et le modifier/supprimer
-     * - Récupérer cet Account ou sa version modifiée
+     * - Retrouver l'ensemble des refAction
      * - Gestion des exceptions et des erreurs
      * @author Alban Truc
-     * @param array|Account $searchQuery critères de recherche
-     * @param array|Account $updateCriteria les modifications à réaliser
+     * @param array $fieldsToReturn champs à retourner
+     * @since 11/03/2014
+     * @return array|RefAction[] tableau d'objets RefAction
+     */
+
+    function findAll($fieldsToReturn = array());
+
+    /**
+     * - Retrouver un refAction selon certains critères et le modifier/supprimer
+     * - Récupérer ce refAction ou sa version modifiée
+     * - Gestion des exceptions et des erreurs
+     * @author Alban Truc
+     * @param array|RefAction $searchQuery critères de recherche
+     * @param array|RefAction $updateCriteria les modifications à réaliser
      * @param array|NULL $fieldsToReturn pour ne récupérer que certains champs
      * @param array|NULL $options
      * @since 11/03/2014
-     * @return array|Account
+     * @return array|RefAction
      */
 
     function findAndModify($searchQuery, $updateCriteria, $fieldsToReturn = NULL, $options = NULL);
 
     /**
-     * - Insère un nouveau compte en base.
+     * - Ajoute un refAction en base de données
      * - Gestion des exceptions et des erreurs
-     * - On n'insert pas de nouveau refPlan, ceux-ci sont déjà définis en base.
      * @author Alban Truc
-     * @param array|Account $account
+     * @param array|RefAction $document
      * @param array $options
-     * @since 31/03/2014
+     * @since 12/03/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
 
-    function create($account, $options = array('w' => 1));
+    function create($document, $options = array('w' => 1));
 
     /**
      * Fonction d'update utilisant celle de {@see AbstractPdoManager}
      * @author Alban Truc
-     * @param array|Account $criteria description des entrées à modifier
-     * @param array|Account $update nouvelles valeurs
+     * @param array|RefAction $criteria description des entrées à modifier
+     * @param array|RefAction $update nouvelles valeurs
      * @param array|NULL $options
-     * @since 31/03/2014
+     * @since 11/03/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
 
     function update($criteria, $update, $options = array('w' => 1));
 
     /**
-     * - Supprime un/des compte(s) correspondant à des critères données
+     * - Supprime un/des refAction(s) correspondant à des critères données
      * - Gestion des exceptions et des erreurs
      * @author Alban Truc
-     * @param array|Account $criteria ce qu'il faut supprimer
+     * @param array|RefAction $criteria ce qu'il faut supprimer
      * @param array $options
-     * @since 31/03/2014
+     * @since 11/03/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
 

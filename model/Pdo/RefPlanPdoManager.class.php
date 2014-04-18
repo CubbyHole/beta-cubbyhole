@@ -5,18 +5,26 @@
  * Date: 31/01/14
  * Time: 12:53
  */
+
+/** @var string $projectRoot chemin du projet dans le système de fichier */
 $projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
+
 require_once 'AbstractPdoManager.class.php';
 require_once $projectRoot.'/model/Classes/RefPlan.class.php';
 require_once $projectRoot.'/model/Interfaces/RefPlanManager.interface.php';
 
+/**
+ * Class RefPlanPdoManager
+ * @author Alban Truc
+ */
 class RefPlanPdoManager extends AbstractPdoManager implements RefPlanManagerInterface{
 
+    /** @var MongoCollection $refPlanCollection collection refPlan */
 	protected $refPlanCollection;
 
     /**
      * Constructeur:
-     * - Appelle le constructeur de AbstractManager (gestion des accès de la BDD).
+     * - Appelle le constructeur de {@see AbstractPdoManager::__construct} (gestion des accès de la BDD).
      * - Initialise la collection refplan.
      * @author Alban Truc
      * @since 01/2014
@@ -24,323 +32,308 @@ class RefPlanPdoManager extends AbstractPdoManager implements RefPlanManagerInte
 
 	public function __construct()
 	{
-		parent::__construct();
-		$this->refPlanCollection = $this->getCollection('refplan');
+        parent::__construct();
+        $this->refPlanCollection = $this->getCollection('refplan');
 	}
 
     /**
+     * Retrouver un refPlan selon des critères donnés
+     * @author Alban Truc
+     * @param array|RefPlan $criteria critères de recherche
+     * @param array $fieldsToReturn champs à récupérer
+     * @since 29/03/2014
+     * @return array
+     */
+
+    public function find($criteria, $fieldsToReturn = array())
+    {
+        //Transforme $criteria en array s'il contient un objet
+        if($criteria instanceof RefPlan)
+            $criteria = $this->dismount($criteria);
+
+        $cursor = parent::__find('refplan', $criteria, $fieldsToReturn);
+
+        if(!(is_array($cursor)) && !(array_key_exists('error', $cursor)))
+        {
+            $refPlans = array();
+
+            foreach($cursor as $refPlan)
+            {
+                /**
+                 * D'après les commentaires sur la page {@link https://php.net/manual/en/function.array-push.php}
+                 * la méthode utilisée ici est plus rapide d'exécution qu'utiliser un array_push.
+                 * Par ailleurs nous n'avons pas besoin de la valeur que retourne array_push
+                 * (à savoir le nombre d'éléments dans le tableau)
+                 */
+                if(empty($fieldsToReturn))
+                    $refPlan = new RefPlan($refPlan);
+
+                $refPlans[] = $refPlan;
+            }
+
+            if(empty($refPlans))
+                return array('error' => 'No match found.');
+            else
+                return $refPlans;
+        }
+        else return $cursor; //message d'erreur
+    }
+
+    /**
+     * Retourne le premier refPlan correspondant au(x) critère(s) donné(s)
+     * @author Alban Truc
+     * @param array|RefPlan $criteria critère(s) de recherche
+     * @param array $fieldsToReturn champs à retourner
+     * @since 29/03/2014
+     * @return array|RefPlan
+     */
+
+    public function findOne($criteria, $fieldsToReturn = array())
+    {
+        //Transforme $criteria en array s'il contient un objet
+        if($criteria instanceof RefPlan)
+            $criteria = $this->dismount($criteria);
+
+        $result = parent::__findOne('refplan', $criteria, $fieldsToReturn);
+
+        if(!(is_array($result)) && !(array_key_exists('error', $result)))
+        {
+            if(empty($fieldsToReturn))
+                $result = new RefPlan($result);
+        }
+
+        return $result;
+    }
+
+    /**
      * - Retrouver un refPlan par son ID.
-     * - Gestion des erreurs.
+     * - Gestion des exceptions et des erreurs
      * @author Alban Truc
      * @param string|MongoId $id Identifiant unique du refPlan à trouver
+     * @param array $fieldsToReturn champs à retourner
      * @since 02/2014
      * @return RefPlan|array contenant le message d'erreur
      */
-    /**
-     * @param MongoId|String $id
-     * @return array|RefPlan
-     */
-    public function findById($id)
+
+    public function findById($id, $fieldsToReturn = array())
 	{
-        /**
-         * Doc du findOne: http://www.php.net/manual/en/mongo.tutorial.findone.php
-         * Utilisé lorsqu'on attend un résultat unique (notre cas) ou si l'on ne veut que le 1er résultat.
-         * Les ID dans Mongo sont des objets MongoId: http://www.php.net/manual/en/class.mongoid.php
-         */
-		$result = $this->refPlanCollection->findOne(array('_id' => new MongoId($id)));
+        $result = parent::__findOne('refplan', array('_id' => new MongoId($id)));
 
-        //Si un refPlan est trouvé
-		if($result !== NULL)
-		{
-            //Cast le MongoId en string
-			$result['_id'] = (string) $result['_id'];
+        if(!(array_key_exists('error', $result)))
+        {
+            if(empty($fieldsToReturn))
+                $result = new RefPlan($result);
+        }
 
-            //retourne sous forme d'objet php
-            $refPlan = new RefPlan($result);
-            return $refPlan;
-		}
-		else return array('error' => 'RefPlan with ID '.$id.' not found');
+        return $result;
 	}
 
 
     /**
      * - Retrouver le(s) refPlan gratuit(s), soit par son nom (free) soit par son prix de 0
-     * - Gestion des erreurs
+     * - Gestion des exceptions et des erreurs
      * @author Alban Truc
+     * @param array $fieldsToReturn champs à retourner
      * @since 11/03/2014
-     * @return RefPlan[] tableau d'objets RefPlan
+     * @return array|RefPlan[] tableau d'objets RefPlan
      */
 
-    function findFreePlans()
+    public function findFreePlans($fieldsToReturn = array())
     {
-        // Doc du find: http://www.php.net/manual/en/mongocollection.find.php
-
         $criteria = array(
             '$or' => array(
-                array('name' => 'freee'),
+                array('name' => 'free'),
                 array('price' => (int)0)
             )
         );
 
-        $cursor = $this->refPlanCollection->find($criteria);
+        $cursor = parent::__find('refplan', $criteria);
 
-        $freePlans = array();
-
-        foreach($cursor as $refPlan)
+        if(!(is_array($cursor)) && !(array_key_exists('error', $cursor)))
         {
-            /**
-             * D'après les commentaires sur la page https://php.net/manual/en/function.array-push.php
-             * la méthode utilisée ici est plus rapide d'exécution qu'utiliser un array_push.
-             * Par ailleurs nous n'avons pas besoin de la valeur que retourne array_push
-             * (à savoir le nombre d'éléments dans le tableau)
-             */
-            $freePlans[] = new RefPlan($refPlan);
-        }
+            $freePlans = array();
 
-        if(empty($freePlans))
-            return array('error' => 'No free plan found.');
-        else
-            return $freePlans;
+            foreach($cursor as $refPlan)
+            {
+                if(empty($fieldsToReturn))
+                    $refPlan = new RefPlan($refPlan);
+
+                $freePlans[] = $refPlan;
+            }
+
+            if(empty($freePlans))
+                return array('error' => 'No free plan found.');
+            else
+                return $freePlans;
+        }
+        else return $cursor; //message d'erreur
     }
 
     /**
      * - Retrouver le(s) refPlan payants, à savoir ceux dont le prix est > à 0
-     * - Gestion des erreurs
+     * - Gestion des exceptions et des erreurs
      * @author Alban Truc
+     * @param array $fieldsToReturn champs à retourner
      * @since 11/03/2014
-     * @return RefPlan[] tableau d'objets RefPlan
+     * @return array|RefPlan[] tableau d'objets RefPlan
      */
 
-    function findPremiumPlans()
+    public function findPremiumPlans($fieldsToReturn = array())
     {
-        // Doc du find: http://www.php.net/manual/en/mongocollection.find.php
-
         $criteria = array(
             'price' => array('$gt' => (int)0)
         );
 
-        $cursor = $this->refPlanCollection->find($criteria);
+        $cursor = parent::__find('refplan', $criteria);
 
-        $premiumPlans = array();
-
-        foreach($cursor as $refPlan)
+        if(!(is_array($cursor)) && !(array_key_exists('error', $cursor)))
         {
-            $premiumPlans[] = new RefPlan($refPlan);
-        }
+            $premiumPlans = array();
 
-        if(empty($premiumPlans))
-            return array('error' => 'No premium plan found.');
-        else
-            return $premiumPlans;
+            foreach($cursor as $refPlan)
+            {
+                if(empty($fieldsToReturn))
+                    $refPlan = new RefPlan($refPlan);
+
+                $premiumPlans[] = $refPlan;
+            }
+
+            if(empty($premiumPlans))
+                return array('error' => 'No premium plan found.');
+            else
+                return $premiumPlans;
+        }
+        else return $cursor; //message d'erreur
     }
 
     /**
      * - Retrouver l'ensemble des refPlan
-     * - Gestion des erreurs
+     * - Gestion des exceptions et des erreurs
      * @author Alban Truc
+     * @param array $fieldsToReturn champs à retourner
      * @since 11/03/2014
-     * @return RefPlan[] tableau d'objets RefPlan
+     * @return array|RefPlan[] tableau d'objets RefPlan
      */
 
-    function findAll()
+    public function findAll($fieldsToReturn = array())
     {
-        // Doc du find: http://www.php.net/manual/en/mongocollection.find.php
+        $cursor = parent::__find('refplan', array());
 
-        $cursor = $this->refPlanCollection->find();
-
-        $plans = array();
-
-        foreach($cursor as $refPlan)
+        if(!(is_array($cursor)) && !(array_key_exists('error', $cursor)))
         {
-            $plans[] = new RefPlan($refPlan);
+            $plans = array();
+
+            foreach($cursor as $refPlan)
+            {
+                if(empty($fieldsToReturn))
+                    $refPlan = new RefPlan($refPlan);
+
+                $plans[] = $refPlan;
+            }
         }
 
         if(empty($plans))
-            return array('error' => 'No premium plan found.');
+            return array('error' => 'No plan found.');
         else
             return $plans;
     }
 
     /**
-     * Inspiré de la méthode findAndModify: http://www.php.net/manual/en/mongocollection.findandmodify.php
      * - Retrouver un RefPlan selon certains critères et le modifier/supprimer
      * - Récupérer ce RefPlan ou sa version modifiée
-     * - Gestion des exceptions MongoResultException: http://www.php.net/manual/en/class.mongoresultexception.php
+     * - Gestion des exceptions et des erreurs
      * @author Alban Truc
-     * @param array $searchQuery critères de recherche
-     * @param array $updateCriteria les modifications à réaliser
-     * @param array|NULL $fields pour ne récupérer que certains champs
-     * @param array|NULL $options voir le lien php.net pour la liste des options
+     * @param array|RefPlan $searchQuery critères de recherche
+     * @param array|RefPlan $updateCriteria les modifications à réaliser
+     * @param array|NULL $fieldsToReturn pour ne récupérer que certains champs
+     * @param array|NULL $options
      * @since 11/03/2014
-     * @return RefPlan
+     * @return array|RefPlan
      */
 
-    function findAndModify($searchQuery, $updateCriteria, $fields = NULL, $options = NULL)
+    public function findAndModify($searchQuery, $updateCriteria, $fieldsToReturn = NULL, $options = NULL)
     {
-        $refPlan = NULL;
+        //Transforme $searchQuery en array s'il contient un objet
+        if($searchQuery instanceof RefPlan)
+            $searchQuery = $this->dismount($searchQuery);
 
-        try
-        {
-            $refPlan = $this->refPlanCollection->findAndModify(
-                $searchQuery,
-                $updateCriteria,
-                $fields,
-                $options
-            );
-        }
-        catch(MongoResultException $e)
-        {
-            return array('error' => $e->getMessage());
-        }
+        //Transforme $updateCriteria en array s'il contient un objet
+        if($updateCriteria instanceof RefPlan)
+            $updateCriteria = $this->dismount($updateCriteria);
 
-        if($refPlan !== NULL)
-        {
-            if($fields !== NULL)
-                return $refPlan;
-            else
-                return new RefPlan($refPlan);
-        }
-        else
-            return array(
-                'error' => 'Unknown error when trying to find and modify.'
-            );
+        $result = parent::__findAndModify('refplan', $searchQuery, $updateCriteria, $fieldsToReturn, $options);
+
+        if($fieldsToReturn === NULL)
+            $result = new RefPlan($result);
+
+        return $result;
     }
 
     /**
-     * - Fonction d'update inspirée de http://www.php.net/manual/en/mongocollection.update.php
-     * - Gestion des erreurs
-     * - Gestion des exceptions MongoCursor: http://www.php.net/manual/en/class.mongocursorexception.php
+     * Fonction d'update utilisant celle de {@see AbstractPdoManager}
      * @author Alban Truc
-     * @param array $criteria description des entrées à modifier
-     * @param array $update
+     * @param array|RefPlan $criteria description des entrées à modifier
+     * @param array|RefPlan $update nouvelles valeurs
      * @param array|NULL $options
      * @since 11/03/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
 
-    function update($criteria, $update, $options = array('w' => 1))
+    public function update($criteria, $update, $options = array('w' => 1))
     {
-        try
-        {
-            /**
-             * Informations sur toutes les options au chapitre "Parameters":
-             * http://www.php.net/manual/en/mongocollection.insert.php
-             */
-            $info = $this->refPlanCollection->update($criteria, $update, $options);
-        }
-        catch(MongoCursorException $e)
-        {
-            return array('error' => $e->getMessage());
-        }
+        //Transforme $criteria en array s'il contient un objet
+        if($criteria instanceof RefPlan)
+            $criteria = $this->dismount($criteria);
 
-        /**
-         * Gestion de ce qui est retourné grâce à l'option w.
-         * Si on essaye de supprimer un document qui n'existe pas, remove() ne renvoie pas d'exception.
-         * Dans ce cas, $info['n'] contiendra 0. Nous devons donc vérifer que ce n est différent de 0.
-         * Plus d'informations sur les retours, voir chapitre "Return Values":
-         * http://www.php.net/manual/en/mongocollection.insert.php
-         */
+        //Transforme $update en array s'il contient un objet
+        if($update instanceof RefPlan)
+            $update = $this->dismount($update);
 
-        if(!(empty($info)) && $info['ok'] == '1' && $info['err'] === NULL)
-        {
-            if($info['n'] != '0') return TRUE;
+        $result = parent::__update('refplan', $criteria, $update, $options);
 
-            else return array(
-                'error' => 'Unknown error when trying to update.'
-            );
-        }
-        else return array('error' => $info);
+        return $result;
     }
 
     /**
-     * - Supprime un plan à partir de son ID
-     * - Gestion des erreurs
-     * - Gestion des exceptions MongoCursor: http://www.php.net/manual/en/class.mongocursorexception.php
+     * - Supprime un/des plan(s) correspondant à des critères données
+     * - Gestion des exceptions et des erreurs
      * @author Alban Truc
-     * @param string|MongoId $id
+     * @param array|RefPlan $criteria ce qu'il faut supprimer
+     * @param array $options
      * @since 11/03/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
 
-    function removeById($id)
+    public function remove($criteria, $options = array('w' => 1))
     {
-        //On cherche le refPlan à supprimer à partir de son MongoId.
-        $criteria = array('_id' => new MongoId($id));
+        //Transforme $criteria en array s'il contient un objet
+        if($criteria instanceof RefPlan)
+            $criteria = $this->dismount($criteria);
 
-        try
-        {
-            /**
-             * w = 1 est optionnel, il est déjà à 1 par défaut.
-             * Cela permet d'avoir un retour du status de la suppression.
-             * justOne = TRUE est également optionnel.
-             * Cela permet de ne supprimer qu'un enregistrement correspondant aux critères.
-             * Les IDs étant uniques, on pourrait se passer de cette option.
-             * Documentation du remove: http://www.php.net/manual/en/mongocollection.remove.php
-             */
+        $result = parent::__remove('refplan', $criteria, $options);
 
-            $info = $this->refPlanCollection->remove($criteria, array('w' => 1, 'justOne' => TRUE));
-
-        }
-        catch(MongoCursorException $e)
-        {
-            return array('error' => $e->getMessage());
-        }
-
-        /**
-         * Gestion de ce qui est retourné grâce à l'option w.
-         * Si on essaye de supprimer un document qui n'existe pas, remove() ne renvoie pas d'exception.
-         * Dans ce cas, $info['n'] contiendra 0. Nous devons donc vérifer que ce n est différent de 0.
-         * Plus d'informations sur les retours, voir chapitre "Return Values":
-         * http://www.php.net/manual/en/mongocollection.insert.php
-         */
-
-        if(!(empty($info)) && $info['ok'] == '1' && $info['err'] === NULL)
-        {
-            if($info['n'] != '0') return TRUE;
-
-            else return array('error' => 'Cannot remove refPlan with ID '.$id.', no refPlan found for this ID.');
-        }
-        else return array('error' => $info['err']);
+        return $result;
     }
 
     /**
      * - Ajoute un refPlan en base de données
-     * - Gestion des exceptions MongoCursor: http://www.php.net/manual/en/class.mongocursorexception.php
-     * - Gestion des erreurs
+     * - Gestion des exceptions et des erreurs
      * @author Alban Truc
-     * @param array|RefPlan $refPlan
+     * @param array|RefPlan $document
+     * @param array $options
      * @since 12/03/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
-    function create($refPlan)
+
+    public function create($document, $options = array('w' => 1))
     {
-        //Transforme $refPlan en array s'il contient un objet
-        if(!(is_array($refPlan)))
-            $refPlan = $this->dismount($refPlan);
+        //Transforme $document en array s'il contient un objet
+        if($document instanceof RefPlan)
+            $document = $this->dismount($document);
 
-        try
-        {
-            /**
-             * w = 1 est optionnel, il est déjà à 1 par défaut. Cela permet d'avoir un retour du status de l'insertion.
-             * Plus d'informations sur toutes les options, voir chapitre "Parameters":
-             * http://www.php.net/manual/en/mongocollection.insert.php
-             */
-            $info = $this->refPlanCollection->insert($refPlan, array('w' => 1));
+        $result = parent::__create('refplan', $document, $options);
 
-        }
-        catch(MongoCursorException $e)
-        {
-            return array('error' => $e->getMessage());
-        }
-
-        /**
-         * Gestion de ce qui est retourné grâce à l'option w.
-         * Plus d'informations sur les retours, voir chapitre "Return Values":
-         * http://www.php.net/manual/en/mongocollection.insert.php
-         */
-        if(!(empty($info)) && $info['ok'] == '1' && $info['err'] === NULL) return TRUE;
-
-        else return array('error' => $info['err']);
+        return $result;
     }
 }
 

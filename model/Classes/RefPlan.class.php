@@ -1,60 +1,203 @@
 <?php
+/**
+ * Created by Notepad++.
+ * User: Alban Truc
+ * Date: 31/01/14
+ * Time: 12:52
+ */
 
+/**
+ * Class RefPlan
+ * @author Alban Truc
+ */
 class RefPlan
 {
-	
-	private $id;
+	/** @var string|MongoId $_id identifiant unique du plan */
+	private $_id;
+
+    /** @var int $state 0 = plan indisponible, 1 = plan disponible */
 	private $state;
+
+    /** @var string $name nom du plan */
 	private $name;
+
+    /** @var int $price prix du plan */
 	private $price;
+
+    /** @var int $maxStorage capacité de stockage maximale du plan */
 	private $maxStorage;
-	private $bandwidth;
-	private $maxRatio;
-	
+
+    /** @var int $downloadSpeed vitesse de téléchargement en octets/seconde */
+	private $downloadSpeed;
+
+    /** @var  int $uploadSpeed vitesse de téléversement (upload) en octets/seconde */
+    private $uploadSpeed;
+
+    /** @var int $maxRatio quantité maximale d'octets téléchargeables par jour  */
+    private $maxRatio;
+
+    /*
+	 * - Récupère le nombre d'arguments de la fonction {@link https://php.net/manual/en/function.func-num-args.php}
+     * - Associe chaque propriété de la classe avec le bon argument {@link https://php.net/manual/en/function.func-get-arg.php}
+     * @author Alban Truc
+     * @since 02/2014
+	 */
     public function __construct()
     {
-		
-		$num = func_num_args();
-		
-		//il faudra rajouter le default (erreur)
-		switch($num)
+		$numberOfArgs = func_num_args();
+
+		switch($numberOfArgs)
 		{
-			case 1:
-					$this->id = func_get_arg(0)['_id'];
-					$this->state = (int)func_get_arg(0)['state'];
-					$this->name = func_get_arg(0)['name'];
-					$this->price = (int)func_get_arg(0)['price'];
-					$this->maxStorage = (int)func_get_arg(0)['maxStorage'];
-					$this->bandwidth = (int)func_get_arg(0)['bandwidth'];
-					$this->maxRatio = (int)func_get_arg(0)['maxRatio'];
-					break;
-			case 7:
-					$this->id = func_get_arg(0);
-					$this->state = (int)func_get_arg(1);
-					$this->name = func_get_arg(2);
-					$this->price = (int)func_get_arg(3);
-					$this->maxStorage = (int)func_get_arg(4);
-					$this->bandwidth = (int)func_get_arg(5);
-					$this->maxRatio = (int)func_get_arg(6);
-					break;
+			case 1: //construit l'objet à partir d'un tableau, issu par exemple d'une requête en base
+                $array = func_get_arg(0);
+                $this->_id = (array_key_exists('_id', $array)) ? $array['_id'] : NULL;
+				$this->state = (array_key_exists('state', $array)) ? (int)$array['state'] : NULL;
+				$this->name = (array_key_exists('name', $array)) ? (string)$array['name'] : NULL;
+				$this->price = (array_key_exists('price', $array)) ? (int)$array['price'] : NULL;
+				$this->maxStorage = (array_key_exists('maxStorage', $array)) ? (int)$array['maxStorage'] : NULL;
+				$this->downloadSpeed = (array_key_exists('downloadSpeed', $array)) ? (int)$array['downloadSpeed'] : NULL;
+                $this->uploadSpeed = (array_key_exists('uploadSpeed', $array)) ? (int)$array['uploadSpeed'] : NULL;
+				$this->maxRatio = (array_key_exists('maxRatio', $array)) ? (int)$array['maxRatio'] : NULL;
+				break;
+			case 7: //toutes les propriétés sont passées dans la fonction, non sous la forme d'un tableau
+				$this->state = (int)func_get_arg(0);
+				$this->name = (string)func_get_arg(1);
+				$this->price = (int)func_get_arg(2);
+				$this->maxStorage = (int)func_get_arg(3);
+				$this->downloadSpeed = (int)func_get_arg(4);
+                $this->uploadSpeed = (int)func_get_arg(5);
+				$this->maxRatio = (int)func_get_arg(6);
+				break;
 		}
 	}
-	
-	public function getId() { return $this->id; }
-	public function getState() { return $this->state; } 
-	public function getName() { return $this->name; } 
-	public function getPrice() { return $this->price; } 
-	public function getMaxStorage() { return $this->maxStorage; }
-	public function getBandwidth() { return $this->bandwidth; }
-	public function getMaxRatio() { return $this->maxRatio; }
-	
-	public function setId($id) { $this->id = $id; }
-	public function setState($state) { $this->state = $state; } 
-	public function setName($name) { $this->name = $name; } 
-	public function setPrice($price) { $this->price = $price; } 
-	public function setMaxStorage($maxStorage) { $this->maxStorage = $maxStorage; }
-	public function setBandwidth($bandwidth) { $this->bandwidth = $bandwidth; }	
-	public function setMaxRatio($maxRatio) { $this->maxRatio = $maxRatio; }
+
+    /**
+     * @param MongoId|string $id
+     */
+    public function setId($id)
+    {
+        $this->_id = $id;
+    }
+
+    /**
+     * @return MongoId|string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    /**
+     * @param int $state
+     */
+    public function setState($state)
+    {
+        $this->state = (int)$state;
+    }
+
+    /**
+     * @return int
+     */
+    public function getState()
+    {
+        return (int)$this->state;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = (string)$name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return (string)$this->name;
+    }
+
+    /**
+     * @param int $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = (int)$price;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrice()
+    {
+        return (int)$this->price;
+    }
+
+    /**
+     * @param int $maxStorage
+     */
+    public function setMaxStorage($maxStorage)
+    {
+        $this->maxStorage = (int)$maxStorage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMaxStorage()
+    {
+        return (int)$this->maxStorage;
+    }
+
+    /**
+     * @param int $downloadSpeed
+     */
+    public function setDownloadSpeed($downloadSpeed)
+    {
+        $this->downloadSpeed = (int)$downloadSpeed;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDownloadSpeed()
+    {
+        return (int)$this->downloadSpeed;
+    }
+
+    /**
+     * @param int $uploadSpeed
+     */
+    public function setUploadSpeed($uploadSpeed)
+    {
+        $this->uploadSpeed = (int)$uploadSpeed;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUploadSpeed()
+    {
+        return (int)$this->uploadSpeed;
+    }
+
+    /**
+     * @param int $maxRatio
+     */
+    public function setMaxRatio($maxRatio)
+    {
+        $this->maxRatio = (int)$maxRatio;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMaxRatio()
+    {
+        return (int)$this->maxRatio;
+    }
 }
 
 ?>
