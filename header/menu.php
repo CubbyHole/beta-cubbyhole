@@ -51,7 +51,7 @@
             <ul id="menuTwo" class="nav navbar-nav navbar-right ">
                 <?php if (isset($_SESSION['user'])): //Mise en place d'un module Gravatar pour la photo de profil ?>
                     <li>
-                        <img class="img-circle" title="<?php echo $user->getName().' '.$user->getFirstname(); ?>" src=<?php echo getGravatar($user->getEmail()); ?>>
+                        <img class="img-circle" title="<?php echo $user->getLastName().' '.$user->getFirstname(); ?>" src=<?php echo getGravatar($user->getEmail()); ?>>
 
                     </li>
                     <li>
@@ -59,7 +59,7 @@
                     </li>
                     <li>
                         <a id="menuTwo-Name">
-                            <?php echo $user->getName().' '.$user->getFirstname();  ?>
+                            <?php echo $user->getLastName().' '.$user->getFirstname();  ?>
                         </a>
                     </li>
                 <?php endif ?>
