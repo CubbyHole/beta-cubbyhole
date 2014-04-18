@@ -13,12 +13,11 @@
  * @source http://gravatar.com/site/implement/images/php/
  */
 
-function getGravatar($email, $size = 50, $default = 'mm', $rating = 'g', $img = false, $atts = array()) {
-
-
+function getGravatar($email, $size = 50, $default = 'mm', $rating = 'g', $img = false, $atts = array())
+{
     $url = 'http://www.gravatar.com/avatar/';
-    $url .= md5( strtolower( trim( $email ) ) );//http://www.php.net/manual/en/function.strtolower.php
-    $url .= "?s=$size&d=$default&r=$rating";
+    $url.= md5( strtolower( trim( $email ) ) );//http://www.php.net/manual/en/function.strtolower.php
+    $url.= "?s=$size&d=$default&r=$rating";
 
     if ( $img )
     {
@@ -31,17 +30,49 @@ function getGravatar($email, $size = 50, $default = 'mm', $rating = 'g', $img = 
     return $url;
 }
 
-/**
- * Chiffre une chaîne de caractères
- * @author Alban Truc
- * @param $string
- * @since 02/2014
- * @return string
- */
-
-function encrypt($string)
+function setMailHeader($boundary, $fromName = 'Cubbyhole', $fromMail = 'no-reply@cubbyhole.com', $contentType = 'multipart/alternative')
 {
-    return sha1(md5($string));
+    $header = "From: \"$fromName\"<".$fromMail.">\n";
+    $header.= "Reply-to: \"$fromName\"<".$fromMail.">\n";
+    $header.= "MIME-Version: 1.0\n";
+    $header.= "Content-Type: ".$contentType.";\n boundary=\"$boundary\"\n";
+
+    return $header;
 }
 
- 
+function setMailContent($boundary, $html, $text = NULL, $htmlCharset = 'UTF-8', $textCharset = 'UTF-8', $htmlEncoding = '8bit', $textEncoding = '8bit')
+{
+    $message = "\n--".$boundary."\n";
+
+    //Ajout du message au format texte.
+    if($text !== NULL)
+    {
+        $message.= "Content-Type: text/plain; charset=\"$textCharset\"\n";
+        $message.= "Content-Transfer-Encoding: ".$textEncoding."\n";
+        $message.= "\n".$text."\n";
+
+        $message.= "\n--".$boundary."\n";
+    }
+
+    //Ajout du message au format HTML
+    $message.= "Content-Type: text/html; charset=\"$htmlCharset\"\n";
+    $message.= "Content-Transfer-Encoding: ".$htmlEncoding."\n";
+    $message.= "\n".$html."\n";
+
+    $message.= "\n--".$boundary."--\n";
+    $message.= "\n--".$boundary."--\n";
+
+    return $message;
+}
+
+function sendMail($recipient, $subject, $message, $header)
+{
+    // On filtre les serveurs qui rencontrent des bogues.
+    if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $recipient))
+    {
+        str_replace("\n", "\r\n", $header);
+        str_replace("\n", "\r\n", $message);
+    }
+
+    return mail($recipient, $subject, $message, $header);
+}
