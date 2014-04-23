@@ -15,7 +15,9 @@ class Account
 	/** @var  string|MongoId $_id identifiant unique du compte */
     private $_id;
 
-    /** @var int $state 0 = compte désactivé 1 = compte activé*/
+    /** @var int $state 0 = compte désactivé car il ne s'agit pas du compte actuel d'un utilisateur
+     * 1 = compte activé, il s'agit du compte actuel d'un utilisateur
+     */
     private $state;
 
     /** @var  User|string|MongoId $idUser utilisateur propriétaire du compte */

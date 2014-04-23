@@ -15,7 +15,9 @@ class RefPlan
 	/** @var string|MongoId $_id identifiant unique du plan */
 	private $_id;
 
-    /** @var int $state 0 = plan indisponible, 1 = plan disponible */
+    /** @var int $state 0 = Ce plan n’est pas disponible, on ne peut donc y souscrire (non présent sur le site),
+     * 1 = La souscription à ce plan est possible
+     */
 	private $state;
 
     /** @var string $name nom du plan */
