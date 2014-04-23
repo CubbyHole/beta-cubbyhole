@@ -19,7 +19,7 @@ interface TransactionManagerInterface
      * @param array|Transaction $criteria critères de recherche
      * @param array $fieldsToReturn champs à récupérer
      * @since 29/03/2014
-     * @return array
+     * @return array|Transaction[]
      */
 
     function find($criteria, $fieldsToReturn = array());
