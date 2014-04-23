@@ -369,6 +369,30 @@ class TransactionPdoManager extends AbstractPdoManager implements TransactionMan
                 $criteria['idRefAction'] = $criteria['idRefAction']['_id'];
         }
 
+        if(isset($update['idEmitter']))
+        {
+            if($update['idEmitter'] instanceof User)
+                $update['idEmitter'] = new MongoId($update['idEmitter']->getId());
+            else if(is_array($update['idEmitter']) && isset($update['idEmitter']['_id']))
+                $update['idEmitter'] = $update['idEmitter']['_id'];
+        }
+
+        if(isset($update['idReceiver']))
+        {
+            if($update['idReceiver'] instanceof User)
+                $update['idReceiver'] = new MongoId($update['idReceiver']->getId());
+            else if(is_array($update['idReceiver']) && isset($update['idReceiver']['_id']))
+                $update['idReceiver'] = $update['idReceiver']['_id'];
+        }
+
+        if(isset($update['idRefAction']))
+        {
+            if($update['idRefAction'] instanceof RefAction)
+                $update['idRefAction'] = new MongoId($update['idRefAction']->getId());
+            else if(is_array($update['idRefAction']) && isset($update['idRefAction']['_id']))
+                $update['idRefAction'] = $update['idRefAction']['_id'];
+        }
+
         $result = parent::__update('transaction', $criteria, $update, $options);
 
         return $result;
