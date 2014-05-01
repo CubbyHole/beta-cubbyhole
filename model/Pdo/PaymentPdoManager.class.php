@@ -107,7 +107,7 @@ class PaymentPdoManager extends AbstractPdoManager implements PaymentManagerInte
 
         $result = parent::__findOne('payment', $criteria, $fieldsToReturn);
 
-        if(!(is_array($result)) && !(array_key_exists('error', $result)))
+        if(is_array($result) && !(array_key_exists('error', $result)))
         {
             if(empty($fieldsToReturn))
                 $result = new Payment($result);

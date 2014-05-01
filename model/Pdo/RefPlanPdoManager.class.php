@@ -96,7 +96,7 @@ class RefPlanPdoManager extends AbstractPdoManager implements RefPlanManagerInte
 
         $result = parent::__findOne('refplan', $criteria, $fieldsToReturn);
 
-        if(!(is_array($result)) && !(array_key_exists('error', $result)))
+        if(is_array($result) && !(array_key_exists('error', $result)))
         {
             if(empty($fieldsToReturn))
                 $result = new RefPlan($result);
