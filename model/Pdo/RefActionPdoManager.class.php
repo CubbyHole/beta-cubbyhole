@@ -42,7 +42,7 @@ class RefActionPdoManager extends AbstractPdoManager implements RefActionManager
      * @param array|RefAction $criteria critères de recherche
      * @param array $fieldsToReturn champs à récupérer
      * @since 29/03/2014
-     * @return array
+     * @return array|RefAction[]
      */
 
     public function find($criteria, $fieldsToReturn = array())

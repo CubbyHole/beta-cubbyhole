@@ -49,7 +49,7 @@ class TransactionPdoManager extends AbstractPdoManager implements TransactionMan
      * @param array|Transaction $criteria critères de recherche
      * @param array $fieldsToReturn champs à récupérer
      * @since 29/03/2014
-     * @return array
+     * @return array|Transaction[]
      */
     function find($criteria, $fieldsToReturn = array())
     {
@@ -367,6 +367,30 @@ class TransactionPdoManager extends AbstractPdoManager implements TransactionMan
                 $criteria['idRefAction'] = new MongoId($criteria['idRefAction']->getId());
             else if(is_array($criteria['idRefAction']) && isset($criteria['idRefAction']['_id']))
                 $criteria['idRefAction'] = $criteria['idRefAction']['_id'];
+        }
+
+        if(isset($update['idEmitter']))
+        {
+            if($update['idEmitter'] instanceof User)
+                $update['idEmitter'] = new MongoId($update['idEmitter']->getId());
+            else if(is_array($update['idEmitter']) && isset($update['idEmitter']['_id']))
+                $update['idEmitter'] = $update['idEmitter']['_id'];
+        }
+
+        if(isset($update['idReceiver']))
+        {
+            if($update['idReceiver'] instanceof User)
+                $update['idReceiver'] = new MongoId($update['idReceiver']->getId());
+            else if(is_array($update['idReceiver']) && isset($update['idReceiver']['_id']))
+                $update['idReceiver'] = $update['idReceiver']['_id'];
+        }
+
+        if(isset($update['idRefAction']))
+        {
+            if($update['idRefAction'] instanceof RefAction)
+                $update['idRefAction'] = new MongoId($update['idRefAction']->getId());
+            else if(is_array($update['idRefAction']) && isset($update['idRefAction']['_id']))
+                $update['idRefAction'] = $update['idRefAction']['_id'];
         }
 
         $result = parent::__update('transaction', $criteria, $update, $options);

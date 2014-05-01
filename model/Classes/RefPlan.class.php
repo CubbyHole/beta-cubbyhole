@@ -15,13 +15,15 @@ class RefPlan
 	/** @var string|MongoId $_id identifiant unique du plan */
 	private $_id;
 
-    /** @var int $state 0 = plan indisponible, 1 = plan disponible */
+    /** @var int $state 0 = Ce plan n’est pas disponible, on ne peut donc y souscrire (non présent sur le site),
+     * 1 = La souscription à ce plan est possible
+     */
 	private $state;
 
     /** @var string $name nom du plan */
 	private $name;
 
-    /** @var int $price prix du plan */
+    /** @var float $price prix du plan */
 	private $price;
 
     /** @var int $maxStorage capacité de stockage maximale du plan */
@@ -53,7 +55,7 @@ class RefPlan
                 $this->_id = (array_key_exists('_id', $array)) ? $array['_id'] : NULL;
 				$this->state = (array_key_exists('state', $array)) ? (int)$array['state'] : NULL;
 				$this->name = (array_key_exists('name', $array)) ? (string)$array['name'] : NULL;
-				$this->price = (array_key_exists('price', $array)) ? (int)$array['price'] : NULL;
+				$this->price = (array_key_exists('price', $array)) ? (float)$array['price'] : NULL;
 				$this->maxStorage = (array_key_exists('maxStorage', $array)) ? (int)$array['maxStorage'] : NULL;
 				$this->downloadSpeed = (array_key_exists('downloadSpeed', $array)) ? (int)$array['downloadSpeed'] : NULL;
                 $this->uploadSpeed = (array_key_exists('uploadSpeed', $array)) ? (int)$array['uploadSpeed'] : NULL;
@@ -62,7 +64,7 @@ class RefPlan
 			case 7: //toutes les propriétés sont passées dans la fonction, non sous la forme d'un tableau
 				$this->state = (int)func_get_arg(0);
 				$this->name = (string)func_get_arg(1);
-				$this->price = (int)func_get_arg(2);
+				$this->price = (float)func_get_arg(2);
 				$this->maxStorage = (int)func_get_arg(3);
 				$this->downloadSpeed = (int)func_get_arg(4);
                 $this->uploadSpeed = (int)func_get_arg(5);
@@ -120,19 +122,19 @@ class RefPlan
     }
 
     /**
-     * @param int $price
+     * @param float $price
      */
     public function setPrice($price)
     {
-        $this->price = (int)$price;
+        $this->price = (float)$price;
     }
 
     /**
-     * @return int
+     * @return float
      */
     public function getPrice()
     {
-        return (int)$this->price;
+        return (float)$this->price;
     }
 
     /**

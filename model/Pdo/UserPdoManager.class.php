@@ -66,7 +66,7 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
      * @param array|User $criteria critères de recherche
      * @param array $fieldsToReturn champs à récupérer
      * @since 31/03/2014
-     * @return array
+     * @return array|User[]
      */
 
     public function find($criteria, $fieldsToReturn = array())
@@ -486,7 +486,11 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
             if($user->getPassword() == $password)
             {
                 //On récupère le compte correspondant à l'utilisateur
-                $account = $this->accountPdoManager->findById($user->getCurrentAccount());
+                $accountCriteria = array(
+                    '_id' => new MongoId($user->getCurrentAccount()),
+                    'state' => (int)1
+                );
+                $account = $this->accountPdoManager->findOne($accountCriteria);
 
                 if($account instanceof Account) //Si le compte existe
                 {
@@ -506,7 +510,7 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
                 }
                 else
                 {
-                    $errorInfo = 'Account with ID '.$user->getCurrentAccount().' of user '.$user->getId().' not found';
+                    $errorInfo = 'No active account with ID '.$user->getCurrentAccount().' for user '.$user->getId();
                     return array('error' => $errorInfo);
                 }
             }

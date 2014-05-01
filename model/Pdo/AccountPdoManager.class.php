@@ -56,7 +56,7 @@ class AccountPdoManager extends AbstractPdoManager implements AccountManagerInte
      * @param array|Account $criteria critères de recherche
      * @param array $fieldsToReturn champs à récupérer
      * @since 29/03/2014
-     * @return array
+     * @return array|Account[]
      */
 
     public function find($criteria, $fieldsToReturn = array())

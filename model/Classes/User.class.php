@@ -15,7 +15,9 @@ class User
 	/** @var string|MongoId $_id identifiant unique de l'utilisateur */
 	private $_id;
 
-    /** @var int $state 0 = utilisateur désactivé, 1 = utilisateur activé */
+    /** @var int $state 0 = Inscription non validée OU utilisateur non activé,
+     * 1 = Inscription validée ET utilisateur activé
+     */
 	private $state;
 
     /** @var bool $isAdmin FALSE = utilisateur classique TRUE = administrateur */

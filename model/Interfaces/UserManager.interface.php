@@ -19,7 +19,7 @@ interface UserManagerInterface
      * @param array|User $criteria critères de recherche
      * @param array $fieldsToReturn champs à récupérer
      * @since 31/03/2014
-     * @return array
+     * @return array|User[]
      */
 
     function find($criteria, $fieldsToReturn = array());

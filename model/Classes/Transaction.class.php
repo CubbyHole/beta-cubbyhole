@@ -26,7 +26,7 @@ class Transaction
     /** @var  User|string|MongoId|NULL $idReceiver celui qui reçoit la transaction.
      * Sera null dans le cas d'ajout/modification/suppression d'un document
      */
-    private $idReceiver;
+    //private $idReceiver;
 
     /** @var  RefAction|string|MongoId|NULL $idRefAction type de transaction */
     private $idRefAction;
@@ -60,22 +60,22 @@ class Transaction
                 $this->_id = (array_key_exists('_id', $array)) ? $array['_id'] : NULL;
                 $this->calledFrom = (array_key_exists('calledFrom', $array)) ? (string)$array['calledFrom'] : NULL;
                 $this->idEmitter = (array_key_exists('idEmitter', $array)) ? $array['idEmitter'] : NULL;
-                $this->idReceiver = (array_key_exists('idReceiver', $array)) ? $array['idReceiver'] : NULL;
+                //$this->idReceiver = (array_key_exists('idReceiver', $array)) ? $array['idReceiver'] : NULL;
                 $this->idRefAction = (array_key_exists('idRefAction', $array)) ? $array['idRefAction'] : NULL;
                 $this->idDocument = (array_key_exists('idDocument', $array)) ? $array['idDocument'] : NULL;
                 $this->collectionName = (array_key_exists('collectionName', $array)) ? (string)$array['collectionName'] : NULL;
                 $this->date = (array_key_exists('date', $array)) ? $array['date'] : NULL;
                 $this->serverResponse = (array_key_exists('serverResponse', $array)) ? $array['serverResponse'] : NULL;
                 break;
-            case 8: //toutes les propriétés sont passées dans la fonction, non sous la forme d'un tableau
+            case 7: //toutes les propriétés sont passées dans la fonction, non sous la forme d'un tableau
                 $this->calledFrom = (string)func_get_arg(0);
                 $this->idEmitter = func_get_arg(1);
-                $this->idReceiver = func_get_arg(2);
-                $this->idRefAction = func_get_arg(3);
-                $this->idDocument = func_get_arg(4);
-                $this->collectionName = func_get_arg(5);
-                $this->date = func_get_arg(6);
-                $this->serverResponse = func_get_arg(7);
+                //$this->idReceiver = func_get_arg(2);
+                $this->idRefAction = func_get_arg(2);
+                $this->idDocument = func_get_arg(3);
+                $this->collectionName = func_get_arg(4);
+                $this->date = func_get_arg(5);
+                $this->serverResponse = func_get_arg(6);
                 break;
         }
     }
@@ -131,18 +131,20 @@ class Transaction
     /**
      * @param User|string|MongoId|NULL $receiver
      */
+    /*
     public function setReceiver($receiver)
     {
         $this->idReceiver = $receiver;
-    }
+    }*/
 
     /**
      * @return User|string|MongoId|NULL
      */
+    /*
     public function getReceiver()
     {
         return $this->idReceiver;
-    }
+    }*/
 
     /**
      * @param RefAction|string|MongoId|NULL $refAction

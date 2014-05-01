@@ -15,7 +15,9 @@ class Account
 	/** @var  string|MongoId $_id identifiant unique du compte */
     private $_id;
 
-    /** @var int $state 0 = compte désactivé 1 = compte activé*/
+    /** @var int $state 0 = compte désactivé car il ne s'agit pas du compte actuel d'un utilisateur
+     * 1 = compte activé, il s'agit du compte actuel d'un utilisateur
+     */
     private $state;
 
     /** @var  User|string|MongoId $idUser utilisateur propriétaire du compte */
@@ -57,7 +59,7 @@ class Account
                 $this->storage = (array_key_exists('storage', $array)) ? (int)$array['storage'] : NULL;
                 $this->ratio = (array_key_exists('ratio', $array)) ? (int)$array['ratio'] : NULL;
                 $this->startDate = (array_key_exists('startDate', $array)) ? $array['startDate'] : NULL;
-                $this->endDate = (array_key_exists('ratio', $array)) ? $array['endDate'] : NULL;
+                $this->endDate = (array_key_exists('endDate', $array)) ? $array['endDate'] : NULL;
                 break;
             case 7: //toutes les propriétés sont passées dans la fonction, non sous la forme d'un tableau
                 $this->state = (int)func_get_arg(0);

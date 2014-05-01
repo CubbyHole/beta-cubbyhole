@@ -21,7 +21,7 @@ class RefAction
      */
     private $state;
 
-    /** @var  int $code code numérique représentant l'action */
+    /** @var  string $code code numérique représentant l'action */
     private $code;
 
     /** @var  string $description description de l'action compréhensible par l'humain */
@@ -43,12 +43,12 @@ class RefAction
                 $array = func_get_arg(0);
                 $this->_id = (array_key_exists('_id', $array)) ? $array['_id'] : NULL;
                 $this->state = (array_key_exists('state', $array)) ? (int)$array['state'] : NULL;
-                $this->code = (array_key_exists('code', $array)) ? (int)$array['code'] : NULL;
+                $this->code = (array_key_exists('code', $array)) ? (string)$array['code'] : NULL;
                 $this->description = (array_key_exists('description', $array)) ? (string)$array['description'] : NULL;
                 break;
             case 3: //toutes les propriétés sont passées dans la fonction, non sous la forme d'un tableau
                 $this->state = (int)func_get_arg(0);
-                $this->code = (int)func_get_arg(1);
+                $this->code = (string)func_get_arg(1);
                 $this->description = (string)func_get_arg(2);
                 break;
         }
@@ -87,19 +87,19 @@ class RefAction
     }
 
     /**
-     * @param int $code
+     * @param string $code
      */
     public function setCode($code)
     {
-        $this->code = (int)$code;
+        $this->code = (string)$code;
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getCode()
     {
-        return (int)$this->code;
+        return (string)$this->code;
     }
 
     /**

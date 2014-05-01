@@ -18,7 +18,7 @@ interface RefActionManagerInterface
      * @param array|RefAction $criteria critères de recherche
      * @param array $fieldsToReturn champs à récupérer
      * @since 29/03/2014
-     * @return array
+     * @return array|RefAction[]
      */
 
     function find($criteria, $fieldsToReturn = array());
