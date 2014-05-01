@@ -51,6 +51,7 @@ class TransactionPdoManager extends AbstractPdoManager implements TransactionMan
      * @since 29/03/2014
      * @return array|Transaction[]
      */
+
     function find($criteria, $fieldsToReturn = array())
     {
         //Transforme $criteria en array s'il contient un objet
@@ -111,6 +112,7 @@ class TransactionPdoManager extends AbstractPdoManager implements TransactionMan
      * @since 29/03/2014
      * @return array|Transaction
      */
+
     function findOne($criteria, $fieldsToReturn = array())
     {
         //Transforme $criteria en array s'il contient un objet
@@ -161,6 +163,7 @@ class TransactionPdoManager extends AbstractPdoManager implements TransactionMan
      * @since 02/2014
      * @return Transaction|array contenant le message d'erreur
      */
+
     function findById($id, $fieldsToReturn = array())
     {
         $result = parent::__findOne('transaction', array('_id' => new MongoId($id)));
@@ -183,6 +186,7 @@ class TransactionPdoManager extends AbstractPdoManager implements TransactionMan
      * @since 11/03/2014
      * @return array|Transaction[] tableau d'objets Transaction
      */
+
     function findAll($fieldsToReturn = array())
     {
         $cursor = parent::__find('transaction', array());
@@ -218,6 +222,7 @@ class TransactionPdoManager extends AbstractPdoManager implements TransactionMan
      * @since 11/03/2014
      * @return array|Transaction
      */
+
     function findAndModify($searchQuery, $updateCriteria, $fieldsToReturn = NULL, $options = NULL)
     {
         //Transforme $criteria en array s'il contient un objet
@@ -293,6 +298,7 @@ class TransactionPdoManager extends AbstractPdoManager implements TransactionMan
      * @since 12/03/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
+
     function create($document, $options = array('w' => 1))
     {
         //Transforme $criteria en array s'il contient un objet
@@ -339,6 +345,7 @@ class TransactionPdoManager extends AbstractPdoManager implements TransactionMan
      * @since 11/03/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
+
     function update($criteria, $update, $options = array('w' => 1))
     {
         //Transforme $criteria en array s'il contient un objet
@@ -407,6 +414,7 @@ class TransactionPdoManager extends AbstractPdoManager implements TransactionMan
      * @since 11/03/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
+
     function remove($criteria, $options = array('w' => 1))
     {
         //Transforme $criteria en array s'il contient un objet
