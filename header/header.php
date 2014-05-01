@@ -17,7 +17,7 @@ require_once $projectRoot.'/required.php';
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ubbyhole</title>
+    <title>Cubbyhole</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/Cubbyhole/content/img/icons/icons.png">
