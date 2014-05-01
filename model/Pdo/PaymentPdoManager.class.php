@@ -47,6 +47,7 @@ class PaymentPdoManager extends AbstractPdoManager implements PaymentManagerInte
      * @since 29/03/2014
      * @return array|Payment[]
      */
+
     function find($criteria, $fieldsToReturn = array())
     {
         //Transforme $criteria en array s'il contient un objet
@@ -91,6 +92,7 @@ class PaymentPdoManager extends AbstractPdoManager implements PaymentManagerInte
      * @since 29/03/2014
      * @return array|Payment
      */
+
     function findOne($criteria, $fieldsToReturn = array())
     {
         //Transforme $criteria en array s'il contient un objet
@@ -125,6 +127,7 @@ class PaymentPdoManager extends AbstractPdoManager implements PaymentManagerInte
      * @since 02/2014
      * @return Payment|array contenant le message d'erreur
      */
+
     function findById($id, $fieldsToReturn = array())
     {
         $result = parent::__findOne('payment', array('_id' => new MongoId($id)));
@@ -147,6 +150,7 @@ class PaymentPdoManager extends AbstractPdoManager implements PaymentManagerInte
      * @since 11/03/2014
      * @return array|Payment[]
      */
+
     function findAll($fieldsToReturn = array())
     {
         $cursor = parent::__find('payment', array());
@@ -182,6 +186,7 @@ class PaymentPdoManager extends AbstractPdoManager implements PaymentManagerInte
      * @since 11/03/2014
      * @return array|Payment
      */
+
     function findAndModify($searchQuery, $updateCriteria, $fieldsToReturn = NULL, $options = NULL)
     {
         //Transforme $criteria en array s'il contient un objet
@@ -225,6 +230,7 @@ class PaymentPdoManager extends AbstractPdoManager implements PaymentManagerInte
      * @since 12/03/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
+
     function create($document, $options = array('w' => 1))
     {
         //Transforme $criteria en array s'il contient un objet
@@ -255,6 +261,7 @@ class PaymentPdoManager extends AbstractPdoManager implements PaymentManagerInte
      * @since 11/03/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
+
     function update($criteria, $update, $options = array('w' => 1))
     {
         //Transforme $criteria en array s'il contient un objet
@@ -291,6 +298,7 @@ class PaymentPdoManager extends AbstractPdoManager implements PaymentManagerInte
      * @since 11/03/2014
      * @return TRUE|array contenant le message d'erreur dans un indexe 'error'
      */
+
     function remove($criteria, $options = array('w' => 1))
     {
         //Transforme $criteria en array s'il contient un objet
