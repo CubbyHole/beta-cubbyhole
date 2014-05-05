@@ -76,3 +76,47 @@ function sendMail($recipient, $subject, $message, $header)
 
     return mail($recipient, $subject, $message, $header);
 }
+
+function _cleanInput($data)
+{
+
+    $search = array(
+        '@<script[^>]*?>.*?</script>@si',   // Retire code Javascript
+        '@<[\/\!]*?[^<>]*?>@si',            // Retire code HTML
+        '@<style[^>]*?>.*?</style>@siU',    // Retire code CSS
+        '@<![\s\S]*?--[ \t\n\r]*>@'         // Retire les lignes de commentaires multiples
+    );
+
+    $output = preg_replace($search, '', $data);
+
+    return $output;
+}
+
+/**
+ * Pour protéger la base de données. Fait appel à cleanInput($data) si $data n'est pas un tableau.
+ * @author Alban Truc
+ * @param array|string $data Données envoyées
+ * @since 19/02/2014
+ * @return array|mixed Données nettoyées
+ */
+
+function _sanitize($data)
+{
+    $clean_input = Array();
+
+    if (is_array($data))
+    {
+        foreach ($data as $key => $value)
+            $clean_input[$key] = $this->_sanitize($value);
+    }
+    else
+    {
+        if(get_magic_quotes_gpc())
+            $data = trim(stripslashes($data));
+
+        $data = trim(strip_tags($data));
+        $clean_input = $this->_cleanInput($data);
+    }
+
+    return $clean_input;
+}
