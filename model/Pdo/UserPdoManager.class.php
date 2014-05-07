@@ -675,7 +675,7 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
                 $htmlFileContent = file_get_contents($projectRoot.'/view/emailTemplates/registration/html.php');
                 $textFileContent = file_get_contents($projectRoot.'/view/emailTemplates/registration/plainText.txt');
 
-                $host = $_SERVER['HTTP_HOST'];
+                $host = 'http://'.$_SERVER['HTTP_HOST'];
                 $logoLink = $host.'/Cubbyhole/content/img/icons/cubbyhole_logoFull.png';
                 $activationLink = $host.'/Cubbyhole/view/member/confirmRegistration.php?email='.$email
                     .'&token='.$result['token'];
@@ -862,7 +862,7 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
                     $htmlFileContent = file_get_contents($projectRoot.'/view/emailTemplates/passwordLost/html.php');
                     $textFileContent = file_get_contents($projectRoot.'/view/emailTemplates/passwordLost/plainText.txt');
 
-                    $host = $_SERVER['HTTP_HOST'];
+                    $host = 'http://'.$_SERVER['HTTP_HOST'];
                     $logoLink = $host.'/Cubbyhole/content/img/icons/cubbyhole_logoFull.png';
                     $resetPasswordLink = $host.'/Cubbyhole/view/member/confirmPasswordReset.php?email='.$email
                         .'&token='.$result['token'];
