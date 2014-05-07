@@ -5,7 +5,6 @@ include'../header/header.php';
 
 //require_once $projectRoot . '/controller/functions.php';
 //require_once $projectRoot . '/controller/register.php';
-
 ?>
 <!-- Styles -->
 <link rel="stylesheet" href="../content/css/bootstrap/bootstrap.min.css"  />
@@ -31,19 +30,27 @@ include_once '../header/menu.php';
 
 ?>
 <!-- Sign In Option 1 -->
-<?php if(isset($_SESSION['errorMessage'])): ?>
-<div class="alert alert-danger">
-    <?php echo "<p>Message from the server :</p> <br />";
-          echo  $_SESSION['errorMessage'];
-          echo "<br />";
-    echo "<br />";
-          echo "<p>Please contact the technical support at <a>technical.support@cubbyhole.com</a> or retry</p>";
-    unset($_SESSION['errorMsg']);
-    ?>
-</div>
-<?php endif ?>
-
 <div id="sign_up1">
+    <?php if(isset($_SESSION['errorMessageRegister'])): ?>
+        <div class="alert alert-danger">
+            <p>Message from the server :</p>
+            <br />
+            <?php echo  $_SESSION['errorMessageRegister']; ?>
+            <br />
+            <br />
+            <p>Please contact the technical support at <a>technical.support@cubbyhole.com</a> or retry</p>
+            <?php unset($_SESSION['errorMessageRegister']); ?>
+        </div>
+    <?php endif ?>
+
+    <?php if(isset($_SESSION['validMessageRegister'])): ?>
+        <div class="alert alert-success">
+            <p>Message from the server :</p>
+            <br />
+            <p>A confirmation email has been sent to your mailbox</p>
+            <?php unset($_SESSION['validMessageRegister']); ?>
+        </div>
+    <?php endif ?>
     <div class="container">
         <div class="row">
             <div class="col-md-12 header">
@@ -59,11 +66,11 @@ include_once '../header/menu.php';
             <div class="footer">
                 <form method="post" action="../controller/register.php" class="form">
                     <div class="form-group">
-                        <input id="name" name="name" type="text" placeholder="Nom" class="form-control center" autofocus >
+                        <input id="name" name="name" type="text" placeholder="Lastname" class="form-control center" autofocus >
                     </div>
 
                     <div class="form-group">
-                        <input id="firstname" name="firstName" type="text" placeholder="Prenom" class="form-control center">
+                        <input id="firstname" name="firstName" type="text" placeholder="Firstname" class="form-control center">
                     </div>
 
                     <div class="form-group">
