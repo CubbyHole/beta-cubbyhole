@@ -29,8 +29,14 @@ if(isset($_POST['loginForm'] ))
 			$loginOK = true;
 			//redirection vers index
 			header('Location:../index.php');
-
 		}
+        else
+        {
+
+            $_SESSION['errorMessageLogin'] = $user['error'];
+            header('Location:../view/login.php');
+            die();
+        }
 
 	}
 	

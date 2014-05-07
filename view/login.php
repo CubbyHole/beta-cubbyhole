@@ -23,8 +23,20 @@ include '../header/header.php';
 <?php
  include '../header/menu.php';
 ?>
+
     <!-- Sign In Option 1 -->
     <div id="sign_in1">
+        <?php if(isset($_SESSION['errorMessageLogin'])): ?>
+            <div class="alert alert-danger">
+                <p>Message from the server :</p>
+                <br />
+                <?php echo  $_SESSION['errorMessageLogin']; ?>
+                <br />
+                <br />
+                <p>Please contact the technical support at <a>technical.support@cubbyhole.com</a> or retry</p>
+                <?php unset($_SESSION['errorMessageLogin']); ?>
+            </div>
+        <?php endif ?>
         <div class="container">
             <div class="row">
                 <div class="col-md-12 header">
@@ -52,8 +64,8 @@ include '../header/header.php';
                 <div class="col-md-12 footer">
                     <form method="post" action="../controller/login.php" class="form-inline">
                         
-                        <input name="email" type="text"  autofocus placeholder="Email" class="form-control">
-                        <input id="password" name="password" type="password"  placeholder="Password" class="form-control">
+                        <input name="email" type="text"  autofocus placeholder="Email" class="form-control" required>
+                        <input id="password" name="password" type="password"  placeholder="Password" class="form-control" required>
                         <input name="loginForm" type="submit" value="login">
 
                     </form>

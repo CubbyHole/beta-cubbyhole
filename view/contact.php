@@ -29,7 +29,7 @@ include '../header/menu.php';
                 </div>
                 <div class="row contact">
 
-                    <form method="POST" action="controller/mail.php">
+                    <form method="POST" action="/Cubbyhole/controller/mail.php">
                         <div class="row form">
                             <div class="col-sm-6 row-col">
                                 <div class="box">

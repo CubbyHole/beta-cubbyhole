@@ -565,8 +565,8 @@ h4
                                             style="padding-right: 9px;padding-left: 9px;padding-top: 0;padding-bottom: 0;text-align: center;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                             <img align="center" alt=""
                                                  src="/Cubbyhole/content/img/icons/cubbyhole_logoFull.png"
-                                                 width="100"
-                                                 style="max-width: 100px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"
+
+                                                 style="width:100px;max-width: 100px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"
                                                  class="mcnImage">
                                         </td>
                                     </tr>

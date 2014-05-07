@@ -83,12 +83,13 @@ For the backgrounds, you can combine from the bgs folder :D
 
 </br>
 
-<?php/*
-if(isset($_SESSION['user']))
+<?php
+/*if(isset($_SESSION['user']))
 {
     $grav = unserialize($_SESSION['user']);
     var_dump($grav);
-}*/
+}
+var_dump($_SESSION);*/
 ?>
 <div id="showcase">
 

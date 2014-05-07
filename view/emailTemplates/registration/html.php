@@ -521,7 +521,7 @@ h4{
                                                             <td class="mcnImageContent" valign="top" style="padding-right: 9px;padding-left: 9px;padding-top: 0;padding-bottom: 0;text-align: center;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                 
                                     
-                                                                <img align="center" alt="" src="https://gallery.mailchimp.com/30068f09e3b312a28f95a49b8/images/logoNestBox_transpe41f17.png" width="100" style="max-width: 100px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" class="mcnImage">
+                                                                <img align="center" alt="" src="http://localhost:8081/Cubbyhole/content/img/icons/cubbyhole_logoFull.png" width="100" style="max-width: 100px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" class="mcnImage">
                                     
                                 
                                                             </td>
