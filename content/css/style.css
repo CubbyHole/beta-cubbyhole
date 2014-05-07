@@ -146,7 +146,6 @@ position: relative;
     padding: 10px 15px 10px;
     }
     .navbar-collapse{
-
         padding-right: 30px;
     }
 
@@ -183,4 +182,27 @@ position: relative;
     #menuOne{
         float: left!important;
     }
+}
+
+/*Bouton Paypal*/
+.paypal{
+    text-align: center;
+    margin-top: 25px;
+}
+
+#reset_pwd{
+    padding-top: 106px;
+}
+
+#confirmRegistration{
+    background: url("../img/backgrounds/ocean.jpg") no-repeat;
+    display: block;
+    height: auto;
+    /* margin-bottom: 90px; */
+    padding-top: 105px;
+    padding-bottom: 20px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
