@@ -24,21 +24,23 @@ if( isset($_POST['add_user'] ) )
     if(!empty($name) && $password == $passwordConfirmation)
     {
 		$userPdoManager = new UserPdoManager();
-		$result = $userPdoManager->register($name, $firstName, $email, $password, $passwordConfirmation, $geolocation);
+        /*$result = $userPdoManager->register($name, $firstName, $email, $password, $passwordConfirmation, $geolocation);*/
+        $result = $userPdoManager->register(_sanitize($name), _sanitize($firstName), _sanitize($email), _sanitize($password), _sanitize($passwordConfirmation), _sanitize($geolocation));
+
 
         //http://www.php.net/manual/en/function.array-key-exists.php
 		if( !( array_key_exists('error', $result) ) )
 		{
 			$loginOK = true;
-            
-			//redirection vers le dashboard
-			header('Location:../index.php');
-            die();
+            $_SESSION['validMessageRegister'] = $loginOK;
+
+			//reste sur la page
+			header('Location:/Cubbyhole/view/register.php');
 		}
         else
         {
 
-            $_SESSION['errorMessage'] = $result['error'];
+            $_SESSION['errorMessageRegister'] = $result['error'];
             header('Location:../view/register.php');
             die();
         }
