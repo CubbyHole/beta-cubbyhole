@@ -676,8 +676,12 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
                 $textFileContent = file_get_contents($projectRoot.'/view/emailTemplates/registration/plainText.txt');
 
                 $host = $_SERVER['HTTP_HOST'];
+                $logoLink = $host.'/Cubbyhole/content/img/icons/cubbyhole_logoFull.png';
                 $activationLink = $host.'/Cubbyhole/view/member/confirmRegistration.php?email='.$email
-                                 .'&token='.$result['token'];
+                    .'&token='.$result['token'];
+
+                $htmlFileContent = str_replace('logoLink', $logoLink, $htmlFileContent);
+
                 $htmlFileContent = str_replace('activationLink', $activationLink, $htmlFileContent);
                 $textFileContent = str_replace('activationLink', $activationLink, $textFileContent);
 
@@ -859,8 +863,11 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
                     $textFileContent = file_get_contents($projectRoot.'/view/emailTemplates/passwordLost/plainText.txt');
 
                     $host = $_SERVER['HTTP_HOST'];
+                    $logoLink = $host.'/Cubbyhole/content/img/icons/cubbyhole_logoFull.png';
                     $resetPasswordLink = $host.'/Cubbyhole/view/member/confirmPasswordReset.php?email='.$email
                         .'&token='.$result['token'];
+
+                    $htmlFileContent = str_replace('logoLink', $logoLink, $htmlFileContent);
                     $htmlFileContent = str_replace('resetPasswordLink', $resetPasswordLink, $htmlFileContent);
                     $textFileContent = str_replace('resetPasswordLink', $resetPasswordLink, $textFileContent);
 
