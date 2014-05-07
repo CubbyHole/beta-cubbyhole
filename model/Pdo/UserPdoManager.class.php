@@ -483,6 +483,8 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
 
         if($user instanceof User) //Si l'utilisateur existe
         {
+            $password = self::encrypt($password);
+
             if($user->getPassword() == $password)
             {
                 //On récupère le compte correspondant à l'utilisateur
@@ -594,7 +596,7 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
 			{
 				if(self::checkEmailAvailability($email) != FALSE)
 				{
-
+                    $password = self::encrypt($password);
                     $isRegisterValid = self::addFreeUser($name, $firstName, $email, $password, $geolocation);
 
                     if($isRegisterValid == TRUE)
@@ -749,15 +751,15 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
 
     public function changePassword($email, $oldPassword, $newPassword, $newPasswordConfirmation)
     {
-        /*
-        **Entre 8 et 26 caractères, mini un chiffre, mini une lettre minuscule, mini une lettre majuscule,
-        **minimum un caractère spécial (@*#).
-        **Exemples de caractères non acceptés: ‘ , \ &amp; $ &lt; &gt; et l'espace (\s).
-        */
-        $regex = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@*#]).([a-zA-Z0-9@*#]{8,26})$/';
-
         if($newPassword == $newPasswordConfirmation)
         {
+            /*
+            **Entre 8 et 26 caractères, mini un chiffre, mini une lettre minuscule, mini une lettre majuscule,
+            **minimum un caractère spécial (@*#).
+            **Exemples de caractères non acceptés: ‘ , \ &amp; $ &lt; &gt; et l'espace (\s).
+            */
+            $regex = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@*#]).([a-zA-Z0-9@*#]{8,26})$/';
+
             if(preg_match($regex, $newPassword))
             {
                 //Récupère l'utilisateur inscrit avec l'e-mail indiquée.
@@ -770,8 +772,12 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
 
                 if($user instanceof User) //Si l'utilisateur existe
                 {
+                    $oldPassword = self::encrypt($oldPassword);
+
                     if($user->getPassword() == $oldPassword)
                     {
+                        $newPassword = self::encrypt($newPassword);
+
                         if($oldPassword != $newPassword)
                         {
                             $criteria = array(
@@ -781,6 +787,7 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
 
                             if($result == TRUE)
                             {
+                                //force l'utilisateur à se reconnecter après le changement de mot de passe
                                 session_start();
                                 session_destroy();
                                 return TRUE;
@@ -813,7 +820,7 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
     /**
      * Envoi un e-mail pour permettre à un utilisateur de reset sont mot de passe.
      * @author Alban Truc
-     * @param $email
+     * @param string $email
      * @since 17/04/2014
      * @return array|bool
      */
@@ -872,48 +879,71 @@ class UserPdoManager extends AbstractPdoManager implements UserManagerInterface{
         }
     }
 
+    /**
+     * Change le mot de passe d'un utilisateur qui l'a perdu
+     * @param string $email
+     * @param string $token
+     * @param string $newPassword
+     * @param string $newPasswordConfirmation
+     * @return array|string|TRUE
+     */
     public function validatePasswordReset($email, $token, $newPassword, $newPasswordConfirmation)
     {
-        $criteria = array(
-            'email' => $email,
-            'token' => $token
-        );
-
-        $result = parent::__findOne('validation', $criteria);
-
-        if(!(array_key_exists('error', $result)))
+        if($newPassword == $newPasswordConfirmation)
         {
-            //Reset non encore effectué
-            if($result['state'] == 2)
+            /*
+                **Entre 8 et 26 caractères, mini un chiffre, mini une lettre minuscule, mini une lettre majuscule,
+                **minimum un caractère spécial (@*#).
+                **Exemples de caractères non acceptés: ‘ , \ &amp; $ &lt; &gt; et l'espace (\s).
+                */
+            $regex = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@*#]).([a-zA-Z0-9@*#]{8,26})$/';
+
+            if(preg_match($regex, $newPassword))
             {
-                $user = $this->findOne(array());
+                $criteria = array(
+                    'email' => $email,
+                    'token' => $token
+                );
 
-                $updateUserState = $this->update(array('email' => $email), array('$set' => array('password' => $newPassword)));
+                $result = parent::__findOne('validation', $criteria);
 
-                if($updateUserState == TRUE)
+                if(!(array_key_exists('error', $result)))
                 {
-                    $updateValidation = array('$set' => array('state' => (int)3)); //3 = reset effectué
-                    $updateValidationState = parent::__update('validation', $criteria, $updateValidation);
+                    //Reset non encore effectué
+                    if($result['state'] == 2)
+                    {
+                        $newPassword = self::encrypt($newPassword);
 
-                    if($updateValidationState == TRUE)
-                        return 'Password changed successfully. You can now login!';
+                        $updateUserState = $this->update(array('email' => $email), array('$set' => array('password' => $newPassword)));
+
+                        if($updateUserState == TRUE)
+                        {
+                            $updateValidation = array('$set' => array('state' => (int)3)); //3 = reset effectué
+                            $updateValidationState = parent::__update('validation', $criteria, $updateValidation);
+
+                            if($updateValidationState == TRUE)
+                                return 'Password changed successfully. You can now login!';
+                            else
+                            {
+                                $errorMessage = 'Your password was changed but we had trouble acknowledging this information.'
+                                    .'Please contact us.';
+                                return array('error' => $errorMessage);
+                            }
+                        }
+                        else return $updateUserState;
+                    }
                     else
                     {
-                        $errorMessage = 'Your password was changed but we had trouble acknowledging this information.'
-                            .'Please contact us.';
+                        $errorMessage = 'You already used your token to reset your password.'
+                            .'You will have to request for another reset if you really want to do so.';
                         return array('error' => $errorMessage);
                     }
                 }
-                else return $updateUserState;
+                else return $result;
             }
-            else
-            {
-                $errorMessage = 'You already used your token to reset your password.'
-                               .'You will have to request for another reset if you really want to do so.';
-                return array('error' => $errorMessage);
-            }
+            else return array('error' => 'New password doesn\'t match password specifications');
         }
-        else return $result;
+        else return array('error' => 'The new password and its confirmation aren\'t the same');
     }
 }
 ?>
