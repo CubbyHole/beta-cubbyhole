@@ -3,13 +3,13 @@
  * Récupère le gravatar correspondant en fonction de l'adresse mail.
  *
  * @author Kentucky Sato
- * @param string $email l'adresse mail
- * @param string $size Taille en pixel, valeur par defaut à 80px [ 1 - 2048 ]
- * @param string $default Image par defaut [ 404 | mm | identicon | monsterid | wavatar ]
- * @param string $rating Maximum rating (inclusive) [ g | pg | r | x ]
- * @param boole $img True => retourne l'image complete, False=> retourne l'URL
- * @param array $atts Optional, additional key/value attributes to include in the IMG tag
- * @return String containing either just a URL or a complete image tag
+ * @param string $email=> l'adresse mail
+ * @param string $size=> Taille en pixel, valeur par defaut à 80px [ 1 - 2048 ]
+ * @param string $default=> Image par defaut [ 404 | mm | identicon | monsterid | wavatar ]
+ * @param string $rating=> Note Maximum [ g | pg | r | x ]
+ * @param boole $img=> True => retourne l'image complete, False=> retourne l'URL
+ * @param array $atts=> Optionnel, Attribut pour l'inclusion d' tag img
+ * @return Chaîne contenant seulement une URL ou un tag d'image complète
  * @source http://gravatar.com/site/implement/images/php/
  */
 
@@ -107,7 +107,7 @@ function _sanitize($data)
     if (is_array($data))
     {
         foreach ($data as $key => $value)
-            $clean_input[$key] = $this->_sanitize($value);
+            $clean_input[$key] = _sanitize($value);
     }
     else
     {
@@ -115,7 +115,7 @@ function _sanitize($data)
             $data = trim(stripslashes($data));
 
         $data = trim(strip_tags($data));
-        $clean_input = $this->_cleanInput($data);
+        $clean_input = _cleanInput($data);
     }
 
     return $clean_input;
