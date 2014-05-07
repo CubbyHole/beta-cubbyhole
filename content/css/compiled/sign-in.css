@@ -2,9 +2,9 @@
 #sign_in1 {
   background: url("../../img/backgrounds/aqua.jpg") no-repeat;
   display: block;
-  height: 600px;
+  height: auto;
   /*margin-bottom: 90px;*/
-    padding-top: 100px;
+    padding-top: 106px;
     padding-bottom: 20px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
