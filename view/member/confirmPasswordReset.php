@@ -17,23 +17,26 @@ include $projectRoot.'/header/header.php';
 <link rel="stylesheet" href="../../content/css/compiled/sign-up.css" type="text/css" media="screen" />
 </head>
 <?php
-if(isset($_GET['email']) && isset($_GET['token']))
+if (isset($_POST['resetPass']))
 {
-    $projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
+    if(isset($_GET['email']) && isset($_GET['token']))
+    {
+        $projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
 
-    require $projectRoot.'/required.php';
+        require $projectRoot.'/required.php';
 
-    $userPdoManager = new UserPdoManager();
+        $userPdoManager = new UserPdoManager();
 
-    //champs password et confirmation
-    $password = $_POST['password'];
-    $passwordConfirmation = $_POST['passwordConfirmation'];
+        //champs password et confirmation
+        $password = $_POST['password'];
+        $passwordConfirmation = $_POST['passwordConfirmation'];
 
-    $result = $userPdoManager->validatePasswordReset($_GET['email'], $_GET['token'], $password, $passwordConfirmation);
+        $result = $userPdoManager->validatePasswordReset($_GET['email'], $_GET['token'], $password, $passwordConfirmation);
 
-    if(is_array($result) && isset($result['error']))
-        echo $result['error'];
-    else echo $result;
+        if(is_array($result) && isset($result['error']))
+            $_SESSION['errorMessageReset'] = $result['error'];
+        else  $_SESSION['validMessageReset'] = $result;
+    }
 }
 
 //appel de la barre menu
@@ -41,6 +44,28 @@ include $projectRoot.'/header/menu.php';
 ?>
 
 <div id="sign_up1">
+
+    <?php if(isset($_SESSION['errorMessageReset'])): ?>
+        <div class="alert alert-danger">
+            <p>Message from the server :</p>
+            <br />
+            <?php echo  $_SESSION['errorMessageReset']; ?>
+            <br />
+            <br />
+            <p>Please contact the technical support at <a>technical.support@cubbyhole.com</a> or retry</p>
+            <?php unset($_SESSION['errorMessageReset']); ?>
+        </div>
+    <?php endif ?>
+
+    <?php if(isset($_SESSION['validMessageReset'])): ?>
+        <div class="alert alert-success">
+            <p>Message from the server :</p>
+            <br />
+            <?php echo  $_SESSION['validMessageReset']; ?>
+            <?php unset($_SESSION['validMessageReset']); ?>
+        </div>
+    <?php endif ?>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12 header">
