@@ -1,10 +1,5 @@
 <?php
 include'../header/header.php';
-//$projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
-//var_dump($_SERVER['DOCUMENT_ROOT']);
-
-//require_once $projectRoot . '/controller/functions.php';
-//require_once $projectRoot . '/controller/register.php';
 ?>
 <!-- Styles -->
 <link rel="stylesheet" href="../content/css/bootstrap/bootstrap.min.css"  />
@@ -27,7 +22,6 @@ include'../header/header.php';
 <?php
 //appel de la barre menu
 include_once '../header/menu.php';
-
 ?>
 <!-- Sign In Option 1 -->
 <div id="sign_up1">
