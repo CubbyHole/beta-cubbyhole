@@ -9,11 +9,6 @@
 <body class="pull_top">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
-        
-        <div>
-
-        </div>
-        
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -59,7 +54,7 @@
                     </li>
                     <li>
                         <a id="menuTwo-Name">
-                            <?php echo $user->getLastName().' '.$user->getFirstname();  ?>
+                            <?php echo $user->getLastName().' '.$user->getFirstname(); ?>
                         </a>
                     </li>
                 <?php endif ?>
