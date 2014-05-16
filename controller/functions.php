@@ -120,3 +120,41 @@ function _sanitize($data)
 
     return $clean_input;
 }
+
+/**
+ * Convertit des kilobytes (unité enregistrée en BDD) dans l'unité voulue).
+ * Attention: retourne une chaîne de caractère.
+ * @author Alban Truc
+ * @param int|float $kiloBytes
+ * @param NULL|string $outputUnit
+ * @param null|string $format
+ * @since 16/05/2014
+ * @return string
+ */
+
+function convertKilobytes($kiloBytes, $outputUnit = NULL, $format = NULL)
+{
+    $kiloBytes = $kiloBytes * 1024; //transforme en bytes
+
+    // Format string
+    $format = ($format === NULL) ? '%01.2f %s' : (string) $format;
+
+    $units = array('B', 'MB', 'GB', 'TB', 'PB');
+    $mod = 1000;
+
+    /*
+     * Déterminer l'unité à utiliser
+     * http://php.net/manual/en/function.array-search.php
+     */
+    if (($power = array_search((string) $outputUnit, $units)) === FALSE)
+    {
+        //http://php.net/manual/en/function.floor.php
+        $power = ($kiloBytes > 0) ? floor(log($kiloBytes, $mod)) : 0;
+    }
+
+    /*
+     * http://php.net/manual/en/function.sprintf.php
+     * http://php.net/manual/en/function.pow.php
+     */
+    return sprintf($format, $kiloBytes / pow($mod, $power), $units[$power]);
+}
