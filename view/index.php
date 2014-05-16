@@ -84,12 +84,22 @@ For the backgrounds, you can combine from the bgs folder :D
 </br>
 
 <?php
-/*if(isset($_SESSION['user']))
+if(isset($_SESSION['user']))
 {
-    $grav = unserialize($_SESSION['user']);
-    var_dump($grav);
+    $infoUser = unserialize($_SESSION['user']);
+    echo $infoUser->getId();
+    //var_dump($infoUser);
+
+    /*$infoUser2 = unserialize($_SESSION['user1']);
+    var_dump($infoUser2);*/
+    /*$userMongoDate = new formatMongoDate();
+    $mongoDate = $user->getCurrentAccount()->getStartDate();
+
+    var_dump(formatMongoDate($mongoDate));*/
+
+
+
 }
-var_dump($_SESSION);*/
 ?>
 <div id="showcase">
 
@@ -159,7 +169,7 @@ var_dump($_SESSION);*/
     </div>
 </div>
 
-<div id="features">
+<!--<div id="features">
     <div class="container">
         <div class="section_header">
             <h3>Features</h3>
@@ -207,7 +217,7 @@ var_dump($_SESSION);*/
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 
 <!-- Pricing Option -->
@@ -224,25 +234,25 @@ var_dump($_SESSION);*/
                     <div class="wrapper">
                         <h3>Free</h3>
                         <div class="price">
-                            <span class="dollar">$</span>
-                            <span class="qty">0</span>
-                            <span class="month">/month</span>
+
+                            <span class="qty">10</span>
+                            <span class="month">Go</span>
                         </div>
                         <div class="features">
                             <p>
-                                <strong>5</strong>
-                                Go
+                                <strong>1</strong>
+                                files / DL
                             </p>
                             <p>
-                                <strong>4</strong>
-                                Team Members
+                                <strong>140ko/s</strong>
+                                bandwich
                             </p>
                             <p>
-                                <strong>10</strong>
-                                Storage
+                                <strong>30</strong>
+                                days of storage
                             </p>
                         </div>
-                        <a class="order" href="pricing.php">ORDER NOW</a>
+
                     </div>
                 </div>
             </div>
@@ -253,15 +263,23 @@ var_dump($_SESSION);*/
                         <img class="ribbon" src="content/img/badge.png">
                         <h3>Ultimate</h3>
                         <div class="price">
-                            <span class="dollar">$</span>
-                            <span class="qty">99</span>
+                            <span class="dollar">€</span>
+                            <span class="qty">15</span>
                             <span class="month">/month</span>
                         </div>
-                        <div class="features">
+                        <div class="price">
 
+                            <span class="qty">500</span>
+                            <span class="month">Go</span>
+                        </div>
+                        <div class="features">
                             <p>
-                                <strong>No</strong>
-                                Advertising
+                                <strong>10</strong>
+                                Shared Projects
+                            </p>
+                            <p>
+                                <strong>25</strong>
+                                Team Members
                             </p>
                             <p>
                                 <strong>Unlimited</strong>
@@ -272,7 +290,7 @@ var_dump($_SESSION);*/
                                 Phone Support
                             </p>
                         </div>
-                        <a class="order" href="pricing.php">ORDER NOW</a>
+
                     </div>
                 </div>
             </div>
@@ -282,25 +300,30 @@ var_dump($_SESSION);*/
                     <div class="wrapper">
                         <h3>Premium</h3>
                         <div class="price">
-                            <span class="dollar">$</span>
-                            <span class="qty">65</span>
+                            <span class="dollar">€</span>
+                            <span class="qty">10</span>
                             <span class="month">/month</span>
+                        </div>
+                        <div class="price">
+
+                            <span class="qty">250</span>
+                            <span class="month">Go</span>
                         </div>
                         <div class="features">
                             <p>
-                                <strong>20</strong>
-                                Go
+                                <strong>Multiple</strong>
+                                files / DL
                             </p>
                             <p>
-                                <strong>4</strong>
-                                Team Members
+                                <strong>1Mb/s</strong>
+                                bandwich
                             </p>
                             <p>
-                                <strong>10</strong>
-                                Storage
+                                <strong>Unlimited</strong>
+                                days of storage
                             </p>
                         </div>
-                        <a class="order" href="pricing.php">ORDER NOW</a>
+
                     </div>
                 </div>
             </div>

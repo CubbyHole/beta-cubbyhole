@@ -1,4 +1,7 @@
-<?php include '../header/header.php'; ?>
+<?php
+include '../header/header.php';
+$ipnUrl = 'http://2ca5c78c.ngrok.com/';
+?>
     <!-- Styles -->
     <link href="../content/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../content/css/compiled/bootstrap-overrides.css" type="text/css" />
@@ -19,11 +22,11 @@
 include '../header/menu.php';
 
 //var_dump($_SESSION['paypal']);
-if(isset($_SESSION['paypal']))
+/*if(isset($_SESSION['paypal']))
 {
     $paypal = $_SESSION['paypal'];
     var_dump($paypal);
-}
+}*/
 ?>
 
     <!-- Pricing Option3 -->
@@ -95,9 +98,11 @@ if(isset($_SESSION['paypal']))
                             <form target="_blank" class="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
                                 <input type="hidden" name="cmd" value="_s-xclick">
                                 <input type="hidden" name="hosted_button_id" value="BX5Q3MK47TUDQ">
-                                <input name="notify_url" type="hidden" value="http://5743ecfe.ngrok.com/Cubbyhole/controller/ipn.php" />
-                                <input name="return" type="hidden" value="http://5743ecfe.ngrok.com/Cubbyhole/view/success-pricing.php" />
-                                <input name="cancel_return" type="hidden" value="http://5743ecfe.ngrok.com/Cubbyhole/view/pricing.php" />
+                                <input name="notify_url" type="hidden" value="<?= $ipnUrl; ?>Cubbyhole/controller/ipn.php" />
+                                <input name="return" type="hidden" value="<?= $ipnUrl; ?>Cubbyhole/view/success-pricing.php" />
+                                <input name="cancel_return" type="hidden" value="<?= $ipnUrl; ?>Cubbyhole/view/pricing.php" />
+                                <!--<input name="custom" type="hidden" value="<?= $user->getFirstName().'&'.$user->getLastName().'&'.$user->getEmail(); ?>" />-->
+                                <input name="custom" type="hidden" value="<?= $user->getId() ?>" />
                                 <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
                                 <img alt="" border="0" src="https://www.sandbox.paypal.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
                             </form>
