@@ -74,6 +74,7 @@ include '../header/header.php';
                 <div class="col-md-12 dosnt">
 
                     <input id="pass" value="Pass" type="submit">
+                    <input id="newPass" value="newPass" type="submit">
                 </div>
 
                 <div class="col-md-12 proof">
@@ -103,6 +104,11 @@ include '../header/header.php';
         $( "#pass" ).click(function() {
 
             $('#password').val('Azertyuiop@123');
+
+        });
+
+        $( "#newPass" ).click(function() {
+            $('#password').val('Wxcvbnjklm@123');
 
         });
     });

@@ -67,7 +67,7 @@ include_once '../header/menu.php';
 </div>
 
 <?php
-include '../footer/register.footer.php';
+include '../footer/footer.php';
 ?>
 
 </body>

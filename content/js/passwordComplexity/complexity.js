@@ -40,7 +40,8 @@ $(function () {
     });
 
     //Message erreur au submit
-    $( "#submit" ).click(function() {
+    $( "#submit" ).click(function()
+    {
 
         //http://www.w3schools.com/jsref/jsref_regexp_test.asp
 
