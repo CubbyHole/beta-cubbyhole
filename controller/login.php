@@ -42,10 +42,11 @@ if(isset($_POST['loginForm'] ))
 	
 }
 
-if($loginOK)
+if($loginOK == true)
 {
 	//Pour les sessions
 	$_SESSION['user'] = serialize($user);
+
 }
 else 
 {
