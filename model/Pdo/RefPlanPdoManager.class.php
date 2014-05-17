@@ -141,6 +141,7 @@ class RefPlanPdoManager extends AbstractPdoManager implements RefPlanManagerInte
     public function findFreePlans($fieldsToReturn = array())
     {
         $criteria = array(
+            'state' => (int)1,
             '$or' => array(
                 array('name' => 'free'),
                 array('price' => (int)0)
@@ -181,6 +182,7 @@ class RefPlanPdoManager extends AbstractPdoManager implements RefPlanManagerInte
     public function findPremiumPlans($fieldsToReturn = array())
     {
         $criteria = array(
+            'state' => (int)1,
             'price' => array('$gt' => (int)0)
         );
 
