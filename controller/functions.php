@@ -156,5 +156,5 @@ function convertKilobytes($kiloBytes, $outputUnit = NULL, $format = NULL)
      * http://php.net/manual/en/function.sprintf.php
      * http://php.net/manual/en/function.pow.php
      */
-    return sprintf($format, $kiloBytes / pow($mod, $power), $units[$power]);
+    return sprintf($format, $kiloBytes / pow($mod, $power));
 }
