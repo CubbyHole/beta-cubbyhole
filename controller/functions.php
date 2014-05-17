@@ -137,7 +137,7 @@ function convertKilobytes($kiloBytes, $outputUnit = NULL, $format = NULL)
     $kiloBytes = $kiloBytes * 1024; //transforme en bytes
 
     // Format string
-    $format = ($format === NULL) ? '%01.2f %s' : (string) $format;
+    $format = ($format === NULL) ? '%01.2f' : (string) $format;
 
     $units = array('B', 'MB', 'GB', 'TB', 'PB');
     $mod = 1000;
@@ -156,5 +156,5 @@ function convertKilobytes($kiloBytes, $outputUnit = NULL, $format = NULL)
      * http://php.net/manual/en/function.sprintf.php
      * http://php.net/manual/en/function.pow.php
      */
-    return sprintf($format, $kiloBytes / pow($mod, $power));
+    return sprintf($format, $kiloBytes / pow($mod, $power), $units[$power]);
 }
