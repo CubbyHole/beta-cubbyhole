@@ -37,6 +37,8 @@ include '../header/header.php';
                 <?php unset($_SESSION['errorMessageLogin']); ?>
             </div>
         <?php endif ?>
+
+        <?php if(empty($_SESSION['user'])): ?>
         <div class="container">
             <div class="row">
                 <div class="col-md-12 header">
@@ -94,6 +96,18 @@ include '../header/header.php';
                 </div>
             </div>
         </div>
+        <?php else: ?>
+        <div class="alert alert-danger">
+            <p>Message from the server :</p>
+            <br />
+            <strong>You are already identified</strong>
+            <br />
+            <br />
+            <p>Please contact the technical support at <a>technical.support@cubbyhole.com</a> or retry</p>
+        </div>
+        <?php endif; ?>
+
+
     </div>
 
     

@@ -1,200 +1,293 @@
-#registerForm{
-  margin-left: 330px;
-  /*text-align: center;*/
+#registerForm
+{
+    margin-left: 330px;
+    /*text-align: center;*/
 }
-.center, input[type="text"]{
-	margin: auto;
+
+.center, input[type="text"]
+{
+    margin: auto;
 }
+
 /*Panel gauche*/
-aside{
-display: block;
-overflow: hidden;
-background: #3a3633;
-background: -webkit-gradient(linear,left top,right top,color-stop(93%,#3a3633),color-stop(100%,#2a2725));
-background: -webkit-linear-gradient(left,#3a3633 93%,#2a2725 100%);
-background: -webkit-gradient(linear,top left,top right,from(#3a3633),to(#2a2725));
-background: -webkit-linear-gradient(left,#3a3633 93%,#2a2725 100%);
-background: linear-gradient(to right,#3a3633 93%,#2a2725 100%);
-min-height: 100%;
-}
-#left-panel{
-    min-height: 1710px;
-    width: 220px;
-    
-    position: absolute;
-    float: left;
-    overflow: hidden;
-}
-nav ul li a {
-line-height: normal;
-font-size: 14px;
-padding: 10px 10px 10px 11px;
-color: #a8a8a8;
-display: block;
-font-weight: 400;
-text-decoration: none!important;
-position: relative;
+#left-panel
+{
+    top: 106px !important;
 }
 
 /*MAIN*/
-#main{
+#main
+{
     display: block;
     margin-left: 220px;
-    padding:0;
+    margin-top: 106px;
+    padding: 0;
     min-height: 500px;
-    margin-top: 91px;
+    background: rgba(0, 0, 0, .18);
+}
+#dash
+{
+    padding: 10px 0 0 20px;
+}
+#dashHead{
+    margin-right: 20px;
 }
 
-#cubbyLogo{
+.cat-user
+{
+    padding-left: 20px;
+}
+/*progress Bar*/
+#progress{
+    width: 300px;
+    margin: auto;
+}
+progress{
+    display: inline-block;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 300px;
+    height: 20px;
+    padding: 3px 3px 2px 3px;
+    background: #333;
+    background: -webkit-linear-gradient(#2d2d2d,#444);
+    background:    -moz-linear-gradient(#2d2d2d,#444);
+    background:      -o-linear-gradient(#2d2d2d,#444);
+    background:         linear-gradient(#2d2d2d,#444);
+    border: 1px solid rgba(0,0,0,.5);
+    border-radius: 15px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.2);
+}
+
+progress::-webkit-progress-value{
+
+    border-radius:10px;
+    background: #09c;
+    background:
+        -webkit-repeating-linear-gradient(
+            45deg,
+            rgba(255,255,255,.2) 0,
+            rgba(255,255,255,.2) 10px,
+            rgba(255,255,255,0) 10px,
+            rgba(255,255,255,0) 20px
+        ),
+        -webkit-linear-gradient(
+            rgba(255,255,255,.1) 50%,
+            rgba(255,255,255,0) 60%
+        ),
+        #09c;
+    background:
+        -webkit-repeating-linear-gradient(
+            45deg,
+            rgba(255,255,255,.2) 0,
+            rgba(255,255,255,.2) 10px,
+            rgba(255,255,255,0) 10px,
+            rgba(255,255,255,0) 20px
+        ),
+        -webkit-linear-gradient(
+            rgba(255,255,255,.1) 50%,
+            rgba(255,255,255,0) 60%
+        ),
+        #09c;
+    background-size: 300px 20px, auto, auto;
+    background-position: -300px 0, top, top;
+    background-position: top right, top, top;
+    box-shadow: 0 1px 0 rgba(255,255,255,.5) inset,
+    0 -1px 0 rgba(0,0,0,.8) inset,
+    0 0 2px black;
+
+}
+progress::-webkit-progress-bar{
+    background: transparent;
+}
+
+#cubbyLogo {
     height: 65px;
 }
 
-
 /********TEST COMPLEXITY***********/
 
-    #progressbar {
-        width:27%;
-        height:35px;
-        display: inline-flex;
-        border-radius: 3px;
-        overflow:hidden;
-        background-color: white;
-        border: 1px solid #ccc;
-    }
+#progressbar
+{
+    width: 27%;
+    height: 35px;
+    display: inline-flex;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid #ccc;
+}
 
-    #progress {
-        display:block;
-        /*height:100px;*/
-        width:0%;
-    }
+#progress
+{
+    display: block;
+    /*height:100px;*/
+    width: 0%;
+}
 
-    .progressbarValid {
+.progressbarValid
+{
 
-      background-color:green;
-      background-image: -o-linear-gradient(-90deg, #8AD702 0%, #389100 100%);
-      background-image: -moz-linear-gradient(-90deg, #8AD702 0%, #389100 100%);
-      background-image: -webkit-linear-gradient(-90deg, #8AD702 0%, #389100 100%);
-      background-image: -ms-linear-gradient(-90deg, #8AD702 0%, #389100 100%);
-      background-image: linear-gradient(-90deg, #8AD702 0%, #389100 100%);
-    }
+    background-color: green;
+    background-image: -o-linear-gradient(-90deg, #8AD702 0%, #389100 100%);
+    background-image: -moz-linear-gradient(-90deg, #8AD702 0%, #389100 100%);
+    background-image: -webkit-linear-gradient(-90deg, #8AD702 0%, #389100 100%);
+    background-image: -ms-linear-gradient(-90deg, #8AD702 0%, #389100 100%);
+    background-image: linear-gradient(-90deg, #8AD702 0%, #389100 100%);
+}
 
-    .progressbarInvalid {
+.progressbarInvalid
+{
 
-      background-color:red;
-      background-image: -o-linear-gradient(-90deg, #F94046 0%, #92080B 100%);
-      background-image: -moz-linear-gradient(-90deg, #F94046 0%, #92080B 100%);
-      background-image: -webkit-linear-gradient(-90deg, #F94046 0%, #92080B 100%);
-      background-image: -ms-linear-gradient(-90deg, #F94046 0%, #92080B 100%);
-      background-image: linear-gradient(-90deg, #F94046 0%, #92080B 100%);
-    }
+    background-color: red;
+    background-image: -o-linear-gradient(-90deg, #F94046 0%, #92080B 100%);
+    background-image: -moz-linear-gradient(-90deg, #F94046 0%, #92080B 100%);
+    background-image: -webkit-linear-gradient(-90deg, #F94046 0%, #92080B 100%);
+    background-image: -ms-linear-gradient(-90deg, #F94046 0%, #92080B 100%);
+    background-image: linear-gradient(-90deg, #F94046 0%, #92080B 100%);
+}
 
-    .noticeInvalid{
-        color: red;
-    }
+.noticeInvalid
+{
+    color: red;
+}
 
-    .noticeValid{
-        color:green;
-    }
+.noticeValid
+{
+    color: green;
+}
 
-    #status {
-        height:150px;
-        width:388px;
-        border:1px solid #ccc;
-        border-bottom-right-radius: 8px;
-        border-bottom-left-radius: 8px;
-        background-color: white;
-    }
+#status
+{
+    height: 150px;
+    width: 388px;
+    border: 1px solid #ccc;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: white;
+}
 
-    #complexityLabel {
-        width:100%;
-        text-align:center;
-        margin-top:10px;
-        font-size:20px;
-        line-height:30px;
-    }
+#complexityLabel
+{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 30px;
+}
 
-    #complexity {
-        width:100%;
-        text-align:center;
-        font-family:"Helvetica Neue", "Helvetica", Arial, sans-serif;
-        font-weight:bold;
-        line-height:35px;
-        
-    }
+#complexity
+{
+    width: 100%;
+    text-align: center;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: bold;
+    line-height: 35px;
 
-    .error{
-        color: #FF0000;
-    }
+}
 
-    .navbar{
-        margin-bottom: 0;
-    }
+.error
+{
+    color: #FF0000;
+}
 
-    .alert{
-        margin-bottom: 0;
-        border-radius: 0;
-        text-align: center;
-        font-size: 18px;
-    }
+.navbar
+{
+    margin-bottom: 0;
+}
 
-    #cross{
-        padding-top: 0px;
-        padding-left: 0px;
-    }
+.alert
+{
+    margin-bottom: 0;
+    border-radius: 0;
+    text-align: center;
+    font-size: 18px;
+}
 
-    .navbar-brand{
+#cross
+{
+    padding-top: 0px;
+    padding-left: 0px;
+}
+
+.navbar-brand
+{
     padding: 10px 15px 10px;
-    }
-    .navbar-collapse{
-        padding-right: 30px;
-    }
+}
 
-    .navbar-header{
-        padding-left: 30px;
-    }
-    #menuOne{
-        margin-left: 30px;
-        padding: 20px 15px 10px;
-    }
-    #menuTwo{
-        padding: 16px 15px 10px;
-    }
+.navbar-collapse
+{
+    padding-right: 30px;
+}
 
-@media (max-width: 991px){
-    #menuOne{
+.navbar-header
+{
+    padding-left: 30px;
+}
+
+#menuOne
+{
+    margin-left: 30px;
+    padding: 20px 15px 10px;
+}
+
+#menuTwo
+{
+    padding: 16px 15px 10px;
+}
+
+@media (max-width: 991px)
+{
+    #menuOne
+    {
         margin-left: 0px;
     }
-    #menuTwo{
-        float: right!important;
+
+    #menuTwo
+    {
+        float: right !important;
         padding-top: 10px;
     }
-    #cross{
+
+    #cross
+    {
         position: absolute;
         top: -50px;
         left: 50px;
     }
-    #menuTwo-Name{
+
+    #menuTwo-Name
+    {
         padding-left: 0;
     }
 }
 
-@media (max-width: 767px){
-    #menuOne{
-        float: left!important;
+@media (max-width: 767px)
+{
+    #menuOne
+    {
+        float: left !important;
     }
 }
 
 /*Bouton Paypal*/
-.paypal{
+.paypal
+{
     text-align: center;
     margin-top: 25px;
 }
 
-#reset_pwd{
+
+/**/
+#reset_pwd
+{
     padding-top: 106px;
+    background: url("../img/backgrounds/ocean.jpg") no-repeat;
+    background-size: cover;
 }
 
-#confirmRegistration{
+#confirmRegistration
+{
     background: url("../img/backgrounds/ocean.jpg") no-repeat;
     display: block;
     height: auto;
@@ -205,4 +298,8 @@ position: relative;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+#progressStorage{
+    vertical-align: top;
 }
