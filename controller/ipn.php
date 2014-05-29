@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Ken
- * Date: 07/05/14
- * Time: 21:16
+ * Date: 27/05/14
+ * Time: 00:55
  */
 session_start();
 $projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
@@ -24,6 +24,7 @@ foreach ($_POST as $key => $value)
 
 //Renvoie au systeme Paypal pour validation
 $header = "POST /cgi-bin/webscr HTTP/1.0\r\n";
+$header .= "Host: www.sandbox.paypal.com\r\n";
 $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
 $header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
 
@@ -39,62 +40,53 @@ $payment_date = $_POST['payment_date'];
 $txn_id = $_POST['txn_id'];
 $receiver_email = $_POST['receiver_email'];
 $payer_email = $_POST['payer_email'];
-//parse_str($_POST['custom'],$custom);
+$custom = explode('|',$_POST['custom']);//parse du champ custom, pour l'instant idUser | idRefPlan
 
-//contient l'id de l'user
-$custom = $_POST['custom'];
-
-$paypalReturn = array('item_name' => $item_name,
-                 'item_number' => $item_number,
-                 'payment_status' => $payment_status,
-                 'payment_amount' => $payment_amount,
-                 'payment_currency' => $payment_currency,
-                 'txn_id' => $txn_id,
-                 'receiver_email' => $receiver_email,
-                 'payer_email' => $payer_email);
-
-if ( $payment_status == "Completed")
+if (!$fp)
 {
-    if ( $emailAccount == $receiver_email )
+
+} else
+{
+    fputs ($fp, $header . $req);
+    while (!feof($fp))
     {
-        /**
-         * C'EST LA QUE TOUT SE PASSE
-         * PS : tjrs penser à vérifier la somme !!
-         */
+        $res = fgets ($fp, 1024);
+        if (strcmp ($res, "VERIFIED") == 0)
+        {
+            // vérifier que payment_status a la valeur Completed
+            if ( $payment_status == "Completed")
+            {
+                if ( $emailAccount == $receiver_email)
+                {
+                    /**
+                     * C'EST LA QUE TOUT SE PASSE
+                     * PS : tjrs penser à vérifier la somme !!
+                     */
+                    $paymentPdoManager = new PaymentPdoManager();
+                    $payment = array(
+                        'state' => (int)1,
+                        'idUser' => new MongoId($custom[0]),//idUser de l'user qui vient d'acheter l'offre
+                        'amount' => $payment_amount,
+                        'date' => new MongoDate(),
+                        'paypalReturn' => $_POST
+                    );
+                    $paymentPdoManager->create($payment);
 
-        $userInSession = unserialize($_SESSION['user']);
-        //$user = $userManager->findById($userInSession->getId());
-        //$userAccount = $accountManager->findById($user->getCurrentAccount());
-
-
-
-        $paymentPdoManager = new PaymentPdoManager();
-        $payment = array(
-            'state' => (int)1,
-            'idUser' => new MongoId($custom),
-            'amount' => $payment_amount,
-            'date' => new MongoDate(),
-            'paypalReturn' => $_POST
-        );
-        $paymentPdoManager->create($payment);
-        $_SESSION['paypal'] = $payment;
-
-        // 1 FindAndModify pour récup le compte actuel: state à 0 + option récup la version modifiée
-        // 2 Insére un nouveau compte avec storage et ratio de l'ancien compte et Id du nouveau refPlan
-        // 3 Update de l'idCurrentAccount du user
-        // SI marche, affiche de message, sinon contacter le service technique
-
-        //$filename = 'log.php';
-        //file_put_contents($filename, print_r($_POST, true));
-
-        //var_dump($_POST);
-        //$result = AbstractPdoManager::__create('validation', array('item' => $item_name));
-
-
-
+                    /**
+                     * FIN CODE
+                     */
+                }
+            }
+            else
+            {
+                // Statut de paiement: Echec
+            }
+            exit();
+        }
+        else if (strcmp ($res, "INVALID") == 0)
+        {
+            // Transaction invalide
+        }
     }
-}
-else
-{
-
+    fclose ($fp);
 }
