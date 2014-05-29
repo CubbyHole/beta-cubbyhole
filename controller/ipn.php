@@ -72,9 +72,67 @@ if (!$fp)
                     );
                     $paymentPdoManager->create($payment);
 
-                    /**
-                     * FIN CODE
-                     */
+                    /*
+                    * Récupère le compte actuel
+                    */
+                    $accountPdoManager = new AccountPdoManager();
+                    $criteria = array(
+                        'state' => (int)1,
+                        'idUser' => new MongoId($custom[0])//idUser de l'user qui vient d'acheter l'offre
+                    );
+                    $account = $accountPdoManager->findAndModify($criteria, array('state' => (int)0), NULL, array('new' => TRUE));
+
+                    /*Si le compte existe*/
+                    if($account instanceof Account)
+                    {
+                        $time = time();
+                        $end = $time + (30 * 24 * 60 * 60); // + 30 jours
+
+                        //$newAccount['_id'];
+
+                        $newAccount = array(
+                            '_id' => new MongoId(),
+                            'state' => (int)1,
+                            'idUser' => new MongoId($custom[0]), //id de l'user qui vien d'acheter l'offre
+                            'idRefPlan' => new MongoId($custom[1]), //id du plan acheté
+                            'storage' => $account->getStorage(),
+                            'ratio' => $account->getRatio(),
+                            'startDate' => new MongoDate($time),
+                            'endDate' => new MongoDate($end)
+                        );
+                        $accountPdoManager->create($newAccount);
+
+                        $userPdoManager = new UserPdoManager();
+
+                        //critères de recherche
+                        $searchQuery = array(
+                            //'state' => (int)1,
+                            '_id' => new MongoId($custom[0]) //idUser de l'user qui vient d'acheter l'offre
+                        );
+
+                        //les modifications à réaliser
+                        //en mettant un $set, on change uniquement le champ voulu
+                        // sans le $set, on ferais un delte puis un insert
+                        $updateCriteria = array(
+                            '$set' => array('idCurrentAccount' => $newAccount['_id'])
+                        );
+
+                        //mise a jour de l'idCurrentAccount de l'user qui vient d'acheter
+                        //$updateUser = $userPdoManager->findAndModify($searchQuery, $updateCriteria,array('idCurrentAccount' => $newAccount['_id'] ),array('new' => TRUE));
+                        $updateUser = $userPdoManager->findAndModify($searchQuery, $updateCriteria, NULL, array('new' => TRUE));
+
+                    }
+
+                    // 1 FindAndModify pour récup le compte actuel: state à 0 + option récup la version modifiée
+                    // 2 Insére un nouveau compte avec storage et ratio de l'ancien compte et Id du nouveau refPlan
+                    // 3 Update de l'idCurrentAccount du user
+                    // SI marche, affiche de message, sinon contacter le service technique
+
+                    //$filename = 'log.php';
+                    //file_put_contents($filename, print_r($_POST, true));
+
+                    //var_dump($_POST);
+                    //$result = AbstractPdoManager::__create('validation', array('item' => $item_name));
                 }
             }
             else
