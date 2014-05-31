@@ -117,7 +117,7 @@ class RefPlanPdoManager extends AbstractPdoManager implements RefPlanManagerInte
 
     public function findById($id, $fieldsToReturn = array())
 	{
-        $result = parent::__findOne('refplan', array('_id' => new MongoId($id)));
+        $result = parent::__findOne('refplan', array('_id' => new MongoId($id)), $fieldsToReturn);
 
         if(!(array_key_exists('error', $result)))
         {
@@ -148,7 +148,7 @@ class RefPlanPdoManager extends AbstractPdoManager implements RefPlanManagerInte
             )
         );
 
-        $cursor = parent::__find('refplan', $criteria);
+        $cursor = parent::__find('refplan', $criteria, $fieldsToReturn);
 
         if(!(is_array($cursor)) && !(array_key_exists('error', $cursor)))
         {
@@ -186,7 +186,7 @@ class RefPlanPdoManager extends AbstractPdoManager implements RefPlanManagerInte
             'price' => array('$gt' => (int)0)
         );
 
-        $cursor = parent::__find('refplan', $criteria);
+        $cursor = parent::__find('refplan', $criteria, $fieldsToReturn);
 
         if(!(is_array($cursor)) && !(array_key_exists('error', $cursor)))
         {
@@ -219,7 +219,7 @@ class RefPlanPdoManager extends AbstractPdoManager implements RefPlanManagerInte
 
     public function findAll($fieldsToReturn = array())
     {
-        $cursor = parent::__find('refplan', array());
+        $cursor = parent::__find('refplan', $fieldsToReturn);
 
         if(!(is_array($cursor)) && !(array_key_exists('error', $cursor)))
         {

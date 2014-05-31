@@ -166,7 +166,7 @@ class TransactionPdoManager extends AbstractPdoManager implements TransactionMan
 
     function findById($id, $fieldsToReturn = array())
     {
-        $result = parent::__findOne('transaction', array('_id' => new MongoId($id)));
+        $result = parent::__findOne('transaction', array('_id' => new MongoId($id)), $fieldsToReturn);
 
         //Si un compte est trouvé
         if (!(array_key_exists('error', $result)))
@@ -189,7 +189,7 @@ class TransactionPdoManager extends AbstractPdoManager implements TransactionMan
 
     function findAll($fieldsToReturn = array())
     {
-        $cursor = parent::__find('transaction', array());
+        $cursor = parent::__find('transaction', $fieldsToReturn);
 
         if(!(is_array($cursor)) && !(array_key_exists('error', $cursor)))
         {
