@@ -5,6 +5,19 @@
  * Date: 20/03/14
  * Time: 12:27
  */
+$projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
+require_once $projectRoot.'/required.php';
+$userManager = new UserPdoManager();
+$accountManager = new AccountPdoManager();
+$refManager = new RefPlanPdoManager();
+
+if(isset($_SESSION['user']))
+{
+    /*$userInSession = unserialize($_SESSION['user']);
+    $user = $userManager->findById($userInSession->getId());
+    $userAccount = $accountManager->findById($user->getCurrentAccount());
+    $userPlan = $refManager->findById($userAccount->getRefPlan());*/
+}
 ?>
 <body class="pull_top">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -41,11 +54,10 @@
 
             </ul>
 
-
-
             <ul id="menuTwo" class="nav navbar-nav navbar-right ">
                 <?php if (isset($_SESSION['user'])): //Mise en place d'un module Gravatar pour la photo de profil ?>
                     <li>
+
                         <img class="img-circle" title="<?php echo $user->getLastName().' '.$user->getFirstname(); ?>" src=<?php echo getGravatar($user->getEmail()); ?>>
 
                     </li>
@@ -61,4 +73,5 @@
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
+
 </nav>
