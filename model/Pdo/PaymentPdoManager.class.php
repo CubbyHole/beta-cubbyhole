@@ -130,7 +130,7 @@ class PaymentPdoManager extends AbstractPdoManager implements PaymentManagerInte
 
     function findById($id, $fieldsToReturn = array())
     {
-        $result = parent::__findOne('payment', array('_id' => new MongoId($id)));
+        $result = parent::__findOne('payment', array('_id' => new MongoId($id)), $fieldsToReturn);
 
         //Si un compte est trouvé
         if (!(array_key_exists('error', $result)))
@@ -153,7 +153,7 @@ class PaymentPdoManager extends AbstractPdoManager implements PaymentManagerInte
 
     function findAll($fieldsToReturn = array())
     {
-        $cursor = parent::__find('payment', array());
+        $cursor = parent::__find('payment', $fieldsToReturn);
 
         if(!(is_array($cursor)) && !(array_key_exists('error', $cursor)))
         {
