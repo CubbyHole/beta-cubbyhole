@@ -138,6 +138,9 @@ include '../footer/register.footer.php';
 
         $( "#pass" ).click(function()
         {
+            $('#name').val('SATO');
+            $('#firstname').val('Kentucky');
+            $('#email').val('knt92@hotmail.fr');
             $('#password').val('Azertyuiop@123');
             $('#passwordConfirmation').val('Azertyuiop@123');
         });

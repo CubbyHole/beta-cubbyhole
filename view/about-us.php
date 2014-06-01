@@ -20,41 +20,8 @@
 include_once  '../header/menu.php';
 ?>
 
-    <div id="aboutus">
-        <div class="container">
-            <div class="section_header">
-                <h3>About Us</h3>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 intro">
-                    <h6>There are many variations of passages Lorem Ipsum available, injected generators on the hidden.</h6>
-                    <p>
-                        There are many variations of passages of Lorem Ipsum available, injected 
-                        generators on the  embarrassing hidden in the middle all the dictionary making it look like readable English. Many desktop publishing packages and web page editors.
-                        <br /><br />
-                        There are many variations of passages of Lorem Ipsum available, but the ndictionary of over 200 Latin words, combined with a handful of models The generated Lorem Ipsum is therefore always free from repetition, the injected humour, or non-characteristic words etc.</p>
-                </div>
-                <div class="col-sm-6">
-                    <div class="flexslider">
-                        <ul class="slides">
-                            <li>
-                              <img src="../content/img/about_slide1.jpg" />
-                            </li>
-                            <li>
-                              <img src="../content/img/about_slide1.jpg" />
-                            </li>
-                            <li>
-                              <img src="../content/img/about_slide1.jpg" />
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div id="team">
-        <div class="container">
+        <div class="container custom-container">
             <div class="section_header">
                 <h3>Meet our Team</h3>
             </div>
@@ -62,10 +29,10 @@ include_once  '../header/menu.php';
             <div class="row people">
                 <div class="row row1">
                     <div class="col-sm-6 bio_box">
-                        <img src="../content/img/ale.png" alt="">
-                        <div class="info">
-                            <p class="name">Alejandra Galvan Castillo</p>
-                            <p class="area">Creative Director</p>
+                        <img class="about-team" src="../content/img/team/Alban.png" alt="">
+                        <div class="info users">
+                            <p class="name">Alban TRUC</p>
+                            <p class="area">Back-end developer, Scrum master, Head analyst</p>
                             <a href="#" class="facebook">
                                 <span class="socialicons ico1"></span>
                                 <span class="socialicons_h ico1h"></span>
@@ -86,10 +53,10 @@ include_once  '../header/menu.php';
                     </div>
 
                     <div class="col-sm-6 bio_box bio_boxr">
-                        <img src="../content/img/ale.png" alt="">
-                        <div class="info">
-                            <p class="name">Alejandra Galvan Castillo</p>
-                            <p class="area">Creative Director</p>
+                        <img class="about-team" src="../content/img/team/Erwan.png" alt="">
+                        <div class="info users">
+                            <p class="name">Erwan GUILLEMARD</p>
+                            <p class="area">Android Developer (lead developer of Sunbeam),Database administrator, Head analyst</p>
                             <a href="#" class="facebook">
                                 <span class="socialicons ico1"></span>
                                 <span class="socialicons_h ico1h"></span>
@@ -112,10 +79,10 @@ include_once  '../header/menu.php';
 
                 <div class="row row1">
                     <div class="col-sm-6 bio_box">
-                        <img src="../content/img/ale.png" alt="">
-                        <div class="info">
-                            <p class="name">Alejandra Galvan Castillo</p>
-                            <p class="area">Creative Director</p>
+                        <img class="about-team" src="../content/img/team/Harry.png" alt="">
+                        <div class="info users">
+                            <p class="name">Harry BELLOD</p>
+                            <p class="area"> Lead developer of Nestbox (web file explorer)</p>
                             <a href="#" class="facebook">
                                 <span class="socialicons ico1"></span>
                                 <span class="socialicons_h ico1h"></span>
@@ -136,10 +103,10 @@ include_once  '../header/menu.php';
                     </div>
 
                     <div class="col-sm-6 bio_box bio_boxr">
-                        <img src="../content/img/ale.png" alt="">
-                        <div class="info">
-                            <p class="name">Alejandra Galvan Castillo</p>
-                            <p class="area">Creative Director</p>
+                        <img class="about-team" src="../content/img/team/Ken.png" alt="">
+                        <div class="info users">
+                            <p class="name">Kentucky SATO</p>
+                            <p class="area">Front-end developer of Cubbyhole, head manager of e-commerce</p>
                             <a href="#" class="facebook">
                                 <span class="socialicons ico1"></span>
                                 <span class="socialicons_h ico1h"></span>
@@ -162,48 +129,4 @@ include_once  '../header/menu.php';
             </div>
         </div>
     </div>
-
-    <div id="process">
-        <div class="container">
-            <div class="section_header">
-                <h3>Our Process</h3>
-            </div>
-            <div class="row services_circles">
-                <div class="col-sm-4 description">
-                    <div class="text active">
-                        <h4>Plan what you need.</h4>
-                        <p>
-                            There are many variations of passages of  this suffered alteration in some form, by injected look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to making this the first true generator  Internet.</p>
-                    </div>
-                    <div class="text">
-                        <h4>Develop your product or service.</h4>
-                        <p>
-                            There are many variations of passages of  this suffered alteration in some form, by injected look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to 
-                            making this the first true generator  Internet.</p>
-                    </div>
-                    <div class="text">
-                        <h4>Design this theme to your needs.</h4>
-                        <p>
-                            There are many variations of passages of  this suffered alteration in some form, by injected look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to making this the first true generator  Internet.</p>
-                    </div>
-                </div>
-
-                <div class="col-sm-7 areas">
-                    <div class="circle active">
-                        <img src="../content/img/plan.png" />
-                        <span>Plan</span>
-                    </div>
-                    <div class="circle">
-                        <img src="../content/img/develop.png" />
-                        <span>Develop</span>
-                    </div>
-                    <div class="circle last_circle">
-                        <img src="../content/img/design.png" />
-                        <span>Design</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-     <?php include '../footer/footer.php'; ?>
+<?php include '../footer/footer.php'; ?>

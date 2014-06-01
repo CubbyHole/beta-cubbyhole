@@ -6,272 +6,188 @@ include'../header/header.php';
     <link rel="stylesheet" href="../content/css/compiled/bootstrap-overrides.css" type="text/css" />
     <link rel="stylesheet" href="../content/css/compiled/theme.css" type="text/css" />
 
-    <link rel="stylesheet" href="../content/css/style.css" type="text/css" />
+
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="../content/css/compiled/sign-up.css" type="text/css" media="screen" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../content/css/smartadmin-production.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../content/css/smartadmin-skins.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../content/css/demo.css">
+
+    <link rel="stylesheet" href="../content/css/style.css" type="text/css" />
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     </head>
 <?php
 include '../header/menu.php';
-?>
+if (isset($_SESSION['user'])):
+    getUserDetails();
+    $userManager = new UserPdoManager();
+    $accountManager = new AccountPdoManager();
+    $refManager = new RefPlanPdoManager();
+
+    //Récupère les dates d'enregistrement et de fin d'abonnement
+    $userStartDate = $user->getCurrentAccount()->getStartDate();
+    $userEndDate = $user->getCurrentAccount()->getEndDate();
+
+    //Formatage des dates pour une meilleur lisibilité humaine
+    $userFormatStartDate = AbstractPdoManager::formatMongoDate($userStartDate);
+    $userFormatEndDate = AbstractPdoManager::formatMongoDate($userEndDate);
+
+    //Requête BDD
+    $userInSession = unserialize($_SESSION['user']);
+    $user = $userManager->findById($userInSession->getId());//retrouve l'user connecté grâce à l'id en session
+    $userAccount = $accountManager->findById($user->getCurrentAccount());//retrouve le compte user
+    $userPlan = $refManager->findById($userAccount->getRefPlan());//retrouve le plan user
+
+
+    ?>
+    <body style="overflow: hidden;">
     <aside id="left-panel">
-        <!-- end user info -->
-
-        <!-- NAVIGATION : This navigation is also responsive
-
-        To make this navigation dynamic please make sure to link the node
-        (the reference to the nav > ul) after page load. Or the navigation
-        will not initialize.
-        -->
-        <nav>
-            <!-- NOTE: Notice the gaps after each icon usage <i></i>..
-            Please note that these links work a bit different than
-            traditional href="" links. See documentation for details.
-            -->
-
+        <nav id="asideNavBar">
             <ul>
-                <!--Dashboard -->
+                <!--Lien Aside -->
                 <li class="">
-                    <a href="dashboard.php" title="Dashboard"><span class="menu-item-parent">Account</span></a>
+                    <a href="change.php" title="Change your password"><span class="menu-item-parent">Change password</span></a>
                 </li>
-
-                <!--<li>
-                    <a href="#"><i class="fa fa-lg fa-fw fa-desktop"></i> <span class="menu-item-parent">UI Elements</span></a>
-                    <ul>
-                        <li>
-                            <a href="ajax/general-elements.html">General Elements</a>
-                        </li>
-                        <li>
-                            <a href="ajax/buttons.html">Buttons</a>
-                        </li>
-                        <li>
-                            <a href="#">Icons</a>
-                            <ul>
-                                <li>
-                                    <a href="ajax/fa.html"><i class="fa fa-plane"></i> Font Awesome</a>
-                                </li>
-                                <li>
-                                    <a href="ajax/glyph.html"><i class="glyphicon glyphicon-plane"></i> Glyph Icons</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="ajax/grid.html">Grid</a>
-                        </li>
-                        <li>
-                            <a href="ajax/treeview.html">Tree View</a>
-                        </li>
-                        <li>
-                            <a href="ajax/nestable-list.html">Nestable Lists</a>
-                        </li>
-                        <li>
-                            <a href="ajax/jqui.html">JQuery UI</a>
-                        </li>
-                    </ul>
+                <li class="">
+                    <a href="pricing.php" title="Change your plan"><span class="menu-item-parent">Change plan</span></a>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-lg fa-fw fa-folder-open"></i> <span class="menu-item-parent">6 Level Navigation</span></a>
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-folder-open"></i> 2nd Level</a>
-                            <ul>
-                                <li>
-                                    <a href="#"><i class="fa fa-fw fa-folder-open"></i> 3ed Level </a>
-                                    <ul>
-                                        <li>
-                                            <a href="#"><i class="fa fa-fw fa-file-text"></i> File</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-fw fa-folder-open"></i> 4th Level</a>
-                                            <ul>
-                                                <li>
-                                                    <a href="#"><i class="fa fa-fw fa-file-text"></i> File</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa fa-fw fa-folder-open"></i> 5th Level</a>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#"><i class="fa fa-fw fa-file-text"></i> File</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="fa fa-fw fa-file-text"></i> File</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-folder-open"></i> Folder</a>
-
-                            <ul>
-                                <li>
-                                    <a href="#"><i class="fa fa-fw fa-folder-open"></i> 3ed Level </a>
-                                    <ul>
-                                        <li>
-                                            <a href="#"><i class="fa fa-fw fa-file-text"></i> File</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-fw fa-file-text"></i> File</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-
-                        </li>
-                    </ul>
+                <li class="">
+                    <a href="#" title="File explorer"><span class="menu-item-parent">My file explorer</span></a>
                 </li>
-                <li>
-                    <a href="ajax/calendar.html"><i class="fa fa-lg fa-fw fa-calendar"></i> <span class="menu-item-parent">Calendar</span></a>
-                </li>
-                <li>
-                    <a href="ajax/widgets.html"><i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Widgets</span></a>
-                </li>
-                <li>
-                    <a href="ajax/gallery.html"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">Gallery</span></a>
-                </li>
-                <li>
-                    <a href="ajax/gmap-xml.html"><i class="fa fa-lg fa-fw fa-map-marker"></i> <span class="menu-item-parent">Google Map Skins</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">Miscellaneous</span></a>
-                    <ul>
-                        <li>
-                            <a href="ajax/typography.html">Typography</a>
-                        </li>
-                        <li>
-                            <a href="ajax/pricing-table.html">Pricing Tables</a>
-                        </li>
-                        <li>
-                            <a href="ajax/invoice.html">Invoice</a>
-                        </li>
-                        <li>
-                            <a href="login.html" target="_top">Login</a>
-                        </li>
-                        <li>
-                            <a href="register.html" target="_top">Register</a>
-                        </li>
-                        <li>
-                            <a href="lock.html" target="_top">Locked Screen</a>
-                        </li>
-                        <li>
-                            <a href="ajax/error404.html">Error 404</a>
-                        </li>
-                        <li>
-                            <a href="ajax/error500.html">Error 500</a>
-                        </li>
-                        <li>
-                            <a href="ajax/blank_.html">Blank Page</a>
-                        </li>
-                        <li>
-                            <a href="ajax/email-template.html">Email Template</a>
-                        </li>
-                        <li>
-                            <a href="ajax/search.html">Search Page</a>
-                        </li>
-                        <li>
-                            <a href="ajax/ckeditor.html">CK Editor</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-lg fa-fw fa-file"></i> <span class="menu-item-parent">Other Pages</span></a>
-                    <ul>
-                        <li>
-                            <a href="ajax/forum.html">Forum Layout</a>
-                        </li>
-                        <li>
-                            <a href="ajax/profile.html">Profile</a>
-                        </li>
-                        <li>
-                            <a href="ajax/timeline.html">Timeline</a>
-                        </li>
-                    </ul>
-                </li>-->
             </ul>
         </nav>
+        <div id="buttCollapse">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </div>
     </aside>
 
-
-    <div id="main">
-        <div id="dash">
-            <h2 ><i id="dashHead" class="glyphicon glyphicon-home"></i>My account</h2>
-            <hr style="margin-left: -20px;">
-            <?php
-
-
-            if (isset($_SESSION['user'])):
-                $userManager = new UserPdoManager();
-                $accountManager = new AccountPdoManager();
-                $refManager = new RefPlanPdoManager();
-
-                //variables
-                $mongoDate = $user->getCurrentAccount()->getStartDate();
-                $mongoDateFinale = AbstractPdoManager::formatMongoDate($mongoDate);
-
-                //Requête BDD
-                $userInSession = unserialize($_SESSION['user']);
-                $user = $userManager->findById($userInSession->getId());
-                $userAccount = $accountManager->findById($user->getCurrentAccount());
-                $userPlan = $refManager->findById($userAccount->getRefPlan());
-                //D
+    <div id="afterBody">
+        <div id="main">
+            <div id="dash">
+                <?php
+                //récupère le nom du plan acheté par l'user en cours
+                switch($userPlan->getName())
+                {
+                    case 'Free':
+                        $typePlan = 0;
+                        break;
+                    case 'Premium':
+                        $typePlan = 1;
+                        break;
+                    case 'Ultimate':
+                        $typePlan = 2;
+                        break;
+                }
                 ?>
-                <div id="info" class="cat-user">
-                    <h3><i class="glyphicon glyphicon-user"></i>Informations</h3>
-                    Hello : <?= $user->getLastName().' '.$user->getFirstname() ?>
-                    <br />
-                    Registration date : <?php echo $mongoDateFinale['date'];  ?>
+                <h2 class="h2-account">
+                    <i id="dashHead" class="glyphicon glyphicon-home"></i>
+                    My account
+                <span>
+                    <?php
+                    if($typePlan > 0 )://Gestion du Badge, aucun badge pour Free User
+                        if($typePlan == 1): //Badge Premium?>
+                            <img class="badge-account-img" src="../content/img/icons/Premium.png">
+                        <?php elseif($typePlan == 2)://Badge Ultimate ?>
+                            <img class="badge-account-img" src="../content/img/icons/Ultimate.png">
+                        <?php endif ?>
+                    <?php endif ?>
+                </span>
+                </h2>
+                <hr class="ligne-account-separation">
+
+                <div id="allInfo" class="container">
+
+                    <div id="info" class="cat-user col-md-3">
+                        <h3><i style="margin-right: 5px;" class="glyphicon glyphicon-user"></i>Information</h3>
+                        <table class="mainTab">
+                            <tr>
+                                <td class="tabInfo">Name</td>
+                                <td class="tabValue"><?= $user->getLastName().' '.$user->getFirstname() ?></td>
+                            </tr>
+                            <tr>
+                                <td class="tabInfo">E-mail</td>
+                                <td class="tabValue"><?= $user->getEmail() ?></td>
+                            </tr>
+                            <tr>
+                                <td class="tabInfo">Registration date</td>
+                                <td class="tabValue"><?php echo $userFormatStartDate['date'];  ?></td>
+                            </tr>
+                            <tr>
+                                <td class="tabInfo">End date</td>
+                                <td class="tabValue"><?php echo $userFormatEndDate['date'];  ?></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div id="plan" class="cat-user col-md-5">
+                        <h3><i style="margin-right: 5px;" class="glyphicon glyphicon-inbox"></i>Storage</h3>
+                        <table class="mainTab">
+                            <tr>
+                                <td class="tabInfo">Plan</td>
+                                <td class="tabValue">
+                                    <div class="account-plan-name"><?= $userPlan->getName() ?></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tabInfo">Data traded today</td>
+                                <td class="tabValue"><progress id="progressRatio" data-toggle="tooltip" title="<?= convertKilobytes($userAccount->getRatio())?>&nbsp;Mb" value="<?= convertKilobytes($userAccount->getRatio()) //Volume de données échangées(Upload + Download) le jour-même ?>"
+                                                               min="0" max="<?= convertKilobytes($userPlan->getMaxRatio()) //Volume que j'ai le droit d'echanger par jour ?>"></progress>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <p id="minRatioVal" class="storageVal">0</p>
+                                    <p id="maxRatioVal" class="storageVal"><?= convertKilobytes($userPlan->getMaxRatio()) ?>&nbsp;Mb</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tabInfo">Capacity storage</td>
+                                <td class="tabValue"><progress id="progressStorage"  data-toggle="tooltip" title="<?= convertKilobytes($userAccount->getStorage())?>&nbsp;Mb" value="<?= convertKilobytes($userAccount->getStorage()) ?>"
+                                                               min="0" max="<?= convertKilobytes($userPlan->getMaxStorage()) ?>"></progress>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <p id="minStorageVal" class="storageVal">0</p>
+                                    <p id="maxStorageVal" class="storageVal"><?= convertKilobytes($userPlan->getMaxStorage()) ?>&nbsp;Mb</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div id="speed" class="cat-user col-md-3">
+                        <h3><i style="margin-right: 5px;" class="glyphicon glyphicon-stats"></i>Bandwidth</h3>
+                        <table class="mainTab">
+                            <tr>
+                                <td class="tabInfo">Download speed limitation</td>
+                                <td class="tabValue"><?= $userPlan->getDownloadSpeed() ?>&nbsp;Kb/s</td>
+                            </tr>
+                            <tr>
+                                <td class="tabInfo">Upload speed limitation</td>
+                                <td class="tabValue"><?= $userPlan->getUploadSpeed() ?>&nbsp;Kb/s</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
 
-                <div id="plan" class="cat-user">
-                    <h3><i class="glyphicon glyphicon-inbox"></i>Plan</h3>
-                    Plan : <?= $userPlan->getName() ?>
-                    <br />
-                    Storage capacity  : <span><progress id="progressStorage" value="<?= $userAccount->getStorage() ?>" min="0" max="<?= $userPlan->getMaxStorage() ?>"></progress><?= $userAccount->getStorage().'/'.$userPlan->getMaxStorage() ?>Go</span>
-                    <br />
-                    Download speed limitation : <?= $userPlan->getDownloadSpeed() ?>Kb/s
-                    <br />
-                    Upload speed limitation : <?= $userPlan->getUploadSpeed() ?>Kb/s
-                    <br />
-                    Data traded : <span><progress id="progressStorage" value="<?= $userAccount->getRatio() //Volume de données échangées(Upload + Download) le jour-même ?>"
-                                        min="0" max="<?= $userPlan->getMaxRatio() //Volume que j'ai le droit d'echanger par jour ?>"></progress><?= $userAccount->getRatio().'/'.$userPlan->getMaxRatio() ?>Go</span>
-                </div>
-
-
-
-            <?php endif ?>
+            </div>
         </div>
-
     </div>
+    </body>
+<?php endif ?>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../content/js/bootstrap.min.js"></script>
+    <script src="../content/js/theme.js"></script>
     <script>
-        /*$(function() {
+        $(function()
+        {
 
-         function modifValues() {
-         var val = $('#progress progress').attr('value');
-         if (val >= 100) {
-         val = 0;
-         }
-         var newVal = val * 1 + 0.25;
-         var txt = Math.floor(newVal) + '%';
+            $('#progressRatio').tooltip({
+                placement: 'top'
+            });
+            $('#progressStorage').tooltip({
+                placement: 'top'
+            });
 
-         $('#progress progress').attr('value', newVal);
-         $('#progress progress span').text(txt);
-         $('#progress strong').html(txt);
-         }
-
-         setInterval(function() {
-         modifValues();
-         }, 40);
-
-         });*/
+        });
     </script>
 <?php //include '../footer/footer.php'; ?>

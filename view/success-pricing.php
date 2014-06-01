@@ -1,4 +1,8 @@
-<?php include '../header/header.php';?>
+<?php
+include '../header/header.php';
+$ipnUrl = 'http://557a16db.ngrok.com/';
+
+?>
     <!-- Styles -->
     <link href="../content/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../content/css/compiled/bootstrap-overrides.css" type="text/css" />
@@ -17,183 +21,139 @@
     </head>
 <?php
 include '../header/menu.php';
+
+$refPlanPdoManager = new RefPlanPdoManager();
+$freePlans = $refPlanPdoManager->findFreePlans();
+$premiumPlans = $refPlanPdoManager->findPremiumPlans();
+
+if(isset($_SESSION['user']))
+{
+    //recharge la session avec les nouvelles données
+    getUserDetails();
+}
+
 ?>
-
-<?php
-if(isset($_SESSION['paypal'])):
-    var_dump($_SESSION['paypal']);
-    ?>
-    <div class="alert alert-success">
-        Congrulation, you are now Premium!!
-    </div>
-    <!--$ses = $_SESSION['paypal'];
-    $session = unserialize($ses);
-    //$grav = unserialize($_SESSION);
-    var_dump($session);-->
-    <?php endif ?>
-
-
-
     <!-- Pricing Option3 -->
     <div id="in_pricing2">
         <div class="container">
             <div class="section_header">
                 <h3>Pricing</h3>
             </div>
-
             <div class="row charts_wrapp">
-                <!-- Plan Box -->
-                <div class="col-sm-3">
-                    <div class="plan">
-                        <div class="wrapper">
-                            <h3>Free</h3>
+                <?php foreach($freePlans as $plan): ?>
+                    <!-- Plan Box FREE -->
+                    <div class="col-sm-4">
+                        <?= var_dump($plan) ?>
+                        <div class="plan">
+                            <div class="wrapper">
+                                <h3><?= $plan->getName() ?></h3>
+                                <div class="price">
 
-                            <div class="price">
+                                    <span class="qty"><?= round(convertKilobytes($plan->getMaxStorage())) ?></span>
+                                    <span class="month">Mb</span>
+                                </div>
+                                <div class="features">
+                                    <p>
+                                        <strong>1</strong>
+                                        files / DL
+                                    </p>
+                                    <p>
+                                        <strong>Download speed</strong><br />
+                                        <?= $plan->getDownloadSpeed() ?> Kb/s
+                                    </p>
+                                    <p>
+                                        <strong>Upload speed</strong><br />
+                                        <?= $plan->getUploadSpeed() ?> Kb/s
+                                    </p>
+                                    <p>
+                                        <strong>30</strong>
+                                        days of storage
+                                    </p>
+                                    <?php if(!isset($_SESSION['user'])): ?>
 
-                                <span class="qty">10</span>
-                                <span class="month">Go</span>
+                                        <form target="_blank" class="paypal" action="register.php" method="post" target="_top">
+                                            <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                            <img alt="" border="0" src="https://www.sandbox.paypal.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+                                        </form>
+                                    <?php endif ?>
+                                </div>
                             </div>
-                            <div class="features">
-                                <p>
-                                    <strong>1</strong>
-                                    files / DL
-                                </p>
-                                <p>
-                                    <strong>140ko/s</strong>
-                                    bandwich
-                                </p>
-                                <p>
-                                    <strong>30</strong>
-                                    days of storage
-                                </p>
-                            </div>
-
                         </div>
                     </div>
-                </div>
-                <!-- Plan Box -->
-                <div class="col-sm-3">
-                    <div class="plan">
-                        <div class="wrapper">
-                            <h3>Premium</h3>
-                            <div class="price">
-                                <span class="dollar">€</span>
-                                <span class="qty">10</span>
-                                <span class="month">/month</span>
+
+                <?php endforeach ?>
+
+                <?php foreach($premiumPlans as $plan):
+
+                    /*Condition pour id du bouton paypal */
+                    switch($plan->getName())
+                    {
+                        case 'Premium':
+                            $idPaypal = "BX5Q3MK47TUDQ";
+                            break;
+
+                        case 'Ultimate':
+                            $idPaypal = "N9X3E9UW4D6RJ";
+                            break;
+                    }
+
+                    ?>
+                    <!-- Plan Box PREMIUM & ULTIMATE -->
+                    <div class="col-sm-4">
+                        <?= var_dump($plan) ?>
+                        <div class="plan">
+                            <div class="wrapper">
+                                <h3><?= $plan->getName() ?></h3>
+                                <div class="price">
+                                    <span class="dollar">$</span>
+                                    <span class="qty"><?= $plan->getPrice() ?></span>
+                                    <span class="month">/month</span>
+                                </div>
+                                <div class="price">
+                                    <span class="qty"><?= round(convertKilobytes($plan->getMaxStorage())) ?></span>
+                                    <span class="month">Mb</span>
+                                </div>
+                                <div class="features">
+                                    <p>
+                                        <strong>Multiple</strong>
+                                        files / DL
+                                    </p>
+                                    <p>
+                                        <strong>Download speed</strong><br />
+                                        <?= $plan->getDownloadSpeed() ?> Kb/s
+                                    </p>
+                                    <p>
+                                        <strong>Upload speed</strong><br />
+                                        <?= $plan->getUploadSpeed() ?> Kb/s
+                                    </p>
+                                    <p>
+                                        <strong>Unlimited</strong>
+                                        days of storage
+                                    </p>
+                                </div>
+                                <?php if(isset($_SESSION['user'])): //Si user connecté, le redirige sur paypal, sinon sur la page register.php ?>
+                                    <form target="_blank" class="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                        <input type="hidden" name="cmd" value="_s-xclick">
+                                        <input type="hidden" name="hosted_button_id" value="<?= $idPaypal ?>">
+                                        <input name="notify_url" type="hidden" value="<?= $ipnUrl; ?>Cubbyhole/controller/ipn.php" />
+                                        <input name="return" type="hidden" value="<?= $ipnUrl; ?>Cubbyhole/view/pricing.php" />
+                                        <input name="cancel_return" type="hidden" value="<?= $ipnUrl; ?>Cubbyhole/view/pricing.php" />
+                                        <input id="custom" name="custom" type="hidden" value="<?= $user->getId().'|'.$plan->getId() ?>" />
+                                        <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                        <img alt="" border="0" src="https://www.sandbox.paypal.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+                                    </form>
+                                <?php else: ?>
+                                    <form target="_blank" class="paypal" action="register.php" method="post" target="_top">
+                                        <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                        <img alt="" border="0" src="https://www.sandbox.paypal.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+                                    </form>
+                                <?php endif ?>
                             </div>
-                            <div class="price">
-
-                                <span class="qty">250</span>
-                                <span class="month">Go</span>
-                            </div>
-                            <div class="features">
-                                <p>
-                                    <strong>Multiple</strong>
-                                    files / DL
-                                </p>
-                                <p>
-                                    <strong>1Mb/s</strong>
-                                    bandwich
-                                </p>
-                                <p>
-                                    <strong>Unlimited</strong>
-                                    days of storage
-                                </p>
-                            </div>
-
-                            <form class="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                                <input type="hidden" name="cmd" value="_s-xclick">
-                                <input type="hidden" name="hosted_button_id" value="BX5Q3MK47TUDQ">
-                                <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                                <img alt="" border="0" src="https://www.sandbox.paypal.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
-                            </form>
-
-
                         </div>
                     </div>
-                </div>
-                <!-- Plan Box -->
-                <div class="col-sm-3">
-                    <div class="plan">
-                        <div class="wrapper">
-
-                            <h3>Ultimate</h3>
-                            <div class="price">
-                                <span class="dollar">€</span>
-                                <span class="qty">15</span>
-                                <span class="month">/month</span>
-                            </div>
-                            <div class="price">
-
-                                <span class="qty">500</span>
-                                <span class="month">Go</span>
-                            </div>
-                            <div class="features">
-                                <p>
-                                    <strong>10</strong>
-                                    Shared Projects
-                                </p>
-                                <p>
-                                    <strong>25</strong>
-                                    Team Members
-                                </p>
-                                <p>
-                                    <strong>Unlimited</strong>
-                                    Storage
-                                </p>
-                                <p>
-                                    <strong>Plus</strong>
-                                    Phone Support
-                                </p>
-                            </div>
-
-                            <form class="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-                                <input type="hidden" name="cmd" value="_s-xclick">
-                                <input type="hidden" name="hosted_button_id" value="N9X3E9UW4D6RJ">
-                                <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" >
-                                <img alt="" border="0" src="https://www.sandbox.paypal.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- Plan Box -->
-                <div class="col-sm-3 ultra">
-                    <div class="plan">
-                        <div class="wrapper">
-                            <img class="ribbon" src="../content/img/badge.png">
-                            <h3>Custom</h3>
-
-                            <div class="features">
-                                <p>
-                                    <strong>10</strong>
-                                    Shared Projects
-                                </p>
-                                <p>
-                                    <strong>4</strong>
-                                    Team Members
-                                </p>
-                                <p>
-                                    <strong>10</strong>
-                                    Storage
-                                </p>
-                            </div>
-                            <a class="order" href="#">ORDER NOW</a>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach ?>
             </div>
         </div>
     </div>
     <br />
-
-
-
-
-<?php include '../footer/footer.php'; ?><?php
-/**
- * Created by PhpStorm.
- * User: Ken
- * Date: 05/04/14
- * Time: 15:11
- */ 
+<?php include '../footer/footer.php'; ?>

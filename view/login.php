@@ -25,7 +25,7 @@ include '../header/header.php';
 ?>
 
     <!-- Sign In Option 1 -->
-    <div id="sign_in1">
+    <div id="sign_in1" class="sign_in1">
         <?php if(isset($_SESSION['errorMessageLogin'])): ?>
             <div class="alert alert-danger">
                 <p>Message from the server :</p>
@@ -66,7 +66,7 @@ include '../header/header.php';
                 <div class="col-md-12 footer">
                     <form method="post" action="../controller/login.php" class="form-inline">
                         
-                        <input name="email" type="text"  autofocus placeholder="Email" class="form-control" required>
+                        <input id="email" name="email" type="text"  autofocus placeholder="Email" class="form-control" required>
                         <input id="password" name="password" type="password"  placeholder="Password" class="form-control" required>
                         <input name="loginForm" type="submit" value="login">
 
@@ -74,16 +74,14 @@ include '../header/header.php';
                 </div>
 
                 <div class="col-md-12 dosnt">
-
+                    <input id="ident" value="Id" type="submit">
                     <input id="pass" value="Pass" type="submit">
                     <input id="newPass" value="newPass" type="submit">
                 </div>
 
                 <div class="col-md-12 proof">
                     <div class="col-md-6 remember">
-                        <label class="checkbox">
-                            <input name="remember" type="checkbox"> Remember me
-                        </label>
+
                         <a href="reset.php">Forgot password?</a>
                     </div>
 
@@ -114,6 +112,12 @@ include '../header/header.php';
     <?php include '../footer/footer.php'; ?>
 <script>
     $(function () {
+        $( "#ident" ).click(function() {
+
+            $('#email').val('knt92@hotmail.fr');
+            $('#password').val('Azertyuiop@123');
+
+        });
 
         $( "#pass" ).click(function() {
 
