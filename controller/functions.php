@@ -13,7 +13,7 @@
  * @source http://gravatar.com/site/implement/images/php/
  */
 
-function getGravatar($email, $size = 50, $default = 'mm', $rating = 'g', $img = false, $atts = array())
+function getGravatar($email, $size = 60, $default = 'mm', $rating = 'g', $img = false, $atts = array())
 {
     $url = 'http://www.gravatar.com/avatar/';
     $url.= md5( strtolower( trim( $email ) ) );//http://www.php.net/manual/en/function.strtolower.php
@@ -134,13 +134,13 @@ function _sanitize($data)
 
 function convertKilobytes($kiloBytes, $outputUnit = NULL, $format = NULL)
 {
-    $kiloBytes = $kiloBytes * 1024; //transforme en bytes
+    $bytes = $kiloBytes * 1024; //transforme en bytes
 
     // Format string
     $format = ($format === NULL) ? '%01.2f' : (string) $format;
 
-    $units = array('B', 'MB', 'GB', 'TB', 'PB');
-    $mod = 1000;
+    $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
+    $mod = 1024;
 
     /*
      * Déterminer l'unité à utiliser
@@ -149,12 +149,70 @@ function convertKilobytes($kiloBytes, $outputUnit = NULL, $format = NULL)
     if (($power = array_search((string) $outputUnit, $units)) === FALSE)
     {
         //http://php.net/manual/en/function.floor.php
-        $power = ($kiloBytes > 0) ? floor(log($kiloBytes, $mod)) : 0;
+        $power = ($bytes > 0) ? floor(log($bytes, $mod)) : 0;
     }
 
     /*
      * http://php.net/manual/en/function.sprintf.php
      * http://php.net/manual/en/function.pow.php
      */
-    return sprintf($format, $kiloBytes / pow($mod, $power), $units[$power]);
+    return sprintf($format, $bytes / pow($mod, $power), $units[$power]);
+}
+
+/**
+ * Recharger une session avec les nouvelles données en bdd
+ */
+function getUserDetails()
+{
+    //Initialise nos objets
+    $userPdoManager = new UserPdoManager();
+    $accountPdoManager = new AccountPdoManager();
+    $refPlanPdoManager = new RefPlanPdoManager();
+
+    //Récupère l'utilisateur inscrit avec l'id indiquée.
+    $id = array(
+        'state' => (int)1,
+        '_id' => unserialize($_SESSION['user'])->getId()
+    );
+
+    $user = $userPdoManager->findOne($id);
+
+    if($user instanceof User) //Si l'utilisateur existe
+    {
+        //On récupère le compte correspondant à l'utilisateur
+        $accountCriteria = array(
+            '_id' => new MongoId($user->getCurrentAccount()),
+            'state' => (int)1
+        );
+        $account = $accountPdoManager->findOne($accountCriteria);
+
+        if($account instanceof Account) //Si le compte existe
+        {
+            $refPlan = $refPlanPdoManager->findById($account->getRefPlan());
+
+            if($refPlan instanceof RefPlan)
+            {
+                $account->setRefPlan($refPlan);
+                $user->setCurrentAccount($account);
+                $u = $_SESSION['user'] = serialize($user);//met les infos user en session
+                return $u;
+            }
+            else
+            {
+                $errorInfo = 'RefPlan with ID '.$account->getRefPlan().' not found';
+                return array('error' => $errorInfo);
+            }
+        }
+        else
+        {
+            $errorInfo = 'No active account with ID '.$user->getCurrentAccount().' for user '.$user->getId();
+            return array('error' => $errorInfo);
+        }
+
+    }
+    else
+    {
+        $errorInfo = 'No ACTIVE user found for the following e-mail: '.$id.' Maybe you didn\'t activate your account?';
+        return array('error' => $errorInfo);
+    }
 }

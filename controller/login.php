@@ -26,13 +26,12 @@ if(isset($_POST['loginForm'] ))
         //http://www.php.net/manual/en/function.array-key-exists.php
 		if(!(array_key_exists('error', $user)))
 		{
-			$loginOK = true;
+			$loginOK = TRUE;
 			//redirection vers index
 			header('Location:../index.php');
 		}
         else
         {
-
             $_SESSION['errorMessageLogin'] = $user['error'];
             header('Location:../view/login.php');
             die();
@@ -42,7 +41,7 @@ if(isset($_POST['loginForm'] ))
 	
 }
 
-if($loginOK == true)
+if($loginOK == TRUE)
 {
 	//Pour les sessions
 	$_SESSION['user'] = serialize($user);

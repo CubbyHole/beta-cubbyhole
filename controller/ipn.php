@@ -12,7 +12,6 @@ include $projectRoot.'/required.php';
 
 //permet de traiter le retour ipn de paypal
 //Compte pour recevoir le paiement
-
 $emailAccount = "naindrag@orange.fr";
 $req = 'cmd=_notify-validate';
 
@@ -42,10 +41,16 @@ $receiver_email = $_POST['receiver_email'];
 $payer_email = $_POST['payer_email'];
 $custom = explode('|',$_POST['custom']);//parse du champ custom, pour l'instant idUser | idRefPlan
 
+$paymentOK = FALSE;
+//récupère le prix du plan en bdd pour une vérification avec Paypal
+$refPlan = new RefPlanPdoManager();
+$refPrice = $refPlan->findById($custom[1])->getPrice();
+
 if (!$fp)
 {
 
-} else
+}
+else
 {
     fputs ($fp, $header . $req);
     while (!feof($fp))
@@ -56,95 +61,131 @@ if (!$fp)
             // vérifier que payment_status a la valeur Completed
             if ( $payment_status == "Completed")
             {
+                //Vérifie si le mail du marchant est == au mail du receveur
                 if ( $emailAccount == $receiver_email)
                 {
-                    /**
-                     * C'EST LA QUE TOUT SE PASSE
-                     * PS : tjrs penser à vérifier la somme !!
-                     */
-                    $paymentPdoManager = new PaymentPdoManager();
-                    $payment = array(
-                        'state' => (int)1,
-                        'idUser' => new MongoId($custom[0]),//idUser de l'user qui vient d'acheter l'offre
-                        'amount' => $payment_amount,
-                        'date' => new MongoDate(),
-                        'paypalReturn' => $_POST
-                    );
-                    $paymentPdoManager->create($payment);
-
-                    /*
-                    * Récupère le compte actuel
-                    */
-                    $accountPdoManager = new AccountPdoManager();
-                    $criteria = array(
-                        'state' => (int)1,
-                        'idUser' => new MongoId($custom[0])//idUser de l'user qui vient d'acheter l'offre
-                    );
-                    $account = $accountPdoManager->findAndModify($criteria, array('state' => (int)0), NULL, array('new' => TRUE));
-
-                    /*Si le compte existe*/
-                    if($account instanceof Account)
+                    //Vérifie la somme en bdd et celle enregistré sur Paypal
+                    if($refPrice == $payment_amount)
                     {
-                        $time = time();
-                        $end = $time + (30 * 24 * 60 * 60); // + 30 jours
-
-                        //$newAccount['_id'];
-
-                        $newAccount = array(
-                            '_id' => new MongoId(),
+                        /*
+                         * Insertion en bdd du plan acheté (state(1), idUser, prix , date, retour paypal
+                         */
+                        $paymentPdoManager = new PaymentPdoManager();
+                        $payment = array(
                             'state' => (int)1,
-                            'idUser' => new MongoId($custom[0]), //id de l'user qui vien d'acheter l'offre
-                            'idRefPlan' => new MongoId($custom[1]), //id du plan acheté
-                            'storage' => $account->getStorage(),
-                            'ratio' => $account->getRatio(),
-                            'startDate' => new MongoDate($time),
-                            'endDate' => new MongoDate($end)
+                            'idUser' => new MongoId($custom[0]),//idUser de l'user qui vient d'acheter l'offre
+                            'amount' => $payment_amount,
+                            'date' => new MongoDate(),
+                            'paypalReturn' => $_POST
                         );
-                        $accountPdoManager->create($newAccount);
+                        $paymentPdoManager->create($payment);
 
-                        $userPdoManager = new UserPdoManager();
-
-                        //critères de recherche
-                        $searchQuery = array(
-                            //'state' => (int)1,
-                            '_id' => new MongoId($custom[0]) //idUser de l'user qui vient d'acheter l'offre
+                        /*
+                        * Récupère le compte actuel
+                        */
+                        $accountPdoManager = new AccountPdoManager();
+                        $criteria = array(
+                            'state' => (int)1,
+                            'idUser' => new MongoId($custom[0])//idUser de l'user qui vient d'acheter l'offre
                         );
+                        $account = $accountPdoManager->findAndModify($criteria, array('state' => (int)0), NULL, array('new' => TRUE));
 
-                        //les modifications à réaliser
-                        //en mettant un $set, on change uniquement le champ voulu
-                        // sans le $set, on ferais un delte puis un insert
-                        $updateCriteria = array(
-                            '$set' => array('idCurrentAccount' => $newAccount['_id'])
-                        );
+                        /*Si le compte existe*/
+                        if($account instanceof Account)
+                        {
+                            $time = time();
+                            $end = $time + (30 * 24 * 60 * 60); // + 30 jours
 
-                        //mise a jour de l'idCurrentAccount de l'user qui vient d'acheter
-                        //$updateUser = $userPdoManager->findAndModify($searchQuery, $updateCriteria,array('idCurrentAccount' => $newAccount['_id'] ),array('new' => TRUE));
-                        $updateUser = $userPdoManager->findAndModify($searchQuery, $updateCriteria, NULL, array('new' => TRUE));
+                            //Récupère l'id de l'user qui vient d'acheter, le plan qu'il vient d'acheter, son espace
+                            //de stockage, son ratio. Met à jour sa date d'achat et de fin d'abonnement
+                            $newAccount = array(
+                                '_id' => new MongoId(),
+                                'state' => (int)1,
+                                'idUser' => new MongoId($custom[0]), //id de l'user qui vien d'acheter l'offre
+                                'idRefPlan' => new MongoId($custom[1]), //id du plan acheté
+                                'storage' => $account->getStorage(),
+                                'ratio' => $account->getRatio(),
+                                'startDate' => new MongoDate($time),
+                                'endDate' => new MongoDate($end)
+                            );
+                            $accountPdoManager->create($newAccount);
+
+
+                            $userPdoManager = new UserPdoManager();
+                            //critères de recherche
+                            $searchQuery = array(
+                                //'state' => (int)1,
+                                '_id' => new MongoId($custom[0]) //idUser de l'user qui vient d'acheter l'offre
+                            );
+
+                            //les modifications à réaliser
+                            //en mettant un $set, on change uniquement le champ voulu
+                            // sans le $set, on ferais un delete puis un insert
+                            $updateCriteria = array(
+                                '$set' => array('idCurrentAccount' => $newAccount['_id'])
+                            );
+
+                            //mise a jour de l'idCurrentAccount de l'user qui vient d'acheter
+                            $updateUser = $userPdoManager->findAndModify($searchQuery, $updateCriteria, NULL, array('new' => TRUE));
+
+                        }
+                        // 1 FindAndModify pour récup le compte actuel: state à 0 + option récup la version modifiée    OK
+                        // 2 Insére un nouveau compte avec storage et ratio de l'ancien compte et Id du nouveau refPlan OK
+                        // 3 Update de l'idCurrentAccount du user                                                       OK
+                        // SI marche, affiche de message, sinon contacter le service technique
+                        $paymentOK = TRUE; //variable paiement à true
+                        $_SESSION['paypalOK'] = $paymentOK;
+
 
                     }
-
-                    // 1 FindAndModify pour récup le compte actuel: state à 0 + option récup la version modifiée
-                    // 2 Insére un nouveau compte avec storage et ratio de l'ancien compte et Id du nouveau refPlan
-                    // 3 Update de l'idCurrentAccount du user
-                    // SI marche, affiche de message, sinon contacter le service technique
-
-                    //$filename = 'log.php';
-                    //file_put_contents($filename, print_r($_POST, true));
-
-                    //var_dump($_POST);
-                    //$result = AbstractPdoManager::__create('validation', array('item' => $item_name));
                 }
+
             }
             else
             {
                 // Statut de paiement: Echec
+                $paymentPdoManager = new PaymentPdoManager();
+                $payment = array(
+                    'state' => (int)2,//Code pour un echec du paiement
+                    'idUser' => new MongoId($custom[0]),//idUser de l'user qui vient d'acheter l'offre
+                    'amount' => $payment_amount,
+                    'date' => new MongoDate(),
+                    'paypalReturn' => $_POST
+                );
+                $paymentPdoManager->create($payment);
             }
             exit();
         }
-        else if (strcmp ($res, "INVALID") == 0)
+        else if (strcmp ($res, "INVALID") == 0)//INVALID
         {
-            // Transaction invalide
+            // Statut de paiement: Echec
+            $paymentPdoManager = new PaymentPdoManager();
+            $payment = array(
+                'state' => (int)2,//Code pour un echec du paiement
+                'idUser' => new MongoId($custom[0]),//idUser de l'user qui vient d'acheter l'offre
+                'amount' => $payment_amount,
+                'date' => new MongoDate(),
+                'paypalReturn' => $_POST
+            );
+            $paymentPdoManager->create($payment);
         }
     }
     fclose ($fp);
 }
+?>
+<script>
+    /*$(document).ready(function(){
+        $.ajax({
+            url: http://localhost:8081/Cubbyhole/view/pricing.php
+            success:function(){
+                <?php
+                /*$paymentOK = TRUE;
+                $_SESSION['paypalOK'] = $paymentOK;*/
+                ?>
+            },
+            error:function(XMLHttpRequest,textStatus, errorThrown){
+               alert('error');
+            }
+        })
+    });*/
+</script>
