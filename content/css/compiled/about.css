@@ -30,13 +30,15 @@
 
 #team {
   padding: 35px 0 25px;
-  margin: 0;
+  margin-top: 106px;
   background: #f7f7f7;
-  margin-bottom: 90px;
+  /*margin-bottom: 90px;*/
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee; }
   #team .section_header {
-    margin-bottom: 60px; }
+    /*margin-bottom: 60px;*/
+      margin-bottom: 119px;
+  }
     #team .section_header h3 {
       color: #9D9D9E;
       border-color: #9D9D9E;
