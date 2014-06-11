@@ -5,7 +5,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Activate your Cubbyhole account now</title>
-<link rel="shortcut icon" href="/Cubbyhole/content/img/icons/icons.png">
 
 <!--[if gte mso 6]>
 <style>
@@ -564,7 +563,7 @@ h4
                                         <td class="mcnImageContent" valign="top"
                                             style="padding-right: 9px;padding-left: 9px;padding-top: 0;padding-bottom: 0;text-align: center;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                             <img align="center" alt=""
-                                                 src="/Cubbyhole/content/img/icons/cubbyhole_logoFull.png"
+                                                 src="<?= $projectRoot . $logoLink; ?>"
 
                                                  style="width:100px;max-width: 100px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"
                                                  class="mcnImage">
@@ -609,7 +608,7 @@ h4
                                             style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: Helvetica;font-size: 15px;line-height: 150%;text-align: left;">
 
                                             <h2 class="null"
-                                                style="margin: 0;padding: 0;display: block;font-family: Helvetica;font-size: 26px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -.75px;text-align: left;color: #404040 !important;">
+                                                style="margin: 0;padding: 0;display: block;font-family: Helvetica;font-size: 26px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -.75px;text-align: center;color: #404040 !important;">
                                                 Password reset for Cubbyhole</h2>
 
                                             <h3 style="margin: 0;padding: 0;display: block;font-family: Helvetica;font-size: 18px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;">
