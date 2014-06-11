@@ -13,10 +13,7 @@ $refManager = new RefPlanPdoManager();
 
 if(isset($_SESSION['user']))
 {
-    /*$userInSession = unserialize($_SESSION['user']);
-    $user = $userManager->findById($userInSession->getId());
-    $userAccount = $accountManager->findById($user->getCurrentAccount());
-    $userPlan = $refManager->findById($userAccount->getRefPlan());*/
+    $user = unserialize($_SESSION['user']);
 }
 ?>
 <body class="pull_top">
@@ -41,7 +38,7 @@ if(isset($_SESSION['user']))
                 <li><a href="/Cubbyhole">HOME</a></li>
                 <li><a href="/Cubbyhole/view/pricing.php">PRICING</a></li>
 
-                <?php if (isset($_SESSION['user'])) : $user = unserialize($_SESSION['user']);//recupère la session du login?>
+                <?php if(isset($_SESSION['user'])): //recupère la session du login?>
                     <li><a href="/Cubbyhole/view/account.php">MY ACCOUNT</a></li>
                 <?php else: ?>
 
