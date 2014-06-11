@@ -4,7 +4,7 @@
 $(document).ready(function()
 {
     //ajoute le lien dans le body
-    $('body').append('<a href="#top" class="top_link" title="Revenir en haut de page">Top</a>');
+    $('body').append('<a href="#top" style="color: #f7f7f7;font-size: 18px;font-weight: bolder;" class="top_link" title="Revenir en haut de page">Top</a>');
 
     //CSS avec display none au départ
     $('.top_link').css({

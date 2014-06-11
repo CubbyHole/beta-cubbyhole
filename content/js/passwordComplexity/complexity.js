@@ -51,6 +51,7 @@ $(function () {
         var emailVal = $("#email").val();
         var passwordVal = $("#password").val();
         var passwordCheckVal = $("#passwordConfirmation").val();
+        var captcha = $("#captcha").val();
 
         //notre expression regulière pour la verification de la validité du mail
         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -223,6 +224,14 @@ $(function () {
             $("#passwordConfirmation").after('<span class="error">Passwords do not match.</span>');
             /*$('#passwordConfirmation').popover({ title: 'Error', content:'Passwords do not match' , html:true });
              $('#passwordConfirmation').popover('show');*/
+            //erreur = 1
+            hasError = true;
+        }
+        //Enfin nous verifierons la correspondance des mdp
+        else if (captcha == '' )
+        {
+            //insere notre message d'erreur apres la div du passwordConfirmation pour la non correspondance
+            $("#captcha").after('<span class="error">Please fill in the captcha.</span>');
             //erreur = 1
             hasError = true;
         }
