@@ -34,7 +34,7 @@ if(isset($_GET['email']) && isset($_GET['token']))
 include $projectRoot.'/header/menu.php';
 ?>
 
-<div id="confirmRegistration">
+<div id="sign_up1"">
     <?php
     if(isset($_SESSION['errorMessage'])): ?>
         <div class="alert alert-danger">
@@ -56,7 +56,7 @@ include $projectRoot.'/header/menu.php';
         </div>
     <?php endif ?>
     <div class="container">
-        <div class="row" style="height: 500px;width: 100%;">
+        <div class="row" style="height: 400px;width: 100%;">
 
 
         </div>
