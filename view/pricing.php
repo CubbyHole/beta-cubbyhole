@@ -1,6 +1,6 @@
 <?php
 include '../header/header.php';
-$ipnUrl = 'http://70e0cd43.ngrok.com/';
+$ipnUrl = 'http://1d0792b5.ngrok.com/';
 ?>
     <!-- Styles -->
     <link href="../content/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
@@ -28,12 +28,6 @@ $freePlans = $refPlanPdoManager->findFreePlans();
 //Plan Premium
 $premiumPlans = $refPlanPdoManager->findPremiumPlans();
 
-$bannière_premium = "<img src='../content/img/icons/bannière_premium.png'>";
-//$bannière_premium = 'Vous êtes Premium';
-$bannière_ultimate = $projectRoot.'/content/img/icons/bannière_ultimate.png';
-
-$_SESSION['helloPremium'] = $bannière_premium;
-$helloPremium = false;
 
 ?>
     <!-- Pricing Option3 -->
@@ -41,7 +35,7 @@ $helloPremium = false;
         <?php if(isset($_SESSION['user']))
         {
             //recharge la session avec les nouvelles données
-            getUserDetails();
+            refreshUserSession();
 
             //condition d'affichage de la bannière une fois l'user revenu sur la page
             $refPlanName = unserialize($_SESSION['user']);
@@ -66,50 +60,25 @@ $helloPremium = false;
                     $bannière = 2;
             }
 
-            /*if($bannière > 0)
-            {
-                if($bannière == 1)
-                {
-                    $criteria = array(
-                        'etat' => $bannière,
-                        'srcImg' => $bannière_premium
-                    );
-                    $_SESSION['HelloPremium'] = $criteria;
-
-                    if(isset($_SESSION['HelloPremium']))
-                    {
-                        echo '<div class="alert alert-info">';
-                        echo $_SESSION['HelloPremium']['srcImg'];
-                        echo '</div>';
 
 
-                        //var_dump($_SESSION['HelloPremium']);
-                    }
-                    // unset($_SESSION['HelloPremium']['srcImg']);
-                }
-                elseif($bannière == 2)
-                {
-                    echo '<div class="alert alert-success">
-                                    $bannière_ultimate;
-                              </div>';
-                }
-
-            }*/
-
-        }   ?>
+        }
+        ?>
         <div class="container">
-            <?php if(isset($_SESSION['user']))
-            {
-                var_dump(unserialize($_SESSION['user']));
 
-            } ?>
-            <div class="section_header">
+            <div class="section_header" style="margin-top: 40px;">
                 <h3>Pricing</h3>
+                <?php if(isset($_SESSION['user']) && $bannière >= 0): ?>
+                    <div style="margin-top: 2px;" class="alert alert-info">
+                        <p>You are actually <?php echo $refPlanName->getCurrentAccount()->getRefPlan()->getName(); ?></p>
+                    </div>
+                <?php endif ?>
             </div>
             <div class="row charts_wrapp">
                 <?php foreach($freePlans as $plan): ?>
                     <!-- Plan Box FREE -->
-                    <div class="col-sm-4">
+
+                    <div id="<?= $plan->getName(); ?>" class="col-sm-4 offers">
                         <div class="plan">
                             <div class="wrapper">
                                 <h3><?= $plan->getName() ?></h3>
@@ -160,25 +129,23 @@ $helloPremium = false;
                     {
                         case 'Premium':
                             $idPaypal = "BX5Q3MK47TUDQ";
+                            $name = $plan->getName();
                             break;
 
                         case 'Ultimate':
                             $idPaypal = "N9X3E9UW4D6RJ";
+                            $name = $plan->getName();
                             break;
                     }
 
                     ?>
                     <!-- Plan Box PREMIUM & ULTIMATE -->
-                    <div class="col-sm-4 pro">
+
+                    <div id="<?= $plan->getName() ?>" class="col-sm-4 pro offers">
                         <div class="plan">
                             <div class="wrapper">
                                 <h3><?= $plan->getName() ?></h3>
-                                <?php
-                                if($plan->getName() == 'Ultimate')
-                                {
-                                    echo '<img class="ribbon" src="../content/img/badge.png">';
-                                }
-                                ?>
+
                                 <div class="price">
                                     <span class="dollar">$</span>
                                     <span class="qty"><?= $plan->getPrice() ?></span>
@@ -206,18 +173,22 @@ $helloPremium = false;
                                         days of storage
                                     </p>
                                 </div>
-                                <?php if(isset($_SESSION['user'])): //Si user connecté, le redirige sur paypal, sinon sur la page register.php ?>
+                                <?php if(isset($refPlanName)): //Si user connecté, le redirige sur paypal, sinon sur la page register.php ?>
+                                    <?php if($name != $refPlanName->getCurrentAccount()->getRefPlan()->getName()): ?>
                                     <form target="_blank" class="paypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
                                         <input type="hidden" name="cmd" value="_s-xclick">
                                         <input type="hidden" name="hosted_button_id" value="<?= $idPaypal ?>">
                                         <input name="notify_url" type="hidden" value="<?= $ipnUrl; ?>Cubbyhole/controller/ipn.php" />
                                         <input name="return" type="hidden" value="http://localhost:8081/Cubbyhole/view/pricing.php" />
                                         <input name="cancel_return" type="hidden" value="http://localhost:8081/Cubbyhole/view/pricing.php" />
-                                        <input id="custom" name="custom" type="hidden" value="<?= $user->getId().'|'.$plan->getId() ?>" />
+                                        <input id="custom" name="custom" type="hidden" value="<?= $user->getId().'|'.$plan->getId() ?>"  />
+
                                         <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit"
                                                alt="PayPal - The safer, easier way to pay online!">
                                         <img alt="" border="0" src="https://www.sandbox.paypal.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+
                                     </form>
+                                    <?php endif ?>
                                 <?php else: ?>
                                     <form target="_blank" class="paypal" action="register.php" method="post" target="_top">
                                         <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">

@@ -1,5 +1,7 @@
 <?php
 include'../header/header.php';
+$cryptinstall = "../controller/crypt/cryptographp.fct.php";
+include $cryptinstall;
 ?>
 <!-- Styles -->
 <link rel="stylesheet" href="../content/css/bootstrap/bootstrap.min.css"  />
@@ -55,7 +57,12 @@ include_once '../header/menu.php';
                         <div class="form">
                             <form method="POST" action="/Cubbyhole/controller/reset.php">
                                 <input type="text" name="resetEmail" placeholder="Email address" class="control-form" />
-                                <input type="submit" name="resetPassword" value="SEND"/>
+<!--                                <input type="submit" name="resetPassword" value="SEND"/>-->
+                                <table>
+                                    <tr><td><?php dsp_crypt(0,1); ?></td></tr>
+                                    <tr><td><input type="text" name="code" placeholder="Copy the code"></td></tr>
+                                    <tr><td><input type="submit" name="resetPassword" value="SEND"></td></tr>
+                                </table>
                             </form>
                         </div>
                     </div>

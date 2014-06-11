@@ -32,7 +32,7 @@ include_once  '../header/menu.php';
                         <img class="about-team" src="../content/img/team/Alban.png" alt="">
                         <div class="info users">
                             <p class="name">Alban TRUC</p>
-                            <p class="area">Back-end developer, Scrum master, Head analyst</p>
+                            <p class="area">Back-end developer, Scrum master<br>Head analyst</p>
                             <a href="#" class="facebook">
                                 <span class="socialicons ico1"></span>
                                 <span class="socialicons_h ico1h"></span>
@@ -56,7 +56,7 @@ include_once  '../header/menu.php';
                         <img class="about-team" src="../content/img/team/Erwan.png" alt="">
                         <div class="info users">
                             <p class="name">Erwan GUILLEMARD</p>
-                            <p class="area">Android Developer (lead developer of Sunbeam),Database administrator, Head analyst</p>
+                            <p class="area">Lead developer of Sunbeam (Android)<br>Database administrator, Head analyst</p>
                             <a href="#" class="facebook">
                                 <span class="socialicons ico1"></span>
                                 <span class="socialicons_h ico1h"></span>
@@ -106,7 +106,8 @@ include_once  '../header/menu.php';
                         <img class="about-team" src="../content/img/team/Ken.png" alt="">
                         <div class="info users">
                             <p class="name">Kentucky SATO</p>
-                            <p class="area">Front-end developer of Cubbyhole, head manager of e-commerce</p>
+                            <p class="area">Front-end developer of Cubbyhole<br>
+                                Head manager of e-commerce</p>
                             <a href="#" class="facebook">
                                 <span class="socialicons ico1"></span>
                                 <span class="socialicons_h ico1h"></span>

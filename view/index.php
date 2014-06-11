@@ -1,5 +1,5 @@
 <?php
-$projectRoot = $_SERVER['HTTP_HOST'] . '/Cubbyhole';
+$projectRoot = $_SERVER['DOCUMENT_ROOT'] . '/Cubbyhole';
 ?>
 <!-- Styles -->
 <link href="content/css/bootstrap/bootstrap.css" rel="stylesheet" type="text/css" xmlns="http://www.w3.org/1999/html"/>
@@ -27,94 +27,107 @@ $ipnUrl = 'https://5b0ead1c.ngrok.com/';
 ?>
 
 <section id="feature_slider" class="lol">
-    <article class="slide" id="showcasing"
-             style="background: url('content/img/backgrounds/deep-green.jpg') repeat-x top center;">
-        <img class="asset left250 sp600 t120 z1" src="content/img/slides/scene4/my.png"/>
 
+    <article class="slide" id="tour" style="background: url('content/img/slides/coffre1.png') 50% 45% repeat-x;">
+        <!--<img class="asset left-472 sp650 t210 z3" src="content/img/slides/scene3/ipad.png"/>-->
         <div class="info">
-            <h2>MongoDB</h2>
-
-            <p style="color:white;">Performance, speed</p>
+            <h2>Trust</h2>
+            <p class="description-slide" style="margin-top: 40px;">You trust us with your data, security and reliability means a lot to us</p>
         </div>
     </article>
 
-    <article class="slide" id="tour"
-             style="background: url('content/img/backgrounds/color-splash.jpg') repeat-x top center;">
-        <img class="asset left-472 sp650 t210 z3" src="content/img/slides/scene3/ipad.png"/>
-        <img class="asset left-365 sp600 t270 z4" src="content/img/slides/scene3/iphone5.png"/>
-        <img class="asset left-350 sp450 t135 z2" src="content/img/slides/scene3/desktop2.png"/>
-
+    <article class="slide" id="showcasing" style="background: url('content/img/slides/nature.png') 50% 58% repeat-x  ;">
+        <img style="height: 332px;" class="asset left480 sp600 t120 z1 ampoule" src="content/img/slides/Eco_friendly.png"/>
         <div class="info">
-            <h2>Fully Responsive Cubbyhole theme</h2>
-            <!--<a href="features.php">TOUR THE PRODUCT</a>-->
+            <h2>Eco-friendly</h2>
+            <p class="description-slide" style="margin-top: 40px;">We don't want you to harm our planet by using our services</p>
         </div>
     </article>
 
-    <article class="slide" id="responsive"
-             style="background: url('content/img/backgrounds/indigo.jpg') repeat-x top center;">
-        <img class="asset left-472 sp600 t120 z3" src="content/img/slides/scene4/html5.png"/>
-        <img class="asset left-190 sp500 t120 z2" src="content/img/slides/scene4/css3.png"/>
+    <!--<article class="slide" id="responsive" style="background: url('content/img/slides/entreprise1.png') 15% 15% repeat-x ;">-->
+    <article class="slide" id="responsive" style="background: url('content/img/slides/path.png') 15% 65% repeat-x ;">
+        <!--<img id="evolution" style="height: 220px;" class="asset left400 sp600 t120 z3" src="content/img/slides/planet.png"/>-->
+        <!--<img id="evolution" style="height: 335px;" class="asset left362 sp600 t120 z3" src="content/img/slides/evolve.png"/>
+        <!--<img id="evolution" style="height: 335px;" class="asset left300 sp600 t120 z3" src="content/img/slides/man.png"/>
+        <img id="evolution" style="height: 335px;" class="asset left362 sp600 t120 z3" src="content/img/slides/woman.png"/>
+        <img id="evolution" style="height: 335px;" class="asset left362 sp600 t120 z3" src="content/img/slides/evolve.png"/>-->
 
-        <div class="info">
-            <h2>
-                Responsive <strong>HTML5 & CSS3</strong>
-                Theme
-            </h2>
+        <div class="info" style="text-align: center;">
+            <h2>Constant evolution</h2>
+            <p class="description-slide" style="color:white;">We are newcomers, therefore our hears are open to suggestion and feedback</p>
         </div>
     </article>
 </section>
+
 </br>
 <?php
-if (isset($_SESSION['user'])) {
+/*if (isset($_SESSION['user'])) {
     $info = unserialize($_SESSION['user']);
 
     //$u = getUserDetails($_SESSION['user']);
     var_dump($info->getCurrentAccount()->getRefPlan()->getName());
     var_dump($info);
-}
+}*/
 ?>
 <section id="showcase" class="section">
     <div class="sectionWrap">
-        <div class="copy"><h2 style="font-size: 48px; line-height: 72px;">Cubbyhole anywhere you go</h2>
-            <p style="font-size: 24px; line-height: 34.8px;">Cubbyhole, the best online storage offers free access wherever you are.</p></div>
-        <div class="content" style="height: 573px;">
-            <div class="appSec webApp">
-                <h4 style="padding-left: 89px;" class="anywhere">Cubbyhole for the Web</h4>
-                <a class="signUp">
-                    <img style="height: 395px;" class="appGraphic" src="content/img/icons/Mac_browser.png">
-                </a>
 
+            <div class="copy"><h2 id="firstSectionTitle">Cubbyhole multiplateforme</h2>
+                <p style="font-size: 24px; line-height: 34.8px;">Cubbyhole, the best online storage offers free access wherever you are.</p>
             </div>
-            <div style="padding-left: 185px;" class="appSec mobileApps">
-                <h4 class="anywhere">Cubbyhole Mobile</h4>
-                <a href="#">
-                    <img style="width: 300px;" class="appGraphic" src="content/img/icons/iphone_android.png">
-                </a>
+            <div class="content"> <!--style="height: 573px;"-->
+                <div class="appSec webApp col-lg-6">
+                    <h4 class="anywhere">Cubbyhole for the Web</h4>
+                    <img id="imgNestbox" class="appGraphic img-responsive" src="content/img/icons/Mac_browser.png">
+                </div>
+                <div class="appSec mobileApps col-lg-6">
+                    <h4 class="anywhere">Cubbyhole for Mobile</h4>
+                    <img style="width: 300px;" class="appGraphic img-responsive" src="content/img/icons/sunbeam_phone.png">
+                </div>
+            </div>
 
+    </div>
+</section>
+<div class="separe"></div>
+<section id="showcase2" class="section">
+    <div class="sectionWrap">
+        <div class="copy"><h2 style="font-size: 48px; line-height: 72px;">Coming soon</h2>
+            <p style="font-size: 24px; line-height: 34.8px;">We are working hard to get as many useful utilities as possible.</p></div>
+        <div class="content" >
+            <div class="appSec">
+                <img class="appGraphic" src="content/img/icons/MacBook_Windove.png">
             </div>
         </div>
     </div>
+    </div>
 </section>
-<hr>
+<!--<div class="separe"></div>
+
 <section id="showcase" class="section">
     <div class="sectionWrap">
         <div class="copy"><h2 style="font-size: 48px; line-height: 72px;">Share your media</h2>
             <p style="font-size: 24px; line-height: 34.8px;">Share your media as media. Your photos, videos, songs, and documents are more than just files.
                 On Cubbyhole you can share, view, and listen to over different file formats - all right in your web browser or mobile device - all right in your web browser or mobile device.</p></div>
         <div class="content" style="height: 573px;">
-           <img class="appGraphic" src="content/img/icons/Mac.png">
-        </div>
+            <div class="appSec">
+                <img class="appGraphic" src="content/img/icons/Mac.png">
+            </div>
         </div>
     </div>
+    </div>
 </section>
-<hr>
+<div class="separe"></div>
 <section id="showcase" class="section">
     <div class="sectionWrap">
         <div class="copy"><h2 style="font-size: 48px; line-height: 72px;">Your security is our priority</h2>
             <p style="font-size: 24px; line-height: 34.8px;">Your files are stored securely and privately and are always available to you.You can connected wherever you are safe.</p></div>
         <div class="content" style="height: 573px;">
-            <img class="appGraphic" src="content/img/icons/Apple_devices_security.png">
+            <div class="appSec">
+                <img class="appGraphic" src="content/img/icons/Apple_devices_security.png">
+            </div>
         </div>
     </div>
     </div>
-</section>
+</section>-->
+
+

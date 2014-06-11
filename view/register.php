@@ -1,5 +1,7 @@
 <?php
 include'../header/header.php';
+$cryptinstall = "../controller/crypt/cryptographp.fct.php";
+include $cryptinstall;
 ?>
 <!-- Styles -->
 <link rel="stylesheet" href="../content/css/bootstrap/bootstrap.min.css"  />
@@ -35,16 +37,23 @@ include_once '../header/menu.php';
             <p>Please contact the technical support at <a>technical.support@cubbyhole.com</a> or retry</p>
             <?php unset($_SESSION['errorMessageRegister']); ?>
         </div>
-    <?php endif ?>
-
-    <?php if(isset($_SESSION['validMessageRegister'])): ?>
+    <?php elseif(isset($_SESSION['validMessageRegister'])): ?>
         <div class="alert alert-success">
             <p>Message from the server :</p>
             <br />
             <p>A confirmation email has been sent to your mailbox</p>
             <?php unset($_SESSION['validMessageRegister']); ?>
         </div>
+    <?php elseif(isset($_SESSION['errorMessageCaptcha'])): ?>
+    <div class="alert alert-danger">
+        <p>Message from the server :</p>
+        <br />
+        <?php echo  $_SESSION['errorMessageCaptcha']; ?>
+        <?php unset($_SESSION['errorMessageCaptcha']); ?>
+    </div>
     <?php endif ?>
+
+
 
     <?php if(empty($_SESSION['user'])): ?>
     <div class="container">
@@ -93,7 +102,20 @@ include_once '../header/menu.php';
 
                     <input id="geolocation" name="geolocation" type="hidden">
 
-                    <input id="submit" name="add_user" value="Sign up" type="submit">
+                    <table class="table-captcha">
+                        <tr>
+                            <td><?php dsp_crypt(0,1); ?></td>
+                        </tr>
+                        <tr>
+                            <td><input id="captcha" class="input-captcha form-control" type="text" name="code" placeholder="Copy the captcha"></td>
+                        </tr>
+                        <tr>
+                            <td><input id="submit" class="input-captcha" type="submit" name="add_user" value="Sign up"></td>
+                        </tr>
+                    </table>
+
+<!--                    <input id="submit" name="add_user" value="Sign up" type="submit">-->
+
                 </form>
             </div>
 

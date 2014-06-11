@@ -6,6 +6,8 @@
  * Time: 12:48
  */
 include '../header/header.php';
+$cryptinstall = "../controller/crypt/cryptographp.fct.php";
+include $cryptinstall;
 ?>
 <!-- Styles -->
 <link rel="stylesheet" href="../content/css/bootstrap/bootstrap.min.css"  />
@@ -78,8 +80,20 @@ include '../header/menu.php';
                     <?php if(isset($_SESSION['user'])): ?>
                     <input id="email" name="email" type="hidden" class="form-control center password" value="<?= $user->getEmail(); ?>">
                     <?php endif ?>
+                    <hr>
+                    <table class="table-captcha">
+                        <tr>
+                            <td><?php dsp_crypt(0,1); ?></td>
+                        </tr>
+                        <tr>
+                            <td><input id="captcha" class="input-captcha form-control" type="text" name="code" placeholder="Copy the captcha"></td>
+                        </tr>
+                        <tr>
+                            <td><input id="submit-change" class="input-captcha" type="submit" name="changePassword" value="SEND"></td>
+                        </tr>
+                    </table>
 
-                    <input id="submit" name="changePassword" value="SEND" type="submit">
+<!--                    <input id="submit" name="changePassword" value="SEND" type="submit">-->
                 </form>
             </div>
 
@@ -96,15 +110,53 @@ include '../header/menu.php';
 include '../footer/register.footer.php';
 ?>
 <script>
-    $(function () {
+    $(function ()
+    {
 
-            $("#pass").click(function() {
-                $('#password').val('Azertyuiop@123');
-            });
+        $("#pass").click(function()
+        {
+            $('#password').val('Azertyuiop@123');
+        });
 
-        $( "#newPass" ).click(function() {
+        $( "#newPass" ).click(function()
+        {
             $('#newPassword').val('Wxcvbnjklm@123');
             $('#newPasswordConfirmation').val('Wxcvbnjklm@123');
+        });
+
+        $("#submit-change").click(function()
+        {
+
+            var password = $("#password").val();
+            var newPassword = $("#newPassword").val();
+            var newPasswordConfirmation = $("#newPasswordConfirmation").val();
+            var email = $("#email").val();
+            if (typeof email != undefined){
+                 email = $("#email").val();
+            }
+            else
+            {
+                email = null;
+            }
+
+            setTimeout(function(){
+                alert("Hello")
+            },3000);
+
+//
+//            if((password != newPassword) && newPassword == newPasswordConfirmation)
+//            {
+//                setTimeout(function(){
+//                    alert("Hello")
+//                }, 2000);
+//            }
+//            else
+//            {
+//                alert("error");
+//            }
+
+
+
         });
     });
 </script>

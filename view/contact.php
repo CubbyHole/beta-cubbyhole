@@ -1,5 +1,7 @@
 <?php 
 include '../header/header.php';
+$cryptinstall = "../controller/crypt/cryptographp.fct.php";
+include $cryptinstall;
 ?>
     <!-- Styles -->
     <link href="../content/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
@@ -46,13 +48,20 @@ include '../header/menu.php';
                         </div>
 
                         <div class="row submit">
-                           <!-- <div class="col-md-5 box">
-                                <label class="checkbox">
-                                    <input type="checkbox"> Sign up for newsletter
-                                </label>
-                            </div>-->
                             <div class="col-md-3 right">
-                                <input name="mail" type="submit" value="Send your message">
+                            <table class="table-captcha">
+                                <tr>
+                                    <td><?php dsp_crypt(0,1); ?></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="input-captcha form-control" type="text" name="code" placeholder="Copy the captcha"></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="input-captcha" type="submit" name="mail" value="Send your message"></td>
+                                </tr>
+                            </table>
+
+<!--                                <input name="mail" type="submit" value="Send your message">-->
                             </div>
                         </div>
                     </form>

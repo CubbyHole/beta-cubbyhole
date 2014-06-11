@@ -1,8 +1,11 @@
 <?php
-
-$projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
+include_once '../header/header.php';
+//$projectRoot = $_SERVER['HTTP_HOST'].'/Cubbyhole';
+//$cryptinstall = 'http://'.$projectRoot.'/content/captcha/crypt/cryptographp.fct.php';
+$cryptinstall = "../controller/crypt/cryptographp.fct.php";
+include $cryptinstall;
 //require $projectRoot.'/controller/functions.php';
-include '../header/header.php';
+
 ?>
     <!-- Styles -->
     <link rel="stylesheet" href="../content/css/bootstrap/bootstrap.min.css" />
@@ -22,10 +25,12 @@ include '../header/header.php';
     </head>
 <?php
  include '../header/menu.php';
+
 ?>
 
     <!-- Sign In Option 1 -->
     <div id="sign_in1" class="sign_in1">
+
         <?php if(isset($_SESSION['errorMessageLogin'])): ?>
             <div class="alert alert-danger">
                 <p>Message from the server :</p>
@@ -36,6 +41,14 @@ include '../header/header.php';
                 <p>Please contact the technical support at <a>technical.support@cubbyhole.com</a> or retry</p>
                 <?php unset($_SESSION['errorMessageLogin']); ?>
             </div>
+        <?php elseif(isset($_SESSION['errorMessageCaptcha'])): ?>
+        <div class="alert alert-danger">
+            <p>Message from the server :</p>
+            <br />
+            <?php echo  $_SESSION['errorMessageCaptcha']; ?>
+            <br />
+            <?php unset($_SESSION['errorMessageCaptcha']); ?>
+        </div>
         <?php endif ?>
 
         <?php if(empty($_SESSION['user'])): ?>
@@ -64,14 +77,22 @@ include '../header/header.php';
                 </div>
 
                 <div class="col-md-12 footer">
-                    <form method="post" action="../controller/login.php" class="form-inline">
-                        
-                        <input id="email" name="email" type="text"  autofocus placeholder="Email" class="form-control" required>
+                   <form method="post" action="../controller/login.php" class="form-inline ">
+                       <input id="email" name="email" type="text"  autofocus placeholder="Email" class="form-control" required>
                         <input id="password" name="password" type="password"  placeholder="Password" class="form-control" required>
-                        <input name="loginForm" type="submit" value="login">
-
-                    </form>
-                </div>
+                       <table class="table-captcha">
+                           <tr>
+                               <td><?php dsp_crypt(0,1); ?></td>
+                           </tr>
+                           <tr>
+                               <td><input class="input-captcha form-control" type="text" name="code" placeholder="Copy the captcha"></td>
+                           </tr>
+                           <tr>
+                               <td><input class="input-captcha" type="submit" name="loginForm" value="login"></td>
+                           </tr>
+                       </table>
+                   </form>
+               </div>
 
                 <div class="col-md-12 dosnt">
                     <input id="ident" value="Id" type="submit">
@@ -104,11 +125,7 @@ include '../header/header.php';
             <p>Please contact the technical support at <a>technical.support@cubbyhole.com</a> or retry</p>
         </div>
         <?php endif; ?>
-
-
     </div>
-
-    
     <?php include '../footer/footer.php'; ?>
 <script>
     $(function () {
