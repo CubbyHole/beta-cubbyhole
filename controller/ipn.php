@@ -41,7 +41,7 @@ $receiver_email = $_POST['receiver_email'];
 $payer_email = $_POST['payer_email'];
 $custom = explode('|',$_POST['custom']);//parse du champ custom, pour l'instant idUser | idRefPlan
 
-$paymentOK = FALSE;
+$paymentOK = '';
 //récupère le prix du plan en bdd pour une vérification avec Paypal
 $refPlan = new RefPlanPdoManager();
 $refPrice = $refPlan->findById($custom[1])->getPrice();
@@ -133,8 +133,8 @@ else
                         // 2 Insére un nouveau compte avec storage et ratio de l'ancien compte et Id du nouveau refPlan OK
                         // 3 Update de l'idCurrentAccount du user                                                       OK
                         // SI marche, affiche de message, sinon contacter le service technique
-                        $paymentOK = TRUE; //variable paiement à true
-                        $_SESSION['paypalOK'] = $paymentOK;
+                        $paymentOK = 'OK'; //variable paiement à true
+                        $_SESSION['paypalOK'] = serialize($paymentOK);
 
 
                     }

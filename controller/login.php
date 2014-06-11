@@ -8,47 +8,64 @@ $loginOK = false;
 $projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
 require $projectRoot.'/controller/functions.php';
 require $projectRoot.'/required.php';
+$cryptinstall = $projectRoot.'/controller/crypt/cryptographp.fct.php';
+include $cryptinstall;
 
 //On check si loginForm est bien defini
 //S'il est defini alors on entre dans la condition
 if(isset($_POST['loginForm'] ))
 {
-	$email = $_POST['email'];
-    $password = $_POST['password'];
 
-    
-    //Avant de se logger on verifie bien que les champs mail et password ne sont pas vide
-    if(!empty($email) && !empty($password))
+
+    if(chk_crypt($_POST['code']))
     {
-		$userPdoManager = new UserPdoManager();
-		$user = $userPdoManager->authenticate($email, $password);
 
-        //http://www.php.net/manual/en/function.array-key-exists.php
-		if(!(array_key_exists('error', $user)))
-		{
-			$loginOK = TRUE;
-			//redirection vers index
-			header('Location:../index.php');
-		}
-        else
+
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        //Avant de se logger on verifie bien que les champs mail et password ne sont pas vide
+        if(!empty($email) && !empty($password))
         {
-            $_SESSION['errorMessageLogin'] = $user['error'];
-            header('Location:../view/login.php');
-            die();
-        }
+            $userPdoManager = new UserPdoManager();
+            $user = $userPdoManager->authenticate($email, $password);
 
-	}
-	
+            //http://www.php.net/manual/en/function.array-key-exists.php
+            if(!(array_key_exists('error', $user)))
+            {
+                $loginOK = TRUE;
+
+                //redirection vers index
+                header('Location:../index.php');
+            }
+            else
+            {
+                $_SESSION['errorMessageLogin'] = $user['error'];
+                header('Location:../view/login.php');
+                die();
+            }
+
+        }
+    }
+    else
+    {
+        $errorCaptcha = 'Error, invalid captcha';
+
+        $_SESSION['errorMessageCaptcha'] = $errorCaptcha;
+        header('Location:../view/login.php');
+        die();
+    }
+
 }
 
 if($loginOK == TRUE)
 {
-	//Pour les sessions
-	$_SESSION['user'] = serialize($user);
+    //Pour les sessions
+    $_SESSION['user'] = serialize($user);
 
 }
-else 
-{
-  echo $user['error'];
-}
+//else
+//{
+//    echo $user['error'];
+//}
 
