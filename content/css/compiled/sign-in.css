@@ -4,12 +4,16 @@
   display: block;
   height: auto;
   /*margin-bottom: 90px;*/
-    padding-top: 106px;
-    padding-bottom: 20px;
+
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover; }
+  background-size: cover;
+}
+.sign_in1{
+    padding-top: 106px;
+    padding-bottom: 20px;
+}
   #sign_in1 .header {
     text-align: center;
     margin: 0;
@@ -57,7 +61,7 @@
         background: #292929;
         margin: 0; }
   #sign_in1 .division {
-    margin: 0 auto 50px;
+    margin: 0 auto 96px;
     float: none;
     overflow: hidden;
     position: relative;
@@ -75,6 +79,7 @@
       color: #fff;
       font-size: 17px; }
   #sign_in1 .proof {
+      padding-top: 70px;
     display: block;
     overflow: hidden;
     margin: 0 auto;

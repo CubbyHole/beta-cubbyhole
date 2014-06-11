@@ -121,6 +121,16 @@ header {
   /* contact */
   /* credits */
   /* inner footer */ }
+#footer-account{
+    min-height: 260px;
+    /* margin-top: 140px; */
+    background-color: #252528;
+    color: #fff;
+    padding-top: 35px;
+    position: absolute;
+    width: 100%;
+    bottom: 106px;
+}
   #footer .footer_header {
     color: #c4c4c4;
     font-style: italic;
@@ -210,7 +220,7 @@ header {
       -moz-transition: background-color .2s linear; }
       #footer .contact input[type="submit"]:hover {
         background-color: #2190DB; }
-  #footer .credits {
+  #footer .credits,#footer-account .info {
     border-top: 1px solid #343437;
     padding: 10px 0px 60px 0px; }
     #footer .credits .social {
@@ -255,10 +265,10 @@ header {
       background: url("../../img/socialicons_h.png") no-repeat;
       width: 265px;
       height: 36px; }
-  #footer .info {
+  #footer .info,#footer-account .info {
     margin-bottom: 10px;
     margin-left: 0; }
-    #footer .info .residence {
+    #footer .info .residence,#footer-account .info .residence {
       margin-left: 0; }
     #footer .info ul {
       margin: 0;
@@ -281,6 +291,14 @@ header {
       #footer .info .touch ul li {
         display: inline-block;
         margin-left: 22px; }
+
+      .footer-account{
+          position: relative;
+          bottom: 0;
+          width: 100%;
+          /*background: rgba(0, 0, 0, 0.8)!important;*/
+          z-index: 99999;
+      }
 
 /* Global
 -------------------------------------------------- */
@@ -321,6 +339,12 @@ header {
       position: relative;
       top: 999; } }
 @media (max-width: 767px) {
+    .footer-account{
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.8)!important;
+    }
   .navbar.navbar-inverse .container .navbar-header .navbar-brand {
     margin-left: -5px; }
   .navbar .navbar-nav .open .dropdown-menu > li > a {
