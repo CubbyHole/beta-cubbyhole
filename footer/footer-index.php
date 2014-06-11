@@ -61,17 +61,23 @@
                         <div class="col-md-12">
                             © 2014 Cubbyhole. SUPINFO International.
                         </div>
+                        <div class="col-md-12">
+                            <a class="linkTerms" href="terms.php" target="_blank">Terms of services</a>
+                            <a class="linkTerms" href="privacy.php" target="_blank">Privacy policy</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
+    <script src="content/js/jquery.js"></script>
     <script src="content/js/bootstrap.min.js"></script>
     <script src="content/js/theme.js"></script>
-    <script type="text/javascript" src="content/js/index-slider.js"></script>
-    <script type="text/javascript" src="content/js/flexslider.js"></script>
+    <script src="content/js/index-slider.js"></script>
+    <!--<script type="text/javascript" src="content/js/flexslider.js"></script>-->
+    <script src="content/js/top.js"></script>
 
 </body>
 </html>

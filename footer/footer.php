@@ -1,5 +1,17 @@
- <!-- starts footer -->
-    <footer id="footer">
+<?php define('pagencours', $_SERVER['PHP_SELF'], true);
+
+if(pagencours == '/Cubbyhole/view/account.php')
+{
+    $class= 'footer-account';
+}
+else
+{
+    $class= NULL;
+}
+?>
+
+        <footer id="footer" class="<?= $class ?>">
+
         <div class="container">
             <div class="row info">
                 <div class="col-sm-6 residence">
@@ -53,13 +65,19 @@
                         <div class="col-md-12">
                             © 2014 Cubbyhole. SUPINFO International.
                         </div>
+                        <div class="col-md-12">
+                          <a class="linkTerms" href="terms.php" target="_blank">Terms of services</a>
+                          <a class="linkTerms" href="privacy.php" target="_blank">Privacy policy</a>
+                        </div>
+
                     </div>
                 </div>            
             </div>
         </div>
     </footer>
 
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
+    <script src="../content/js/jquery.js"></script>
     <script src="../content/js/bootstrap.min.js"></script>
     <script src="../content/js/theme.js"></script>
     <script type="text/javascript" src="../content/js/index-slider.js"></script>
