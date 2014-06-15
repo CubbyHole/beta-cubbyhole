@@ -143,7 +143,7 @@ class RefPlanPdoManager extends AbstractPdoManager implements RefPlanManagerInte
         $criteria = array(
             'state' => (int)1,
             '$or' => array(
-                array('name' => 'free'),
+                array('name' => 'Free'),
                 array('price' => (int)0)
             )
         );

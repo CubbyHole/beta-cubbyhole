@@ -167,7 +167,7 @@ abstract class AbstractPdoManager
      * @return array
      */
 
-    public function formatMongoDate($mongoDate)
+    static public function formatMongoDate($mongoDate)
     {
         $timestamp = $mongoDate->sec;
         $date = date('Y-M-d', $timestamp);

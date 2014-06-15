@@ -68,7 +68,7 @@ echo '----------------------------------------<br />';
 
 
 echo 'Utilisation du findAndModify puis create<br />';
-    $searchQuery = array('name' => 'premium');
+    $searchQuery = array('name' => 'Pro');
     $updateCriteria = array(
         '$inc' => array('price' => (int)1),
         '$set' => array('maxRatio' => (int)51)
