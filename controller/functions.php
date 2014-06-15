@@ -162,7 +162,7 @@ function convertKilobytes($kiloBytes, $outputUnit = NULL, $format = NULL)
 /**
  * Recharger une session avec les nouvelles données en bdd
  */
-function getUserDetails()
+function refreshUserSession()
 {
     //Initialise nos objets
     $userPdoManager = new UserPdoManager();

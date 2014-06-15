@@ -61,13 +61,13 @@ $ipnUrl = 'https://5b0ead1c.ngrok.com/';
 
 </br>
 <?php
-/*if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user'])) {
     $info = unserialize($_SESSION['user']);
 
     //$u = getUserDetails($_SESSION['user']);
-    var_dump($info->getCurrentAccount()->getRefPlan()->getName());
+    //var_dump($info->getCurrentAccount()->getRefPlan()->getName());
     var_dump($info);
-}*/
+}
 ?>
 <section id="showcase" class="section">
     <div class="sectionWrap">

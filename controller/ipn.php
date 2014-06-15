@@ -5,7 +5,6 @@
  * Date: 27/05/14
  * Time: 00:55
  */
-session_start();
 $projectRoot = $_SERVER['DOCUMENT_ROOT'].'/Cubbyhole';
 include $projectRoot.'/required.php';
 
@@ -33,6 +32,7 @@ $fp = fsockopen ('ssl://www.sandbox.paypal.com', 443, $errno, $errstr, 30);
 $item_name = $_POST['item_name'];
 $item_number = $_POST['item_number'];
 $payment_status = $_POST['payment_status'];
+//$payment_status = 'Canceled_Reversal';
 $payment_amount = $_POST['mc_gross'];
 $payment_currency = $_POST['mc_currency'];
 $payment_date = $_POST['payment_date'];
@@ -41,10 +41,12 @@ $receiver_email = $_POST['receiver_email'];
 $payer_email = $_POST['payer_email'];
 $custom = explode('|',$_POST['custom']);//parse du champ custom, pour l'instant idUser | idRefPlan
 
-$paymentOK = '';
 //récupère le prix du plan en bdd pour une vérification avec Paypal
 $refPlan = new RefPlanPdoManager();
-$refPrice = $refPlan->findById($custom[1])->getPrice();
+$paymentPdoManager = new PaymentPdoManager();
+$accountPdoManager = new AccountPdoManager();
+$userPdoManager = new UserPdoManager();
+
 
 if (!$fp)
 {
@@ -58,37 +60,48 @@ else
         $res = fgets ($fp, 1024);
         if (strcmp ($res, "VERIFIED") == 0)
         {
+
+
             // vérifier que payment_status a la valeur Completed
             if ( $payment_status == "Completed")
             {
+
                 //Vérifie si le mail du marchant est == au mail du receveur
                 if ( $emailAccount == $receiver_email)
                 {
+                    $refPrice = $refPlan->findById($custom[1])->getPrice();
                     //Vérifie la somme en bdd et celle enregistré sur Paypal
                     if($refPrice == $payment_amount)
                     {
                         /*
                          * Insertion en bdd du plan acheté (state(1), idUser, prix , date, retour paypal
                          */
-                        $paymentPdoManager = new PaymentPdoManager();
+
                         $payment = array(
                             'state' => (int)1,
+                            'paymentStatus' => $payment_status,
                             'idUser' => new MongoId($custom[0]),//idUser de l'user qui vient d'acheter l'offre
                             'amount' => $payment_amount,
                             'date' => new MongoDate(),
-                            'paypalReturn' => $_POST
+                            'paypalReturn' => $_POST //retour paypal
                         );
                         $paymentPdoManager->create($payment);
 
                         /*
                         * Récupère le compte actuel
                         */
-                        $accountPdoManager = new AccountPdoManager();
                         $criteria = array(
                             'state' => (int)1,
                             'idUser' => new MongoId($custom[0])//idUser de l'user qui vient d'acheter l'offre
                         );
-                        $account = $accountPdoManager->findAndModify($criteria, array('state' => (int)0), NULL, array('new' => TRUE));
+
+                        $updateAccount = array(
+                            '$set' => array(
+                                'state' => new MongoInt32(0)
+                            )
+                        );
+
+                        $account = $accountPdoManager->findAndModify($criteria, $updateAccount, NULL, array('new' => TRUE));
 
                         /*Si le compte existe*/
                         if($account instanceof Account)
@@ -111,7 +124,7 @@ else
                             $accountPdoManager->create($newAccount);
 
 
-                            $userPdoManager = new UserPdoManager();
+
                             //critères de recherche
                             $searchQuery = array(
                                 //'state' => (int)1,
@@ -133,9 +146,6 @@ else
                         // 2 Insére un nouveau compte avec storage et ratio de l'ancien compte et Id du nouveau refPlan OK
                         // 3 Update de l'idCurrentAccount du user                                                       OK
                         // SI marche, affiche de message, sinon contacter le service technique
-                        $paymentOK = 'OK'; //variable paiement à true
-                        $_SESSION['paypalOK'] = serialize($paymentOK);
-
 
                     }
                 }
@@ -144,17 +154,23 @@ else
             else
             {
                 // Statut de paiement: Echec
-                $paymentPdoManager = new PaymentPdoManager();
                 $payment = array(
                     'state' => (int)2,//Code pour un echec du paiement
+                    'payment_status' => $payment_status,
                     'idUser' => new MongoId($custom[0]),//idUser de l'user qui vient d'acheter l'offre
                     'amount' => $payment_amount,
                     'date' => new MongoDate(),
                     'paypalReturn' => $_POST
                 );
                 $paymentPdoManager->create($payment);
+//                $payment = array(
+//                    'paymentStatus' => $payment_status,
+//                    'paypalReturn' => $_POST
+//                );
+//                $paymentPdoManager->create($payment);
+
             }
-            exit();
+
         }
         else if (strcmp ($res, "INVALID") == 0)//INVALID
         {
@@ -167,25 +183,10 @@ else
                 'date' => new MongoDate(),
                 'paypalReturn' => $_POST
             );
+
             $paymentPdoManager->create($payment);
         }
     }
     fclose ($fp);
 }
 ?>
-<script>
-    /*$(document).ready(function(){
-        $.ajax({
-            url: http://localhost:8081/Cubbyhole/view/pricing.php
-            success:function(){
-                <?php
-                /*$paymentOK = TRUE;
-                $_SESSION['paypalOK'] = $paymentOK;*/
-                ?>
-            },
-            error:function(XMLHttpRequest,textStatus, errorThrown){
-               alert('error');
-            }
-        })
-    });*/
-</script>

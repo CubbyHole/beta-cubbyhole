@@ -11,10 +11,27 @@ $userManager = new UserPdoManager();
 $accountManager = new AccountPdoManager();
 $refManager = new RefPlanPdoManager();
 
+//define('pagencours', $_SERVER['PHP_SELF'], true);
+//$linkMenu = array( "index.php", "pricing.php", "register.php", "login.php", "about-us.php", "contact.php", "account.php" );
+//var_dump(pathinfo(pagencours)['basename']);
+//$currentPage = pathinfo(pagencours)['basename'];
+//if($currentPage == 'index.php')
+//{
+//    $class1= 'active';
+//}
+//elseif($currentPage == 'pricing.php')
+//{
+//    $class2= 'active';
+//}
+//else
+//{
+//    $class = NULL;
+//}var_dump($class);
 if(isset($_SESSION['user']))
 {
     $user = unserialize($_SESSION['user']);
 }
+//var_dump($_SESSION['user']);
 ?>
 <body class="pull_top">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -32,27 +49,27 @@ if(isset($_SESSION['user']))
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
+        <div id="mainMenu" class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
 
             <ul id="menuOne"class="nav navbar-nav navbar-left">
-                <li><a href="/Cubbyhole">HOME</a></li>
-                <li><a href="/Cubbyhole/view/pricing.php">PRICING</a></li>
+                <li><a  href="/Cubbyhole">HOME</a></li>
+                <li><a  href="/Cubbyhole/view/pricing.php">PRICING</a></li>
 
-                <?php if(isset($_SESSION['user'])): //recupère la session du login?>
-                    <li><a href="/Cubbyhole/view/account.php">MY ACCOUNT</a></li>
+                <?php if(isset($user)): //recupère la session du login?>
+                    <li><a  href="/Cubbyhole/view/account.php">MY ACCOUNT</a></li>
                 <?php else: ?>
 
-                    <li><a href="/Cubbyhole/view/register.php">REGISTER</a></li>
-                    <li><a href="/Cubbyhole/view/login.php">LOGIN</a></li>
+                    <li><a  href="/Cubbyhole/view/register.php">REGISTER</a></li>
+                    <li><a  href="/Cubbyhole/view/login.php">LOGIN</a></li>
 
                 <?php endif ?>
-                <li><a href="/Cubbyhole/view/about-us.php">ABOUT US</a></li>
-                <li><a href="/Cubbyhole/view/contact.php">CONTACT US</a></li>
+                <li><a  href="/Cubbyhole/view/about-us.php">ABOUT US</a></li>
+                <li><a  href="/Cubbyhole/view/contact.php">CONTACT US</a></li>
 
             </ul>
 
             <ul id="menuTwo" class="nav navbar-nav navbar-right ">
-                <?php if (isset($_SESSION['user'])): //Mise en place d'un module Gravatar pour la photo de profil ?>
+                <?php if (isset($user)): //Mise en place d'un module Gravatar pour la photo de profil ?>
                     <li>
 
                         <img class="img-circle" title="<?php echo $user->getLastName().' '.$user->getFirstname(); ?>" src=<?php echo getGravatar($user->getEmail()); ?>>

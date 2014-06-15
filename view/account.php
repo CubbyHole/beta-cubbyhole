@@ -150,7 +150,7 @@ if (isset($_SESSION['user'])):
                                 </td>
                             </tr>
                             <tr>
-                                <td class="tabInfo">Capacity storage</td>
+                                <td class="tabInfo">Storage capacity</td>
                                 <td class="tabValue"><progress class="progress-bar2" id="progressStorage"  data-toggle="tooltip" title="<?= convertKilobytes($userAccount->getStorage())?>&nbsp;Mb" value="<?= convertKilobytes($userAccount->getStorage()) ?>"
                                                                min="0" max="<?= convertKilobytes($userPlan->getMaxStorage()) ?>"></progress>
                                 </td>

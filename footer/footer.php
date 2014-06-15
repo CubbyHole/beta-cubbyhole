@@ -82,6 +82,20 @@ else
     <script src="../content/js/theme.js"></script>
     <script type="text/javascript" src="../content/js/index-slider.js"></script>
     <script type="text/javascript" src="../content/js/flexslider.js"></script>
+<script>
+    $(function() {
+
+        // Alerte de déconnexion
+        $( '#cross' ).on( 'click', function( e )
+        {
+            if( confirm( 'You want to disconnect ?' ) )
+                return true;
+
+            return false;
+        });
+
+    });
+</script>
    
 </body>
 </html>

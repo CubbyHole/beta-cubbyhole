@@ -92,9 +92,9 @@ include_once '../header/menu.php';
 
                     <!--Complexité du mot de passe -->
                     <div class="form-group">
-                        <div id="progressbar" >
-                            <div id="progress" class="progressbarInvalid" style="width: 0%;">
-                                <div id="complexity" class="noticeInvalid"></div>
+                        <div id="progressbarRegister" class="center" >
+                            <div id="progressRegister" class="progressbarInvalid" style="width: 0%;">
+                                <div id="complexity"></div>
                             </div>
                         </div>
                         <p id="notice" class="noticeInvalid">Strenght password</p>
@@ -119,21 +119,9 @@ include_once '../header/menu.php';
                 </form>
             </div>
 
-            <!--<div class="col-md-5 remember">
-                <label class="checkbox">
-                    <input type="checkbox"> Remember me
-                </label>
-                <a href="#">Forgot password?</a>
-            </div>-->
-
             <div class="col-md-12 dosnt">
                 <span>Already have an account?</span>
                 <a href="login.php">Sign in</a>
-            </div>
-
-            <div class="col-md-12 dosnt">
-
-                <input id="pass" value="Pass" type="submit">
             </div>
 
         </div>
@@ -155,19 +143,3 @@ include_once '../header/menu.php';
 <?php
 include '../footer/register.footer.php';
 ?>
-<script>
-    $(function () {
-
-        $( "#pass" ).click(function()
-        {
-            $('#name').val('SATO');
-            $('#firstname').val('Kentucky');
-            $('#email').val('knt92@hotmail.fr');
-            $('#password').val('Azertyuiop@123');
-            $('#passwordConfirmation').val('Azertyuiop@123');
-        });
-    });
-</script>
-
-</body>
-</html>

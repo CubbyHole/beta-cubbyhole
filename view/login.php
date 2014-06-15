@@ -24,7 +24,7 @@ include $cryptinstall;
     <![endif]-->
     </head>
 <?php
- include '../header/menu.php';
+include '../header/menu.php';
 
 ?>
 
@@ -42,109 +42,86 @@ include $cryptinstall;
                 <?php unset($_SESSION['errorMessageLogin']); ?>
             </div>
         <?php elseif(isset($_SESSION['errorMessageCaptcha'])): ?>
-        <div class="alert alert-danger">
-            <p>Message from the server :</p>
-            <br />
-            <?php echo  $_SESSION['errorMessageCaptcha']; ?>
-            <br />
-            <?php unset($_SESSION['errorMessageCaptcha']); ?>
-        </div>
+            <div class="alert alert-danger">
+                <p>Message from the server :</p>
+                <br />
+                <?php echo  $_SESSION['errorMessageCaptcha']; ?>
+                <br />
+                <?php unset($_SESSION['errorMessageCaptcha']); ?>
+            </div>
         <?php endif ?>
 
         <?php if(empty($_SESSION['user'])): ?>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 header">
-                    <h4>Authentification</h4>
-                    
-                    <div class="col-md-4 social">
-                        <a href="#" class="circle facebook">
-                            <img src="../content/img/face.png" alt="">
-                        </a>
-                         <a href="#" class="circle twitter">
-                            <img src="../content/img/twt.png" alt="">
-                        </a>
-                         <a href="#" class="circle gplus">
-                            <img src="../content/img/gplus.png" alt="">
-                        </a>
-                    </div>
-                </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 header">
+                        <h4>Authentification</h4>
 
-                <div class="col-sm-3 division">
-                    <div class="line l"></div>
-                    <span>here</span>
-                    <div class="line r"></div>
-                </div>
-
-                <div class="col-md-12 footer">
-                   <form method="post" action="../controller/login.php" class="form-inline ">
-                       <input id="email" name="email" type="text"  autofocus placeholder="Email" class="form-control" required>
-                        <input id="password" name="password" type="password"  placeholder="Password" class="form-control" required>
-                       <table class="table-captcha">
-                           <tr>
-                               <td><?php dsp_crypt(0,1); ?></td>
-                           </tr>
-                           <tr>
-                               <td><input class="input-captcha form-control" type="text" name="code" placeholder="Copy the captcha"></td>
-                           </tr>
-                           <tr>
-                               <td><input class="input-captcha" type="submit" name="loginForm" value="login"></td>
-                           </tr>
-                       </table>
-                   </form>
-               </div>
-
-                <div class="col-md-12 dosnt">
-                    <input id="ident" value="Id" type="submit">
-                    <input id="pass" value="Pass" type="submit">
-                    <input id="newPass" value="newPass" type="submit">
-                </div>
-
-                <div class="col-md-12 proof">
-                    <div class="col-md-6 remember">
-
-                        <a href="reset.php">Forgot password?</a>
+                        <div class="col-md-4 social">
+                            <a href="#" class="circle facebook">
+                                <img src="../content/img/face.png" alt="">
+                            </a>
+                            <a href="#" class="circle twitter">
+                                <img src="../content/img/twt.png" alt="">
+                            </a>
+                            <a href="#" class="circle gplus">
+                                <img src="../content/img/gplus.png" alt="">
+                            </a>
+                        </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="dosnt">
-                            <span>Don’t have an account?</span>
-                            <a href="register.php">Sign up</a>
+                    <div class="col-sm-3 division">
+                        <div class="line l"></div>
+                        <span>here</span>
+                        <div class="line r"></div>
+                    </div>
+
+                    <div class="footer">
+                        <form method="post" action="../controller/login.php" class="form">
+                            <div class="form-group">
+                                <input style="margin: 0 auto" id="email" name="email" type="text"  autofocus placeholder="Email" class="form-control center" required>
+                            </div>
+                            <div class="form-group">
+                                <input style="margin: 0 auto" id="password" name="password" type="password"  placeholder="Password" class="form-control center" required>
+                            </div>
+                            <table class="table-captcha">
+                                <tr>
+                                    <td><?php dsp_crypt(0,1); ?></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="input-captcha form-control" type="text" name="code" placeholder="Copy the captcha"></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="input-captcha" type="submit" name="loginForm" value="login"></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+
+                    <div class="col-md-12 proof">
+                        <div class="col-md-6 remember">
+
+                            <a href="reset.php">Forgot password?</a>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="dosnt">
+                                <span>Don’t have an account?</span>
+                                <a href="register.php">Sign up</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         <?php else: ?>
-        <div class="alert alert-danger">
-            <p>Message from the server :</p>
-            <br />
-            <strong>You are already identified</strong>
-            <br />
-            <br />
-            <p>Please contact the technical support at <a>technical.support@cubbyhole.com</a> or retry</p>
-        </div>
+            <div class="alert alert-danger">
+                <p>Message from the server :</p>
+                <br />
+                <strong>You are already identified</strong>
+                <br />
+                <br />
+                <p>Please contact the technical support at <a>technical.support@cubbyhole.com</a> or retry</p>
+            </div>
         <?php endif; ?>
     </div>
-    <?php include '../footer/footer.php'; ?>
-<script>
-    $(function () {
-        $( "#ident" ).click(function() {
-
-            $('#email').val('knt92@hotmail.fr');
-            $('#password').val('Azertyuiop@123');
-
-        });
-
-        $( "#pass" ).click(function() {
-
-            $('#password').val('Azertyuiop@123');
-
-        });
-
-        $( "#newPass" ).click(function() {
-            $('#password').val('Wxcvbnjklm@123');
-
-        });
-    });
-</script>
+<?php include '../footer/footer.php'; ?>

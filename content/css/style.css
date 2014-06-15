@@ -13,6 +13,11 @@ body{
     /*overflow: hidden;*/
     /*background: rgba(0, 0, 0, .18);*/
 }
+.navbar .navbar-inverse .nav > li > a:active
+{
+
+    color: #fff;
+}
 /*Slider*/
 .description-slide{
     color: white;
@@ -266,7 +271,7 @@ progress::-webkit-progress-bar{
 
 /********TEST COMPLEXITY***********/
 
-#progressbar
+#progressbarRegister
 {
     width: 27%;
     height: 35px;
@@ -277,11 +282,11 @@ progress::-webkit-progress-bar{
     border: 1px solid #ccc;
 }
 
-#progress
+#progressRegister
 {
     display: block;
-    /*height:100px;*/
-    width: 0%;
+    height:33px;
+    /*width: 0%;*/
 }
 
 .progressbarValid

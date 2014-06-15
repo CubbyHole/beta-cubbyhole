@@ -34,7 +34,7 @@ if(isset($_POST['loginForm'] ))
             if(!(array_key_exists('error', $user)))
             {
                 $loginOK = TRUE;
-
+                $_SESSION['user'] = serialize($user);
                 //redirection vers index
                 header('Location:../index.php');
             }
@@ -58,14 +58,4 @@ if(isset($_POST['loginForm'] ))
 
 }
 
-if($loginOK == TRUE)
-{
-    //Pour les sessions
-    $_SESSION['user'] = serialize($user);
-
-}
-//else
-//{
-//    echo $user['error'];
-//}
 

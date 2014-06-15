@@ -1,6 +1,6 @@
 <?php
 include '../header/header.php';
-$ipnUrl = 'http://1d0792b5.ngrok.com/';
+$ipnUrl = 'http://635ec315.ngrok.com/';
 ?>
     <!-- Styles -->
     <link href="../content/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
@@ -59,9 +59,6 @@ $premiumPlans = $refPlanPdoManager->findPremiumPlans();
                 case 'Ultimate':
                     $bannière = 2;
             }
-
-
-
         }
         ?>
         <div class="container">
@@ -70,7 +67,7 @@ $premiumPlans = $refPlanPdoManager->findPremiumPlans();
                 <h3>Pricing</h3>
                 <?php if(isset($_SESSION['user']) && $bannière >= 0): ?>
                     <div style="margin-top: 2px;" class="alert alert-info">
-                        <p>You are actually <?php echo $refPlanName->getCurrentAccount()->getRefPlan()->getName(); ?></p>
+                        <p>You are currently <strong><?php echo $refPlanName->getCurrentAccount()->getRefPlan()->getName(); ?></strong></p>
                     </div>
                 <?php endif ?>
             </div>
@@ -179,8 +176,8 @@ $premiumPlans = $refPlanPdoManager->findPremiumPlans();
                                         <input type="hidden" name="cmd" value="_s-xclick">
                                         <input type="hidden" name="hosted_button_id" value="<?= $idPaypal ?>">
                                         <input name="notify_url" type="hidden" value="<?= $ipnUrl; ?>Cubbyhole/controller/ipn.php" />
-                                        <input name="return" type="hidden" value="http://localhost:8081/Cubbyhole/view/pricing.php" />
-                                        <input name="cancel_return" type="hidden" value="http://localhost:8081/Cubbyhole/view/pricing.php" />
+                                        <input name="return" type="hidden" value="<?= $ipnUrl; ?>Cubbyhole/view/pricing.php" />
+                                        <input name="cancel_return" type="hidden" value="<?= $ipnUrl; ?>Cubbyhole/view/pricing.php" />
                                         <input id="custom" name="custom" type="hidden" value="<?= $user->getId().'|'.$plan->getId() ?>"  />
 
                                         <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit"
