@@ -96,13 +96,6 @@ include '../header/menu.php';
 <!--                    <input id="submit" name="changePassword" value="SEND" type="submit">-->
                 </form>
             </div>
-
-            <div class="col-md-12 dosnt">
-                <input id="pass" value="Pass" type="submit">
-                <input id="newPass" value="newPass" type="submit">
-            </div>
-
-
         </div>
     </div>
 </div>
@@ -110,55 +103,32 @@ include '../header/menu.php';
 include '../footer/register.footer.php';
 ?>
 <script>
-    $(function ()
-    {
-
-        $("#pass").click(function()
-        {
-            $('#password').val('Azertyuiop@123');
-        });
-
-        $( "#newPass" ).click(function()
-        {
-            $('#newPassword').val('Wxcvbnjklm@123');
-            $('#newPasswordConfirmation').val('Wxcvbnjklm@123');
-        });
-
-        $("#submit-change").click(function()
-        {
-
-            var password = $("#password").val();
-            var newPassword = $("#newPassword").val();
-            var newPasswordConfirmation = $("#newPasswordConfirmation").val();
-            var email = $("#email").val();
-            if (typeof email != undefined){
-                 email = $("#email").val();
-            }
-            else
-            {
-                email = null;
-            }
-
-            setTimeout(function(){
-                alert("Hello")
-            },3000);
-
+//    $(function ()
+//    {
 //
-//            if((password != newPassword) && newPassword == newPasswordConfirmation)
-//            {
-//                setTimeout(function(){
-//                    alert("Hello")
-//                }, 2000);
+//        $("#submit-change").click(function()
+//        {
+//
+//            var password = $("#password").val();
+//            var newPassword = $("#newPassword").val();
+//            var newPasswordConfirmation = $("#newPasswordConfirmation").val();
+//            var email = $("#email").val();
+//            if (typeof email != undefined){
+//                 email = $("#email").val();
 //            }
 //            else
 //            {
-//                alert("error");
+//                email = null;
 //            }
-
-
-
-        });
-    });
+//
+//            setTimeout(function(){
+//                alert("Hello")
+//            },3000);
+//
+//
+//
+//        });
+//    });
 </script>
 
 </body>

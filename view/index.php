@@ -60,15 +60,6 @@ $ipnUrl = 'https://5b0ead1c.ngrok.com/';
 </section>
 
 </br>
-<?php
-if (isset($_SESSION['user'])) {
-    $info = unserialize($_SESSION['user']);
-
-    //$u = getUserDetails($_SESSION['user']);
-    //var_dump($info->getCurrentAccount()->getRefPlan()->getName());
-    var_dump($info);
-}
-?>
 <section id="showcase" class="section">
     <div class="sectionWrap">
 
@@ -101,33 +92,3 @@ if (isset($_SESSION['user'])) {
     </div>
     </div>
 </section>
-<!--<div class="separe"></div>
-
-<section id="showcase" class="section">
-    <div class="sectionWrap">
-        <div class="copy"><h2 style="font-size: 48px; line-height: 72px;">Share your media</h2>
-            <p style="font-size: 24px; line-height: 34.8px;">Share your media as media. Your photos, videos, songs, and documents are more than just files.
-                On Cubbyhole you can share, view, and listen to over different file formats - all right in your web browser or mobile device - all right in your web browser or mobile device.</p></div>
-        <div class="content" style="height: 573px;">
-            <div class="appSec">
-                <img class="appGraphic" src="content/img/icons/Mac.png">
-            </div>
-        </div>
-    </div>
-    </div>
-</section>
-<div class="separe"></div>
-<section id="showcase" class="section">
-    <div class="sectionWrap">
-        <div class="copy"><h2 style="font-size: 48px; line-height: 72px;">Your security is our priority</h2>
-            <p style="font-size: 24px; line-height: 34.8px;">Your files are stored securely and privately and are always available to you.You can connected wherever you are safe.</p></div>
-        <div class="content" style="height: 573px;">
-            <div class="appSec">
-                <img class="appGraphic" src="content/img/icons/Apple_devices_security.png">
-            </div>
-        </div>
-    </div>
-    </div>
-</section>-->
-
-
